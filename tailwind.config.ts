@@ -1,0 +1,58 @@
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          orange: "#E8703A",
+          lavender: "#B4A7D6",
+          green: "#2D6A4F",
+          blue: "#4A90D9",
+          yellow: "#F5D060",
+        },
+        surface: {
+          white: "#FFFFFF",
+          cream: "#FAFAF7",
+          warm: "#F5F0E8",
+          light: "#F5F3EF",
+          muted: "#E8E5DF",
+        },
+        text: {
+          primary: "#1A1A1A",
+          secondary: "#4A4A4A",
+          tertiary: "#888888",
+          inverse: "#FFFFFF",
+        },
+        dark: {
+          bg: "#141414",
+          card: "#1E1E1E",
+          muted: "#2A2A2A",
+        },
+      },
+      fontFamily: {
+        serif: ["'Playfair Display'", "Georgia", "serif"],
+        sans: ["'Inter'", "system-ui", "sans-serif"],
+      },
+      backdropBlur: {
+        16: "16px",
+      },
+      keyframes: {
+        "scroll-up": {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(-50%)" },
+        },
+      },
+      animation: {
+        "scroll-up": "scroll-up 30s linear infinite",
+      },
+    },
+  },
+  plugins: [],
+};
+export default config;
