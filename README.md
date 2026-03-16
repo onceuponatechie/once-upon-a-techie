@@ -1,6 +1,6 @@
 # Once Upon a Techie — Portfolio
 
-The personal portfolio of **Essy**, Product Storyteller, Builder, and penultimate undergraduate building in public.
+The personal portfolio of **Essy**, Product Storyteller, Creator, and Builder.
 
 Live at: _coming soon_
 
