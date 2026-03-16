@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Once Upon a Techie — Portfolio
 
-## Getting Started
+The personal portfolio of **Essy**, Product Storyteller, Builder, and penultimate undergraduate building in public.
 
-First, run the development server:
+Live at: _coming soon_
+
+---
+
+## What This Is
+
+My digital garden — a living, breathing record of someone learning building the right product, the right way.
+
+Built with intention. Iterated in public.
+
+---
+
+## Tech Stack
+
+- **Framework:** Next.js 14
+- **CMS:** Sanity (for blog posts, builds, book notes, and resources)
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion
+- **Language:** TypeScript
+- **Deployment:** Vercel _(coming soon)_
+
+---
+
+## Pages
+
+- `/` — Homepage
+- `/about` — The full story
+- `/builds` — Ship Log (case studies and projects)
+- `/blog` — Storyteller's Log
+- `/resources` — Creative vault
+- `/resources/readers-corner` — Book notes and reading life
+- `/contact` — Let's talk
+
+---
+
+## Running Locally
 
 ```bash
+git clone https://github.com/onceuponatechie/portfolio-trial-one.git
+cd portfolio-trial-one
+npm install --legacy-peer-deps
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open `http://localhost:3000` in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment Variables
 
-## Learn More
+Create a `.env.local` file in the root folder with the following:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
+NEXT_PUBLIC_SANITY_DATASET=production
+SANITY_API_TOKEN=your_token
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Status
 
-## Deploy on Vercel
+🚧 Active development — iterating in public.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+_Built by Essy · Once Upon a Techie_
