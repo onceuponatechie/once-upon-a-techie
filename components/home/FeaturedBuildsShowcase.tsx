@@ -1,47 +1,62 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Expand } from "lucide-react";
+import { Expand, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 
 const projects = [
   {
-    category: "Web App",
-    title: "My Piggy Bank",
+    slug: "cohort",
+    category: "EdTech Platform",
+    title: "Cohort",
+    subtitle: "Collaborative EdTe...",
     description:
-      "A personal finance dashboard that helps track portfolio strength, stock history, and investment controls.",
-    tools: ["React", "Node.js", "Chart.js"],
-    bg: "#2D6A4F",
-  },
-  {
-    category: "Mobile App",
-    title: "Hobby Point",
-    description:
-      "A community platform for hobby enthusiasts to discover, share, and learn new activities.",
-    tools: ["React Native", "Firebase", "Figma"],
-    bg: "#4A90D9",
-  },
-  {
-    category: "SaaS Platform",
-    title: "Journey Builder",
-    description:
-      "An onboarding and certification platform to help teams level up and track skill progress.",
+      "A collaborative education platform designed to bring learners and mentors together through cohort-based courses and real-time engagement tools.",
     tools: ["Next.js", "Supabase", "Tailwind"],
-    bg: "#B4A7D6",
+    bg: "#1a1a4e",
+    gradient: "from-[#1a1a4e] to-[#2d2d7a]",
+  },
+  {
+    slug: "nithub-hackathon",
+    category: "Hackathon Project",
+    title: "Nithub\nHackathon\nBuild",
+    subtitle: "48-Hour Award Winner",
+    description:
+      "A rapid-fire hackathon project built in 48 hours that won the UI/UX award at the Nithub Innovation Summit — a smart task delegation tool for distributed teams.",
+    tools: ["Bolt", "React", "OpenAI"],
+    bg: "#2D6A4F",
+    gradient: "from-[#2D6A4F] to-[#3d8a6f]",
+  },
+  {
+    slug: "ai-prompt-generator",
+    category: "AI Tool",
+    title: "AI Prompt\nGenerator",
+    subtitle: "Prompt Engineerin...",
+    description:
+      "An intelligent prompt engineering tool that helps creators and developers craft highly effective prompts for AI models.",
+    tools: ["Python", "GPT-4", "Streamlit"],
+    bg: "#7a6520",
+    gradient: "from-[#7a6520] to-[#a08830]",
   },
 ];
 
 export default function FeaturedBuildsShowcase() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(1);
+
+  const next = useCallback(() => {
+    setActive((prev) => (prev + 1) % projects.length);
+  }, []);
+
+  const prev = useCallback(() => {
+    setActive((prev) => (prev - 1 + projects.length) % projects.length);
+  }, []);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setActive((prev) => (prev + 1) % projects.length);
-    }, 5000);
+    const timer = setInterval(next, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [next]);
 
   const project = projects[active];
 
@@ -49,14 +64,13 @@ export default function FeaturedBuildsShowcase() {
     <section className="bg-surface-cream py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-4">
         <ScrollReveal>
-          <div className="relative rounded-3xl overflow-hidden gradient-border">
-            <div className="absolute inset-[1.5px] rounded-3xl overflow-hidden">
-              {/* Background */}
+          <div className="relative rounded-3xl overflow-hidden border-[3px] border-white shadow-2xl">
+            <div className="rounded-3xl overflow-hidden relative">
+              {/* Background with crossfade */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}
-                  className="absolute inset-0"
-                  style={{ backgroundColor: project.bg }}
+                  className={`absolute inset-0 bg-gradient-to-br ${project.gradient}`}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -64,73 +78,124 @@ export default function FeaturedBuildsShowcase() {
                 />
               </AnimatePresence>
 
-              {/* Dark gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+              {/* Subtle decorative dot */}
+              <div className="absolute top-1/3 right-1/3 w-4 h-4 rounded-full bg-brand-orange/60 z-[1]" />
 
               {/* Content */}
-              <div className="relative z-10 p-8 md:p-12 min-h-[500px] md:min-h-[600px] flex flex-col md:flex-row items-end justify-between">
-                {/* Left info */}
-                <div className="flex-1 mb-8 md:mb-0">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={active}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <span className="text-white/60 text-sm font-sans uppercase tracking-wider">
-                        {project.category}
+              <div className="relative z-10 p-8 md:p-12 min-h-[500px] md:min-h-[600px] flex flex-col justify-between">
+                {/* Top - tool pills */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={active}
+                    className="flex flex-wrap gap-2"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    {project.tools.map((tool) => (
+                      <span
+                        key={tool}
+                        className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm text-white/80 text-xs font-sans border border-white/10"
+                      >
+                        {tool}
                       </span>
-                      <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white mt-2 mb-4">
-                        {project.title}
-                      </h3>
-                      <p className="font-sans text-white/70 text-sm max-w-md mb-6 leading-relaxed">
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {project.tools.map((tool) => (
-                          <span
-                            key={tool}
-                            className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm text-white/80 text-xs font-sans border border-white/10"
-                          >
-                            {tool}
-                          </span>
-                        ))}
-                      </div>
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
+                    ))}
+                  </motion.div>
+                </AnimatePresence>
 
-                {/* Right thumbnails */}
-                <div className="flex gap-3">
-                  {projects.map((p, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setActive(i)}
-                      className={`w-[90px] h-[130px] md:w-[120px] md:h-[170px] rounded-xl overflow-hidden border-2 transition-all duration-300 ${
-                        i === active
-                          ? "border-white shadow-xl scale-105"
-                          : "border-white/20 opacity-60 hover:opacity-80"
-                      }`}
-                      style={{ backgroundColor: p.bg }}
-                    >
-                      <div className="w-full h-full flex items-center justify-center">
-                        <span className="text-white/80 text-xs font-sans text-center px-2">
-                          {p.title}
+                {/* Bottom section */}
+                <div className="flex flex-col md:flex-row items-end justify-between gap-8">
+                  {/* Left info */}
+                  <div className="flex-1">
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={active}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <h3 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mt-2 mb-4 whitespace-pre-line leading-[1.05]">
+                          {project.title}
+                        </h3>
+                        <p className="font-sans text-white/70 text-sm max-w-md mb-6 leading-relaxed">
+                          {project.description}
+                        </p>
+                        <Link
+                          href={`/builds/${project.slug}`}
+                          className="inline-flex items-center gap-2 rounded-full bg-white text-text-primary px-6 py-3 font-sans text-sm font-medium hover:bg-white/90 transition-colors"
+                        >
+                          View Case Study
+                          <span className="text-xs">↗</span>
+                        </Link>
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+
+                  {/* Right thumbnails */}
+                  <div className="flex gap-3">
+                    {projects.map((p, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setActive(i)}
+                        className={`w-[100px] h-[140px] md:w-[120px] md:h-[170px] rounded-xl overflow-hidden border-2 transition-all duration-300 flex flex-col items-center justify-center px-2 text-center ${
+                          i === active
+                            ? "border-white shadow-xl scale-105"
+                            : "border-white/20 opacity-60 hover:opacity-80"
+                        }`}
+                        style={{
+                          background: `linear-gradient(135deg, ${p.bg}, ${p.bg}cc)`,
+                        }}
+                      >
+                        <span className="text-white text-xs font-sans font-medium leading-tight">
+                          {p.slug
+                            .split("-")
+                            .map(
+                              (w) => w.charAt(0).toUpperCase() + w.slice(1)
+                            )
+                            .join(" ")}
                         </span>
-                      </div>
-                    </button>
-                  ))}
+                        <span className="text-white/50 text-[10px] font-sans mt-1 leading-tight">
+                          {p.subtitle}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Counter + Expand */}
-              <div className="absolute top-6 right-6 z-20 flex items-center gap-3">
-                <span className="text-white/50 text-sm font-sans">
-                  {String(active + 1).padStart(2, "0")}/
-                  {String(projects.length).padStart(2, "0")}
-                </span>
+              {/* Navigation arrows */}
+              <button
+                onClick={prev}
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white/70 hover:bg-white/20 transition-colors"
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <button
+                onClick={next}
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white/70 hover:bg-white/20 transition-colors"
+              >
+                <ChevronRight size={18} />
+              </button>
+
+              {/* Counter dots */}
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+                {projects.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActive(i)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      i === active
+                        ? "bg-white w-6"
+                        : "bg-white/40 w-2"
+                    }`}
+                  />
+                ))}
+              </div>
+
+              {/* Expand icon */}
+              <div className="absolute top-6 right-6 z-20">
                 <Link
                   href="/builds"
                   className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white/70 hover:bg-white/20 transition-colors"

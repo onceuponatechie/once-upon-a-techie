@@ -47,9 +47,16 @@ const config: Config = {
           "0%": { transform: "translateY(0)" },
           "100%": { transform: "translateY(-50%)" },
         },
+        "scroll-down": {
+          "0%": { transform: "translateY(-50%)" },
+          "100%": { transform: "translateY(0)" },
+        },
       },
       animation: {
         "scroll-up": "scroll-up 30s linear infinite",
+        "scroll-up-slow": "scroll-up 40s linear infinite",
+        "scroll-up-fast": "scroll-up 25s linear infinite",
+        "scroll-down": "scroll-down 35s linear infinite",
       },
     },
   },

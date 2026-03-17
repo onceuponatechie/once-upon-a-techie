@@ -1,89 +1,100 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import {
-  Lightbulb,
-  Sparkles,
-  PenTool,
-  Rocket,
-} from "lucide-react";
+import { Lightbulb, Sparkles, PenTool, Rocket } from "lucide-react";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 
 const posts = [
   {
     title: "Why Every Builder Needs a Side Project",
     category: "Building",
+    date: "Mar 12, 2026",
     readTime: "5 min read",
     excerpt:
       "Side projects are the playground where innovation thrives. Here's why every creator should have one.",
     Icon: Rocket,
     color: "#E8703A",
-    hoverBg: "#E8703A",
+    imageBg: "#E8703A",
   },
   {
     title: "The Art of Product Storytelling",
     category: "Storytelling",
+    date: "Mar 5, 2026",
     readTime: "4 min read",
     excerpt:
       "Products don't sell themselves. Learn how to craft narratives that turn users into advocates.",
     Icon: PenTool,
     color: "#B4A7D6",
-    hoverBg: "#B4A7D6",
+    imageBg: "#B4A7D6",
   },
   {
     title: "Automation Secrets I Learned the Hard Way",
     category: "Automation",
+    date: "Feb 28, 2026",
     readTime: "6 min read",
     excerpt:
       "From Zapier to Python scripts — the shortcuts that actually saved me hundreds of hours.",
     Icon: Sparkles,
     color: "#2D6A4F",
-    hoverBg: "#2D6A4F",
+    imageBg: "#2D6A4F",
   },
   {
     title: "Design Thinking for Non-Designers",
     category: "Design",
+    date: "Feb 20, 2026",
     readTime: "3 min read",
     excerpt:
       "You don't need to be a designer to think like one. A practical guide to solving problems beautifully.",
     Icon: Lightbulb,
     color: "#4A90D9",
-    hoverBg: "#4A90D9",
+    imageBg: "#4A90D9",
   },
 ];
 
-function BlogCard({
-  post,
-}: {
-  post: (typeof posts)[0];
-}) {
+function BlogCard({ post }: { post: (typeof posts)[0] }) {
+  const [hovered, setHovered] = useState(false);
+
   return (
     <motion.div
       className="group relative bg-surface-light rounded-2xl p-6 overflow-hidden"
-      whileHover={{ y: -4 }}
+      animate={{ y: hovered ? -4 : 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onTouchStart={() => setHovered((h) => !h)}
     >
-      {/* Hover image slide-in */}
-      <motion.div
-        className="absolute top-0 right-0 w-32 h-32 rounded-bl-3xl overflow-hidden z-10"
-        initial={{ x: 80, y: -60, opacity: 0 }}
-        whileHover={{ x: 0, y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 180, damping: 18 }}
-        style={{ backgroundColor: post.hoverBg }}
-      >
-        <div className="w-full h-full flex items-center justify-center">
-          <post.Icon size={32} className="text-white/80" />
-        </div>
-      </motion.div>
+      {/* Hover image slide-in from top-right */}
+      <AnimatePresence>
+        {hovered && (
+          <motion.div
+            className="absolute top-0 right-0 w-32 h-32 rounded-bl-3xl overflow-hidden z-10"
+            initial={{ x: 60, y: -60, opacity: 0 }}
+            animate={{ x: 0, y: 0, opacity: 1 }}
+            exit={{ x: 60, y: -60, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            style={{ backgroundColor: post.imageBg }}
+          >
+            <div className="w-full h-full flex items-center justify-center">
+              <post.Icon size={32} className="text-white/80" />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {/* Icon */}
+      {/* Large circle icon */}
       <div
-        className="w-14 h-14 rounded-full flex items-center justify-center mb-5"
+        className="w-16 h-16 rounded-full flex items-center justify-center mb-5"
         style={{ backgroundColor: `${post.color}15` }}
       >
-        <post.Icon size={24} style={{ color: post.color }} />
+        <post.Icon size={28} style={{ color: post.color }} />
       </div>
+
+      {/* Title */}
+      <h3 className="font-serif text-lg text-text-primary mb-3 leading-snug">
+        {post.title}
+      </h3>
 
       {/* Meta */}
       <div className="flex items-center gap-2 mb-3">
@@ -92,22 +103,21 @@ function BlogCard({
         </span>
         <span className="text-text-tertiary/40">·</span>
         <span className="text-xs font-sans text-text-tertiary">
+          {post.date}
+        </span>
+        <span className="text-text-tertiary/40">·</span>
+        <span className="text-xs font-sans text-text-tertiary">
           {post.readTime}
         </span>
       </div>
 
-      {/* Title */}
-      <h3 className="font-serif text-lg text-text-primary mb-3 leading-snug">
-        {post.title}
-      </h3>
-
       {/* Excerpt */}
-      <p className="font-sans text-sm text-text-secondary leading-relaxed mb-4">
+      <p className="font-sans text-sm text-text-secondary leading-relaxed mb-5">
         {post.excerpt}
       </p>
 
-      {/* Read more */}
-      <span className="inline-flex items-center text-sm font-sans font-medium text-brand-orange group-hover:underline">
+      {/* Read more capsule */}
+      <span className="inline-flex items-center px-4 py-2 rounded-full bg-surface-cream text-sm font-sans font-medium text-text-primary border border-surface-muted/50 group-hover:bg-brand-orange group-hover:text-white group-hover:border-brand-orange transition-all duration-300">
         Read more →
       </span>
     </motion.div>
