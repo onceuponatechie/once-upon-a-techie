@@ -3,58 +3,90 @@
 import Link from "next/link";
 import { Folder } from "lucide-react";
 
-const cards = [
-  { w: "w-[200px]", h: "h-[250px]", bg: "#2D6A4F", label: "Brand Guide" },
-  { w: "w-[280px]", h: "h-[350px]", bg: "#4A90D9", label: "Dashboard UI" },
-  { w: "w-[200px]", h: "h-[300px]", bg: "#B4A7D6", label: "Mobile App" },
-  { w: "w-[320px]", h: "h-[420px]", bg: "#E8703A", label: "E-Commerce" },
-  { w: "w-[240px]", h: "h-[280px]", bg: "#F5D060", label: "Landing Page" },
-  { w: "w-[200px]", h: "h-[250px]", bg: "#1A1A1A", label: "Portfolio" },
-  { w: "w-[280px]", h: "h-[350px]", bg: "#2D6A4F", label: "SaaS Tool" },
-  { w: "w-[200px]", h: "h-[300px]", bg: "#4A90D9", label: "Blog Design" },
-  { w: "w-[320px]", h: "h-[420px]", bg: "#B4A7D6", label: "Automation" },
-  { w: "w-[240px]", h: "h-[280px]", bg: "#E8703A", label: "Template" },
+const col1Cards = [
+  { bg: "#8B7355", label: "Resume Template" },
+  { bg: "#9B59B6", label: "Design System Guide" },
+  { bg: "#5D4E37", label: "Freelancer Kit" },
+  { bg: "#8B7355", label: "Resume Template" },
+  { bg: "#9B59B6", label: "Design System Guide" },
+  { bg: "#5D4E37", label: "Freelancer Kit" },
 ];
 
-const categories = [
-  { label: "Templates", color: "bg-brand-orange" },
-  { label: "UI Kits", color: "bg-brand-blue" },
-  { label: "Guides", color: "bg-brand-green" },
-  { label: "Tools", color: "bg-brand-lavender" },
-  { label: "Freebies", color: "bg-brand-yellow" },
+const col2Cards = [
+  { bg: "#7B68EE", label: "Content Calendar" },
+  { bg: "#2D6A4F", label: "Brand Kit" },
+  { bg: "#E8703A", label: "Pitch Deck" },
+  { bg: "#7B68EE", label: "Content Calendar" },
+  { bg: "#2D6A4F", label: "Brand Kit" },
+  { bg: "#E8703A", label: "Pitch Deck" },
 ];
+
+const col3Cards = [
+  { bg: "#4A90D9", label: "E-commerce Template" },
+  { bg: "#34495E", label: "Social Media Pack" },
+  { bg: "#2C3E50", label: "Dev Starter Kit" },
+  { bg: "#4A90D9", label: "E-commerce Template" },
+  { bg: "#34495E", label: "Social Media Pack" },
+  { bg: "#2C3E50", label: "Dev Starter Kit" },
+];
+
+function Card({ bg, label }: { bg: string; label: string }) {
+  return (
+    <div
+      className="w-full aspect-[4/5] rounded-2xl overflow-hidden relative flex-shrink-0"
+      style={{ backgroundColor: bg }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 p-3">
+        <span className="text-white/90 text-xs font-sans">{label}</span>
+      </div>
+    </div>
+  );
+}
 
 export default function CreativeVaultStrip() {
-  const allCards = [...cards, ...cards];
-
   return (
     <section className="bg-surface-cream py-0">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Main container */}
-        <div className="relative rounded-3xl overflow-hidden h-[700px] md:h-[1100px] gradient-border">
-          <div className="absolute inset-[1.5px] rounded-3xl overflow-hidden bg-surface-cream">
-            {/* Scrolling cards */}
-            <div className="absolute inset-0 overflow-hidden">
-              <div className="animate-scroll-up flex flex-wrap gap-4 p-4 justify-center content-start">
-                {allCards.map((card, i) => (
-                  <div
-                    key={i}
-                    className={`${card.w} ${card.h} rounded-2xl shadow-md flex items-end p-4 flex-shrink-0`}
-                    style={{ backgroundColor: card.bg }}
-                  >
-                    <span className="text-white text-sm font-sans font-medium bg-black/20 rounded-lg px-3 py-1.5">
-                      {card.label}
-                    </span>
-                  </div>
-                ))}
+        {/* Main container with white outer border */}
+        <div className="relative rounded-3xl overflow-hidden border-[3px] border-white shadow-2xl">
+          {/* Black background for gaps */}
+          <div className="bg-black rounded-3xl overflow-hidden h-[600px] md:h-[800px] relative">
+            {/* 3-column scrolling grid */}
+            <div className="absolute inset-0 grid grid-cols-3 gap-3 p-3">
+              {/* Column 1 - scrolls UP (fast) */}
+              <div className="overflow-hidden relative">
+                <div className="animate-scroll-up-fast flex flex-col gap-3">
+                  {[...col1Cards, ...col1Cards].map((card, i) => (
+                    <Card key={`c1-${i}`} bg={card.bg} label={card.label} />
+                  ))}
+                </div>
+              </div>
+
+              {/* Column 2 - scrolls DOWN */}
+              <div className="overflow-hidden relative">
+                <div className="animate-scroll-down flex flex-col gap-3">
+                  {[...col2Cards, ...col2Cards].map((card, i) => (
+                    <Card key={`c2-${i}`} bg={card.bg} label={card.label} />
+                  ))}
+                </div>
+              </div>
+
+              {/* Column 3 - scrolls UP (slow) */}
+              <div className="overflow-hidden relative">
+                <div className="animate-scroll-up-slow flex flex-col gap-3">
+                  {[...col3Cards, ...col3Cards].map((card, i) => (
+                    <Card key={`c3-${i}`} bg={card.bg} label={card.label} />
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Black overlay */}
+            {/* Top deeper overlay gradient */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/25 to-black/25 pointer-events-none" />
 
             {/* Center button */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
               <div className="flex flex-col items-center gap-3 pointer-events-auto">
                 {/* Tooltip */}
                 <span className="bg-text-primary text-white rounded-full px-4 py-2 text-sm font-sans whitespace-nowrap">
@@ -70,19 +102,6 @@ export default function CreativeVaultStrip() {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Category pills */}
-        <div className="flex flex-wrap justify-center gap-3 mt-8">
-          {categories.map((cat) => (
-            <span
-              key={cat.label}
-              className="inline-flex items-center gap-2 bg-white rounded-full px-4 py-2 shadow-sm text-sm font-sans text-text-secondary"
-            >
-              <span className={`w-2 h-2 rounded-full ${cat.color}`} />
-              {cat.label}
-            </span>
-          ))}
         </div>
       </div>
     </section>

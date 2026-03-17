@@ -23,19 +23,17 @@ function MediaBox() {
   }, []);
 
   return (
-    <span className="inline-flex align-middle mx-1.5">
-      <span className="relative w-[72px] h-[42px] md:w-[130px] md:h-[72px] rounded-2xl md:rounded-3xl overflow-hidden bg-dark-card glassmorphism border border-white/20 shadow-lg inline-block align-middle">
+    <span className="inline-flex align-middle mx-1">
+      <span className="relative w-[48px] h-[32px] md:w-[64px] md:h-[40px] rounded-xl md:rounded-2xl overflow-hidden bg-dark-card border border-white/20 shadow-md inline-block align-middle">
         {thumbnails.map((thumb, i) => (
           <motion.span
             key={i}
-            className="absolute inset-0 rounded-2xl md:rounded-3xl flex items-center justify-center text-white text-[10px] md:text-xs font-sans"
+            className="absolute inset-0 rounded-xl md:rounded-2xl"
             style={{ backgroundColor: thumb.bg }}
             initial={{ opacity: 0 }}
             animate={{ opacity: i === current ? 1 : 0 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
-          >
-            {thumb.label}
-          </motion.span>
+          />
         ))}
       </span>
     </span>
@@ -64,7 +62,7 @@ export default function HeroSection() {
 
       <motion.div
         style={{ y }}
-        className="relative z-10 max-w-3xl mx-auto px-6 text-center"
+        className="relative z-10 max-w-4xl mx-auto px-6 text-center"
       >
         {/* Smiley */}
         <motion.div
@@ -76,17 +74,20 @@ export default function HeroSection() {
           <SmileyGreeting />
         </motion.div>
 
-        {/* Pill badge */}
+        {/* Blue dot + Pill badge row */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="inline-flex items-center gap-2 glassmorphism rounded-full px-4 py-2 mb-8"
+          className="flex items-center justify-center gap-6 mb-10"
         >
-          <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
-          <span className="text-sm font-sans text-text-secondary">
-            Open to Collaborations
-          </span>
+          <span className="w-3 h-3 rounded-full bg-brand-blue" />
+          <div className="inline-flex items-center gap-2 glassmorphism rounded-full px-4 py-2">
+            <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
+            <span className="text-sm font-sans text-text-secondary">
+              Open to Collaborations
+            </span>
+          </div>
         </motion.div>
 
         {/* Headline */}
@@ -94,7 +95,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.8 }}
-          className="font-serif text-[40px] md:text-[56px] lg:text-[60px] leading-[1.1] tracking-tight text-text-primary mb-6"
+          className="font-serif text-[40px] md:text-[56px] lg:text-[64px] leading-[1.1] tracking-tight text-text-primary mb-6"
         >
           <span className="italic">Products,</span>{" "}
           <span className="italic">people,</span> and the
@@ -105,12 +106,12 @@ export default function HeroSection() {
           <MediaBox /> them.
         </motion.h1>
 
-        {/* Subheadline */}
+        {/* Subheadline - light weight */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
-          className="font-sans text-base md:text-lg font-medium text-text-secondary tracking-wide mb-10"
+          className="font-sans text-base md:text-lg font-light text-text-secondary tracking-widest mb-10"
         >
           Creator · Builder · Storyteller
         </motion.p>
@@ -130,33 +131,10 @@ export default function HeroSection() {
           </Link>
           <Link
             href="/resources"
-            className="font-sans text-text-secondary hover:text-brand-orange transition-colors"
+            className="font-sans text-text-secondary hover:text-brand-orange transition-colors underline underline-offset-4 decoration-text-secondary/40 hover:decoration-brand-orange"
           >
             Or grab a freebie →
           </Link>
-        </motion.div>
-
-        {/* Trust row */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.3 }}
-          className="flex items-center justify-center gap-3 mt-12"
-        >
-          <div className="flex -space-x-2">
-            {["#E8703A", "#4A90D9", "#2D6A4F", "#B4A7D6", "#F5D060"].map(
-              (color, i) => (
-                <div
-                  key={i}
-                  className="w-8 h-8 rounded-full border-2 border-white"
-                  style={{ backgroundColor: color }}
-                />
-              )
-            )}
-          </div>
-          <span className="text-xs font-sans text-text-tertiary">
-            Trusted by Leaders
-          </span>
         </motion.div>
       </motion.div>
     </section>

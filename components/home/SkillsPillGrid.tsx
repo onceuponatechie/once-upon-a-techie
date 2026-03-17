@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import {
@@ -24,12 +24,8 @@ const rightPills = [
   { label: "Design", color: "#F5D060", Icon: Pen },
 ];
 
-const textLines = [
-  "I'm a product storyteller and creative builder",
-  "who turns ideas into experiences people love",
-  "— through design, automation, and a whole",
-  "lot of curiosity.",
-];
+const sentence =
+  "Writing the unofficial diary of a techie, building towards products with great experience";
 
 function SkillPill({
   label,
@@ -50,7 +46,14 @@ function SkillPill({
       delay={delay}
       className="inline-flex"
     >
-      <div className="inline-flex items-center gap-2.5 bg-white shadow-md rounded-full px-4 py-2.5 border border-white/40">
+      <div
+        className="inline-flex items-center gap-2.5 bg-white shadow-lg rounded-full px-4 py-2.5 border border-white/40"
+        style={{
+          transform: "perspective(800px) rotateY(5deg) rotateX(2deg)",
+          boxShadow:
+            "0 8px 30px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)",
+        }}
+      >
         <span
           className="w-8 h-8 rounded-full flex items-center justify-center"
           style={{ backgroundColor: `${color}20` }}
@@ -65,10 +68,58 @@ function SkillPill({
   );
 }
 
-export default function SkillsPillGrid() {
+function ScrollRevealText() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 0.8", "end 0.4"],
+  });
 
+  const words = sentence.split(" ");
+
+  return (
+    <div ref={ref} className="max-w-2xl text-center mx-auto">
+      <p className="font-sans text-2xl md:text-[32px] lg:text-[36px] leading-relaxed">
+        {words.map((word, i) => {
+          const start = i / words.length;
+          const end = (i + 1) / words.length;
+          return (
+            <Word
+              key={i}
+              word={word}
+              range={[start, end]}
+              progress={scrollYProgress}
+            />
+          );
+        })}
+      </p>
+    </div>
+  );
+}
+
+function Word({
+  word,
+  range,
+  progress,
+}: {
+  word: string;
+  range: [number, number];
+  progress: ReturnType<typeof useScroll>["scrollYProgress"];
+}) {
+  const opacity = useTransform(progress, range, [0.2, 1]);
+  const color = useTransform(progress, range, ["#CCCCCC", "#1A1A1A"]);
+
+  return (
+    <motion.span
+      style={{ opacity, color }}
+      className="inline-block mr-[0.3em] transition-none"
+    >
+      {word}
+    </motion.span>
+  );
+}
+
+export default function SkillsPillGrid() {
   return (
     <section className="bg-surface-cream py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
@@ -82,7 +133,7 @@ export default function SkillsPillGrid() {
         </ScrollReveal>
 
         {/* Main layout with pills */}
-        <div className="relative flex items-start justify-center" ref={ref}>
+        <div className="relative flex items-start justify-center">
           {/* Left pills - desktop */}
           <div className="hidden lg:flex flex-col gap-4 pt-4 mr-8">
             {leftPills.map((pill, i) => (
@@ -95,20 +146,8 @@ export default function SkillsPillGrid() {
             ))}
           </div>
 
-          {/* Center text */}
-          <div className="max-w-xl text-center">
-            {textLines.map((line, i) => (
-              <motion.span
-                key={i}
-                className="block font-sans text-xl md:text-[28px] lg:text-[32px] leading-relaxed text-text-primary"
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.3 + i * 0.4, duration: 0.6 }}
-              >
-                {line}
-              </motion.span>
-            ))}
-          </div>
+          {/* Center text - scroll triggered grey to black */}
+          <ScrollRevealText />
 
           {/* Right pills - desktop */}
           <div className="hidden lg:flex flex-col gap-4 pt-4 ml-8">
@@ -123,11 +162,17 @@ export default function SkillsPillGrid() {
           </div>
         </div>
 
-        {/* Mobile pills */}
+        {/* Mobile pills - go beneath text on smaller screens */}
         <div className="flex flex-wrap justify-center gap-3 mt-10 lg:hidden">
           {[...leftPills, ...rightPills].map((pill, i) => (
             <ScrollReveal key={pill.label} delay={0.1 * i}>
-              <div className="inline-flex items-center gap-2 bg-white shadow-md rounded-full px-3 py-2 border border-white/40">
+              <div
+                className="inline-flex items-center gap-2 bg-white shadow-lg rounded-full px-3 py-2 border border-white/40"
+                style={{
+                  transform: "perspective(600px) rotateY(3deg)",
+                  boxShadow: "0 6px 20px rgba(0,0,0,0.1)",
+                }}
+              >
                 <span
                   className="w-6 h-6 rounded-full flex items-center justify-center"
                   style={{ backgroundColor: `${pill.color}20` }}
