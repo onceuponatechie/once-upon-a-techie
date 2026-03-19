@@ -21,10 +21,10 @@ export default function ReadersCornerPreview() {
 
         <ScrollReveal>
           {/* White container with padding */}
-          <div className="bg-white rounded-3xl shadow-sm border border-surface-muted/40 p-6 md:p-8">
-            <div className="flex flex-col md:flex-row gap-8 min-h-[380px] md:min-h-[420px]">
+          <div className="bg-white rounded-3xl shadow-sm border border-surface-muted/40 p-4 md:p-5">
+            <div className="flex flex-col md:flex-row gap-6 min-h-[360px] md:min-h-[400px]">
               {/* Left side - info */}
-              <div className="flex-1 flex flex-col justify-center py-4 md:pl-4">
+              <div className="flex-1 flex flex-col justify-center py-4 px-4 md:px-6">
                 <p className="font-sans text-sm text-text-secondary leading-relaxed mb-8 max-w-sm">
                   A curated space for books I&apos;m reading, articles that
                   caught my eye, random notes, excerpts, and whatever fits a
@@ -38,8 +38,8 @@ export default function ReadersCornerPreview() {
                 </Link>
               </div>
 
-              {/* Right side - image with rounded corners on all 4 sides, padded inside container */}
-              <div className="flex-1 relative min-h-[280px] md:min-h-0">
+              {/* Right side - image with rounded corners all 4 sides, snugs right */}
+              <div className="flex-1 relative min-h-[260px] md:min-h-0">
                 <div
                   className="w-full h-full rounded-2xl overflow-hidden bg-cover bg-center"
                   style={{

@@ -19,7 +19,7 @@ const steps = [
     description:
       "Defining the roadmap, prioritizing features, and aligning goals with user needs.",
     Icon: Target,
-    yOffset: 40,
+    yOffset: 48,
   },
   {
     number: "03",
@@ -27,7 +27,7 @@ const steps = [
     description:
       "From wireframes to polished mockups — every pixel tells a story.",
     Icon: Palette,
-    yOffset: -20,
+    yOffset: -16,
   },
   {
     number: "04",
@@ -35,7 +35,7 @@ const steps = [
     description:
       "Turning designs into real, functional products that people actually enjoy using.",
     Icon: Hammer,
-    yOffset: 60,
+    yOffset: 64,
   },
 ];
 
@@ -55,35 +55,48 @@ export default function ProcessSteps() {
           </h2>
         </ScrollReveal>
 
-        {/* 4 staggered white cards */}
+        {/* 4 staggered 3D glassmorphism cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
           {steps.map((step, i) => (
             <ScrollReveal key={step.number} delay={i * 0.15}>
               <motion.div
-                className="bg-white rounded-3xl p-7 relative overflow-hidden shadow-sm border border-surface-muted/40"
+                className="relative"
                 style={{ marginTop: `${step.yOffset}px` }}
-                whileHover={{ y: -6 }}
+                whileHover={{ y: -8 }}
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
               >
-                {/* Watermark number */}
-                <span className="absolute top-5 right-6 font-serif text-[48px] text-text-primary/[0.06] leading-none select-none">
-                  {step.number}
-                </span>
+                {/* 3D glassmorphism card */}
+                <div
+                  className="bg-white/80 backdrop-blur-xl rounded-3xl p-7 relative overflow-hidden border border-white/60"
+                  style={{
+                    boxShadow: "0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8)",
+                  }}
+                >
+                  {/* Subtle gradient sheen */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-white/20 pointer-events-none rounded-3xl" />
 
-                <div className="relative z-10">
-                  <div className="w-12 h-12 rounded-2xl bg-surface-cream flex items-center justify-center mb-6">
-                    <step.Icon size={22} className="text-brand-orange" />
+                  {/* Watermark number */}
+                  <span className="absolute top-4 right-5 font-serif text-[56px] text-text-primary/[0.04] leading-none select-none">
+                    {step.number}
+                  </span>
+
+                  <div className="relative z-10">
+                    {/* Icon circle */}
+                    <div className="w-14 h-14 rounded-2xl bg-surface-cream/80 flex items-center justify-center mb-6 border border-white/50">
+                      <step.Icon size={24} className="text-brand-orange" />
+                    </div>
+
+                    <h3 className="font-serif text-xl mb-3 text-text-primary">
+                      {step.title}
+                    </h3>
+                    <p className="font-sans text-sm text-text-secondary leading-relaxed">
+                      {step.description}
+                    </p>
                   </div>
-                  <h3 className="font-serif text-xl mb-3 text-text-primary">
-                    {step.title}
-                  </h3>
-                  <p className="font-sans text-sm text-text-secondary leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
 
-                {/* Bottom accent bar */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-orange/20 to-transparent" />
+                  {/* Bottom accent line */}
+                  <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-brand-orange/30 via-brand-orange/10 to-transparent" />
+                </div>
               </motion.div>
             </ScrollReveal>
           ))}

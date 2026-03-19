@@ -25,7 +25,7 @@ const rightPills = [
 ];
 
 const sentence =
-  "Writing the unofficial diary of a techie, building towards product with human-centered experience.";
+  "Writing the unofficial diary of a techie, building towards products that don\u2019t need explaining.";
 
 function ClusteredPill({
   label,
@@ -76,8 +76,8 @@ function ScrollRevealText() {
   const words = sentence.split(" ");
 
   return (
-    <div ref={ref} className="max-w-2xl text-center mx-auto">
-      <p className="font-serif text-2xl md:text-[32px] lg:text-[36px] leading-relaxed">
+    <div ref={ref} className="max-w-xl text-center mx-auto">
+      <p className="font-serif text-[22px] md:text-[28px] lg:text-[32px] leading-[1.4]">
         {words.map((word, i) => {
           const start = i / words.length;
           const end = (i + 1) / words.length;

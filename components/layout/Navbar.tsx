@@ -24,13 +24,13 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="font-serif text-base font-medium text-text-primary whitespace-nowrap mr-auto"
+            className="font-serif text-base font-medium text-text-primary whitespace-nowrap flex-shrink-0"
           >
             Once Upon a Techie
           </Link>
 
           {/* Desktop Links - centered */}
-          <div className="hidden md:flex items-center gap-6 mx-auto">
+          <div className="hidden md:flex items-center justify-center gap-6 flex-1">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -52,7 +52,7 @@ export default function Navbar() {
           {/* CTA - snugged to the right */}
           <Link
             href="/contact"
-            className="hidden md:flex rounded-full bg-brand-orange text-white px-5 py-2.5 text-[13px] font-medium hover:bg-brand-orange/90 transition-colors ml-auto"
+            className="hidden md:flex rounded-full bg-brand-orange text-white px-5 py-2.5 text-[13px] font-medium hover:bg-brand-orange/90 transition-colors flex-shrink-0"
           >
             Build With Me
           </Link>
@@ -60,7 +60,7 @@ export default function Navbar() {
           {/* Mobile Hamburger */}
           <button
             onClick={() => setMobileOpen(true)}
-            className="md:hidden bg-white/70 backdrop-blur-xl border border-white/40 rounded-full w-10 h-10 flex items-center justify-center ml-2"
+            className="md:hidden bg-white/70 backdrop-blur-xl border border-white/40 rounded-full w-10 h-10 flex items-center justify-center ml-auto"
             aria-label="Open menu"
           >
             <Menu size={18} />
@@ -75,7 +75,7 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-[#f5f0ef]/95 backdrop-blur-xl flex flex-col items-center justify-center"
+            className="fixed inset-0 z-[100] bg-[#f9f6f3]/95 backdrop-blur-xl flex flex-col items-center justify-center"
           >
             <button
               onClick={() => setMobileOpen(false)}

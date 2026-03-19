@@ -114,7 +114,6 @@ export default function ContactPage() {
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Name */}
                   <div>
                     <label className="block font-sans text-xs font-medium uppercase tracking-wider text-text-tertiary mb-2">
                       Name
@@ -129,8 +128,6 @@ export default function ContactPage() {
                       className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary placeholder:text-text-tertiary outline-none focus:border-text-primary focus:ring-1 focus:ring-text-primary/20 transition-all duration-300"
                     />
                   </div>
-
-                  {/* Email */}
                   <div>
                     <label className="block font-sans text-xs font-medium uppercase tracking-wider text-text-tertiary mb-2">
                       Email
@@ -145,8 +142,6 @@ export default function ContactPage() {
                       className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary placeholder:text-text-tertiary outline-none focus:border-text-primary focus:ring-1 focus:ring-text-primary/20 transition-all duration-300"
                     />
                   </div>
-
-                  {/* Subject */}
                   <div>
                     <label className="block font-sans text-xs font-medium uppercase tracking-wider text-text-tertiary mb-2">
                       What is this about?
@@ -168,8 +163,6 @@ export default function ContactPage() {
                       ))}
                     </select>
                   </div>
-
-                  {/* Message */}
                   <div>
                     <label className="block font-sans text-xs font-medium uppercase tracking-wider text-text-tertiary mb-2">
                       Message
@@ -184,8 +177,6 @@ export default function ContactPage() {
                       className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary placeholder:text-text-tertiary outline-none focus:border-text-primary focus:ring-1 focus:ring-text-primary/20 transition-all duration-300 resize-none"
                     />
                   </div>
-
-                  {/* Submit */}
                   <motion.button
                     type="submit"
                     whileHover={{ scale: 1.02 }}

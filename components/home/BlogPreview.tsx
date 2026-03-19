@@ -65,14 +65,14 @@ function BlogCard({ post }: { post: (typeof posts)[0] }) {
       onMouseLeave={() => setHovered(false)}
       onTouchStart={() => setHovered((h) => !h)}
     >
-      {/* Hover image slide-in from top-right - landscape, larger */}
+      {/* Hover image slide-in from top-right - landscape, sticks to card border */}
       <AnimatePresence>
         {hovered && (
           <motion.div
-            className="absolute top-0 right-0 w-48 h-28 rounded-bl-3xl overflow-hidden z-10"
-            initial={{ x: 80, y: -40, opacity: 0 }}
+            className="absolute top-0 right-0 w-44 h-28 md:w-52 md:h-32 rounded-bl-2xl overflow-hidden z-10"
+            initial={{ x: 60, y: -40, opacity: 0 }}
             animate={{ x: 0, y: 0, opacity: 1 }}
-            exit={{ x: 80, y: -40, opacity: 0 }}
+            exit={{ x: 60, y: -40, opacity: 0 }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
             style={{ backgroundColor: post.imageBg }}
           >
@@ -116,8 +116,8 @@ function BlogCard({ post }: { post: (typeof posts)[0] }) {
         {post.excerpt}
       </p>
 
-      {/* Read more capsule - orange */}
-      <span className="inline-flex items-center px-4 py-2 rounded-full bg-brand-orange text-sm font-sans font-medium text-white hover:bg-brand-orange/90 transition-all duration-300">
+      {/* Read more capsule - blue */}
+      <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-sans font-medium text-white transition-all duration-300" style={{ backgroundColor: "#5dcdf1" }}>
         Read more →
       </span>
     </motion.div>

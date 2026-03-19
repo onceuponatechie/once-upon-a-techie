@@ -12,150 +12,232 @@ const tabs = [
   { id: "stories", label: "Visual Stories", icon: Camera },
 ];
 
-type CardItem = {
+type BookItem = {
+  id: number;
+  title: string;
+  author: string;
+  excerpt: string;
+  color: string;
+  imageUrl: string;
+};
+
+type ArticleItem = {
+  id: number;
+  title: string;
+  source: string;
+  excerpt: string;
+  color: string;
+};
+
+type StoryItem = {
   id: number;
   title: string;
   subtitle: string;
-  description: string;
   color: string;
-  tall?: boolean;
 };
 
-const data: Record<string, CardItem[]> = {
-  reading: [
-    {
-      id: 1,
-      title: "The Design of Everyday Things",
-      subtitle: "Don Norman",
-      description: "Exploring how good design is actually about good communication between object and user.",
-      color: "#E8703A",
-      tall: true,
-    },
-    {
-      id: 2,
-      title: "Show Your Work!",
-      subtitle: "Austin Kleon",
-      description: "A manifesto for sharing your creative process with the world.",
-      color: "#B4A7D6",
-    },
-    {
-      id: 3,
-      title: "Atomic Habits",
-      subtitle: "James Clear",
-      description: "Small changes, remarkable results. Currently on chapter 12.",
-      color: "#2D6A4F",
-    },
-    {
-      id: 4,
-      title: "Refactoring UI",
-      subtitle: "Adam Wathan & Steve Schoger",
-      description: "Design tips for developers who want to make things look polished.",
-      color: "#4A90D9",
-      tall: true,
-    },
-  ],
-  notes: [
-    {
-      id: 5,
-      title: "Steal Like an Artist",
-      subtitle: "Austin Kleon",
-      description: "Nothing is original. Everything is a remix. The key is to curate what inspires you.",
-      color: "#F5D060",
-      tall: true,
-    },
-    {
-      id: 6,
-      title: "Don't Make Me Think",
-      subtitle: "Steve Krug",
-      description: "Usability is about people and how they understand things, not about technology.",
-      color: "#E8703A",
-    },
-    {
-      id: 7,
-      title: "Deep Work",
-      subtitle: "Cal Newport",
-      description: "Professional activities performed in a state of distraction-free concentration.",
-      color: "#B4A7D6",
-    },
-    {
-      id: 8,
-      title: "Zero to One",
-      subtitle: "Peter Thiel",
-      description: "Every moment in business happens only once. The next Bill Gates will not build an OS.",
-      color: "#2D6A4F",
-      tall: true,
-    },
-  ],
-  articles: [
-    {
-      id: 9,
-      title: "Why Design Systems Fail",
-      subtitle: "Smashing Magazine",
-      description: "An in-depth look at what makes design systems succeed or crumble in large organizations.",
-      color: "#4A90D9",
-    },
-    {
-      id: 10,
-      title: "The Future of AI in Design",
-      subtitle: "UX Collective",
-      description: "How artificial intelligence is reshaping the way we approach design problems.",
-      color: "#E8703A",
-      tall: true,
-    },
-    {
-      id: 11,
-      title: "Building in Public: A Guide",
-      subtitle: "IndieHackers",
-      description: "The benefits and strategies for sharing your journey while building products.",
-      color: "#F5D060",
-    },
-    {
-      id: 12,
-      title: "CSS Container Queries Changed Everything",
-      subtitle: "CSS Tricks",
-      description: "Container queries are the most significant CSS feature in a decade.",
-      color: "#B4A7D6",
-      tall: true,
-    },
-  ],
-  stories: [
-    {
-      id: 13,
-      title: "Tokyo Design Week",
-      subtitle: "Photo Essay",
-      description: "A visual journey through Tokyo's most inspiring design spaces and exhibitions.",
-      color: "#2D6A4F",
-      tall: true,
-    },
-    {
-      id: 14,
-      title: "My Workspace Evolution",
-      subtitle: "Setup Tour",
-      description: "How my workspace changed over the past two years of remote work.",
-      color: "#4A90D9",
-    },
-    {
-      id: 15,
-      title: "Sketchbook Pages",
-      subtitle: "Illustration",
-      description: "Raw pages from my daily sketching practice. Imperfect and proud of it.",
-      color: "#E8703A",
-    },
-    {
-      id: 16,
-      title: "Conference Moments",
-      subtitle: "Event Recap",
-      description: "Best moments from design and tech conferences this year, captured on film.",
-      color: "#F5D060",
-      tall: true,
-    },
-  ],
-};
+const readingData: BookItem[] = [
+  {
+    id: 1,
+    title: "The Design of Everyday Things",
+    author: "Don Norman",
+    excerpt: "Exploring how good design is actually about good communication between object and user.",
+    color: "#E8703A",
+    imageUrl: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=300&q=80",
+  },
+  {
+    id: 2,
+    title: "Show Your Work!",
+    author: "Austin Kleon",
+    excerpt: "A manifesto for sharing your creative process with the world.",
+    color: "#B4A7D6",
+    imageUrl: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=300&q=80",
+  },
+  {
+    id: 3,
+    title: "Atomic Habits",
+    author: "James Clear",
+    excerpt: "Small changes, remarkable results. Currently on chapter 12.",
+    color: "#2D6A4F",
+    imageUrl: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=300&q=80",
+  },
+  {
+    id: 4,
+    title: "Refactoring UI",
+    author: "Adam Wathan & Steve Schoger",
+    excerpt: "Design tips for developers who want to make things look polished.",
+    color: "#4A90D9",
+    imageUrl: "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=300&q=80",
+  },
+];
+
+const notesData: BookItem[] = [
+  {
+    id: 5,
+    title: "Steal Like an Artist",
+    author: "Austin Kleon",
+    excerpt: "Nothing is original. Everything is a remix. The key is to curate what inspires you.",
+    color: "#F5D060",
+    imageUrl: "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=300&q=80",
+  },
+  {
+    id: 6,
+    title: "Don't Make Me Think",
+    author: "Steve Krug",
+    excerpt: "Usability is about people and how they understand things, not about technology.",
+    color: "#E8703A",
+    imageUrl: "https://images.unsplash.com/photo-1524578271613-d550eacf6090?w=300&q=80",
+  },
+  {
+    id: 7,
+    title: "Deep Work",
+    author: "Cal Newport",
+    excerpt: "Professional activities performed in a state of distraction-free concentration.",
+    color: "#B4A7D6",
+    imageUrl: "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=300&q=80",
+  },
+  {
+    id: 8,
+    title: "Zero to One",
+    author: "Peter Thiel",
+    excerpt: "Every moment in business happens only once. The next Bill Gates will not build an OS.",
+    color: "#2D6A4F",
+    imageUrl: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=300&q=80",
+  },
+];
+
+const articlesData: ArticleItem[] = [
+  {
+    id: 9,
+    title: "Why Design Systems Fail",
+    source: "Smashing Magazine",
+    excerpt: "An in-depth look at what makes design systems succeed or crumble in large organizations.",
+    color: "#4A90D9",
+  },
+  {
+    id: 10,
+    title: "The Future of AI in Design",
+    source: "UX Collective",
+    excerpt: "How artificial intelligence is reshaping the way we approach design problems.",
+    color: "#E8703A",
+  },
+  {
+    id: 11,
+    title: "Building in Public: A Guide",
+    source: "IndieHackers",
+    excerpt: "The benefits and strategies for sharing your journey while building products.",
+    color: "#F5D060",
+  },
+  {
+    id: 12,
+    title: "CSS Container Queries Changed Everything",
+    source: "CSS Tricks",
+    excerpt: "Container queries are the most significant CSS feature in a decade.",
+    color: "#B4A7D6",
+  },
+];
+
+const storiesData: StoryItem[] = [
+  {
+    id: 13,
+    title: "Tokyo Design Week",
+    subtitle: "A visual journey through Tokyo's most inspiring design spaces and exhibitions.",
+    color: "#2D6A4F",
+  },
+  {
+    id: 14,
+    title: "My Workspace Evolution",
+    subtitle: "How my workspace changed over the past two years of remote work.",
+    color: "#4A90D9",
+  },
+  {
+    id: 15,
+    title: "Sketchbook Pages",
+    subtitle: "Raw pages from my daily sketching practice. Imperfect and proud of it.",
+    color: "#E8703A",
+  },
+  {
+    id: 16,
+    title: "Conference Moments",
+    subtitle: "Best moments from design and tech conferences this year, captured on film.",
+    color: "#F5D060",
+  },
+];
+
+/* Book card with image */
+function BookCard({ item }: { item: BookItem }) {
+  return (
+    <div className="bg-white rounded-2xl overflow-hidden border border-surface-muted/40 group hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+      <div
+        className="w-full h-48 bg-cover bg-center"
+        style={{ backgroundImage: `url('${item.imageUrl}')` }}
+      >
+        <div className="w-full h-full" style={{ background: `linear-gradient(180deg, transparent 40%, ${item.color}30 100%)` }} />
+      </div>
+      <div className="p-5">
+        <p className="text-[11px] font-sans font-medium uppercase tracking-wider text-text-tertiary mb-2">
+          {item.author}
+        </p>
+        <h3 className="font-serif text-lg text-text-primary mb-2 group-hover:text-brand-orange transition-colors">
+          {item.title}
+        </h3>
+        <p className="font-sans text-sm text-text-secondary leading-relaxed">
+          {item.excerpt}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* Article row - no card, just clean list item */
+function ArticleRow({ item }: { item: ArticleItem }) {
+  return (
+    <div className="group py-5 border-b border-surface-muted/40 last:border-0 flex items-start gap-4">
+      <div
+        className="w-1 h-12 rounded-full flex-shrink-0 mt-1"
+        style={{ backgroundColor: item.color }}
+      />
+      <div className="flex-1">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-[11px] font-sans font-medium uppercase tracking-wider text-text-tertiary">
+            {item.source}
+          </span>
+        </div>
+        <h3 className="font-serif text-base text-text-primary mb-1 group-hover:text-brand-orange transition-colors">
+          {item.title}
+        </h3>
+        <p className="font-sans text-sm text-text-secondary leading-relaxed">
+          {item.excerpt}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* Visual story card - image-style with text overlay */
+function StoryCard({ item }: { item: StoryItem }) {
+  return (
+    <div
+      className="rounded-2xl overflow-hidden relative min-h-[280px] group cursor-pointer"
+      style={{ backgroundColor: item.color }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 p-6">
+        <h3 className="font-serif text-xl text-white mb-2">
+          {item.title}
+        </h3>
+        <p className="font-sans text-sm text-white/70 leading-relaxed">
+          {item.subtitle}
+        </p>
+      </div>
+      {/* Hover overlay */}
+      <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+    </div>
+  );
+}
 
 export default function ReadersCornerPage() {
   const [activeTab, setActiveTab] = useState("reading");
-
-  const items = data[activeTab] || [];
 
   return (
     <section className="pt-32 pb-24 px-6">
@@ -174,7 +256,7 @@ export default function ReadersCornerPage() {
           </p>
         </ScrollReveal>
 
-        {/* Tabs - white pill style */}
+        {/* Tabs */}
         <ScrollReveal delay={0.1}>
           <div className="flex flex-wrap gap-2 mb-14">
             {tabs.map((tab) => {
@@ -204,7 +286,7 @@ export default function ReadersCornerPage() {
           </div>
         </ScrollReveal>
 
-        {/* Clean card grid */}
+        {/* Content */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
@@ -212,53 +294,39 @@ export default function ReadersCornerPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.35 }}
-            className="columns-1 sm:columns-2 lg:columns-3 gap-5 space-y-5"
           >
-            {items.map((item, i) => (
-              <ScrollReveal key={item.id} delay={i * 0.06}>
-                <div
-                  className={`break-inside-avoid rounded-2xl overflow-hidden group transition-all duration-300 hover:shadow-lg hover:-translate-y-1 bg-white border border-surface-muted/40 ${
-                    item.tall ? "min-h-[300px]" : "min-h-[220px]"
-                  }`}
-                >
-                  {/* Subtle left accent */}
-                  <div className="p-6 relative">
-                    <div
-                      className="absolute top-6 left-0 w-1 h-10 rounded-r-full"
-                      style={{ backgroundColor: item.color }}
-                    />
+            {/* Reading & Notes: cards with images */}
+            {(activeTab === "reading" || activeTab === "notes") && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                {(activeTab === "reading" ? readingData : notesData).map((item, i) => (
+                  <ScrollReveal key={item.id} delay={i * 0.06}>
+                    <BookCard item={item} />
+                  </ScrollReveal>
+                ))}
+              </div>
+            )}
 
-                    {/* Subtitle / Source */}
-                    <p className="text-[11px] font-sans font-medium uppercase tracking-wider text-text-tertiary mb-3 pl-3">
-                      {item.subtitle}
-                    </p>
+            {/* Articles: clean list, no cards */}
+            {activeTab === "articles" && (
+              <div className="max-w-3xl">
+                {articlesData.map((item, i) => (
+                  <ScrollReveal key={item.id} delay={i * 0.06}>
+                    <ArticleRow item={item} />
+                  </ScrollReveal>
+                ))}
+              </div>
+            )}
 
-                    {/* Title */}
-                    <h3 className="font-serif text-lg font-normal text-text-primary mb-3 group-hover:text-brand-orange transition-colors duration-300">
-                      {item.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="font-sans text-sm text-text-secondary leading-relaxed">
-                      {item.description}
-                    </p>
-
-                    {/* Minimal progress dots */}
-                    <div className="mt-5 flex gap-1.5">
-                      {[...Array(3)].map((_, j) => (
-                        <div
-                          key={j}
-                          className="w-1.5 h-1.5 rounded-full"
-                          style={{
-                            backgroundColor: j === 0 ? item.color : "#E8E5DF",
-                          }}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
+            {/* Visual Stories: visual cards with text overlay */}
+            {activeTab === "stories" && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                {storiesData.map((item, i) => (
+                  <ScrollReveal key={item.id} delay={i * 0.06}>
+                    <StoryCard item={item} />
+                  </ScrollReveal>
+                ))}
+              </div>
+            )}
           </motion.div>
         </AnimatePresence>
       </div>
