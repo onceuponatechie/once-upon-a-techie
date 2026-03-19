@@ -17,7 +17,7 @@ type CardItem = {
   title: string;
   subtitle: string;
   description: string;
-  accent: string;
+  color: string;
   tall?: boolean;
 };
 
@@ -28,7 +28,7 @@ const data: Record<string, CardItem[]> = {
       title: "The Design of Everyday Things",
       subtitle: "Don Norman",
       description: "Exploring how good design is actually about good communication between object and user.",
-      accent: "bg-brand-orange",
+      color: "#E8703A",
       tall: true,
     },
     {
@@ -36,21 +36,21 @@ const data: Record<string, CardItem[]> = {
       title: "Show Your Work!",
       subtitle: "Austin Kleon",
       description: "A manifesto for sharing your creative process with the world.",
-      accent: "bg-brand-lavender",
+      color: "#B4A7D6",
     },
     {
       id: 3,
       title: "Atomic Habits",
       subtitle: "James Clear",
       description: "Small changes, remarkable results. Currently on chapter 12.",
-      accent: "bg-brand-green",
+      color: "#2D6A4F",
     },
     {
       id: 4,
       title: "Refactoring UI",
       subtitle: "Adam Wathan & Steve Schoger",
       description: "Design tips for developers who want to make things look polished.",
-      accent: "bg-brand-blue",
+      color: "#4A90D9",
       tall: true,
     },
   ],
@@ -60,7 +60,7 @@ const data: Record<string, CardItem[]> = {
       title: "Steal Like an Artist",
       subtitle: "Austin Kleon",
       description: "Nothing is original. Everything is a remix. The key is to curate what inspires you.",
-      accent: "bg-brand-yellow",
+      color: "#F5D060",
       tall: true,
     },
     {
@@ -68,21 +68,21 @@ const data: Record<string, CardItem[]> = {
       title: "Don't Make Me Think",
       subtitle: "Steve Krug",
       description: "Usability is about people and how they understand things, not about technology.",
-      accent: "bg-brand-orange",
+      color: "#E8703A",
     },
     {
       id: 7,
       title: "Deep Work",
       subtitle: "Cal Newport",
       description: "Professional activities performed in a state of distraction-free concentration.",
-      accent: "bg-brand-lavender",
+      color: "#B4A7D6",
     },
     {
       id: 8,
       title: "Zero to One",
       subtitle: "Peter Thiel",
       description: "Every moment in business happens only once. The next Bill Gates will not build an OS.",
-      accent: "bg-brand-green",
+      color: "#2D6A4F",
       tall: true,
     },
   ],
@@ -92,14 +92,14 @@ const data: Record<string, CardItem[]> = {
       title: "Why Design Systems Fail",
       subtitle: "Smashing Magazine",
       description: "An in-depth look at what makes design systems succeed or crumble in large organizations.",
-      accent: "bg-brand-blue",
+      color: "#4A90D9",
     },
     {
       id: 10,
       title: "The Future of AI in Design",
       subtitle: "UX Collective",
       description: "How artificial intelligence is reshaping the way we approach design problems.",
-      accent: "bg-brand-orange",
+      color: "#E8703A",
       tall: true,
     },
     {
@@ -107,14 +107,14 @@ const data: Record<string, CardItem[]> = {
       title: "Building in Public: A Guide",
       subtitle: "IndieHackers",
       description: "The benefits and strategies for sharing your journey while building products.",
-      accent: "bg-brand-yellow",
+      color: "#F5D060",
     },
     {
       id: 12,
       title: "CSS Container Queries Changed Everything",
       subtitle: "CSS Tricks",
       description: "Container queries are the most significant CSS feature in a decade.",
-      accent: "bg-brand-lavender",
+      color: "#B4A7D6",
       tall: true,
     },
   ],
@@ -124,7 +124,7 @@ const data: Record<string, CardItem[]> = {
       title: "Tokyo Design Week",
       subtitle: "Photo Essay",
       description: "A visual journey through Tokyo's most inspiring design spaces and exhibitions.",
-      accent: "bg-brand-green",
+      color: "#2D6A4F",
       tall: true,
     },
     {
@@ -132,21 +132,21 @@ const data: Record<string, CardItem[]> = {
       title: "My Workspace Evolution",
       subtitle: "Setup Tour",
       description: "How my workspace changed over the past two years of remote work.",
-      accent: "bg-brand-blue",
+      color: "#4A90D9",
     },
     {
       id: 15,
       title: "Sketchbook Pages",
       subtitle: "Illustration",
       description: "Raw pages from my daily sketching practice. Imperfect and proud of it.",
-      accent: "bg-brand-orange",
+      color: "#E8703A",
     },
     {
       id: 16,
       title: "Conference Moments",
       subtitle: "Event Recap",
       description: "Best moments from design and tech conferences this year, captured on film.",
-      accent: "bg-brand-yellow",
+      color: "#F5D060",
       tall: true,
     },
   ],
@@ -162,8 +162,8 @@ export default function ReadersCornerPage() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <ScrollReveal>
-          <p className="font-serif italic text-brand-lavender text-sm mb-3">
-            reader&apos;s corner
+          <p className="font-serif italic text-text-tertiary text-sm mb-3">
+            Reader&apos;s Corner
           </p>
           <h1 className="font-serif text-4xl md:text-5xl font-normal text-text-primary mb-4">
             What I&apos;m <span className="font-serif italic">Reading</span>
@@ -174,7 +174,7 @@ export default function ReadersCornerPage() {
           </p>
         </ScrollReveal>
 
-        {/* Tabs */}
+        {/* Tabs - white pill style */}
         <ScrollReveal delay={0.1}>
           <div className="flex flex-wrap gap-2 mb-14">
             {tabs.map((tab) => {
@@ -186,7 +186,7 @@ export default function ReadersCornerPage() {
                   className={`relative flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-sans transition-colors duration-300 ${
                     activeTab === tab.id
                       ? "text-white"
-                      : "text-text-secondary hover:text-text-primary bg-surface-light"
+                      : "text-text-secondary hover:text-text-primary bg-white border border-surface-muted/40"
                   }`}
                 >
                   {activeTab === tab.id && (
@@ -204,7 +204,7 @@ export default function ReadersCornerPage() {
           </div>
         </ScrollReveal>
 
-        {/* Pinterest-style Masonry Grid */}
+        {/* Clean card grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
@@ -217,16 +217,19 @@ export default function ReadersCornerPage() {
             {items.map((item, i) => (
               <ScrollReveal key={item.id} delay={i * 0.06}>
                 <div
-                  className={`break-inside-avoid rounded-2xl overflow-hidden group transition-shadow duration-300 hover:shadow-xl ${
-                    item.tall ? "min-h-[320px]" : "min-h-[220px]"
+                  className={`break-inside-avoid rounded-2xl overflow-hidden group transition-all duration-300 hover:shadow-lg hover:-translate-y-1 bg-white border border-surface-muted/40 ${
+                    item.tall ? "min-h-[300px]" : "min-h-[220px]"
                   }`}
                 >
-                  {/* Colored top bar */}
-                  <div className={`${item.accent} h-2 w-full`} />
+                  {/* Subtle left accent */}
+                  <div className="p-6 relative">
+                    <div
+                      className="absolute top-6 left-0 w-1 h-10 rounded-r-full"
+                      style={{ backgroundColor: item.color }}
+                    />
 
-                  <div className="glassmorphism border-t-0 rounded-t-none rounded-b-2xl p-6 h-full">
                     {/* Subtitle / Source */}
-                    <p className="text-[11px] font-sans font-medium uppercase tracking-wider text-text-tertiary mb-3">
+                    <p className="text-[11px] font-sans font-medium uppercase tracking-wider text-text-tertiary mb-3 pl-3">
                       {item.subtitle}
                     </p>
 
@@ -240,15 +243,15 @@ export default function ReadersCornerPage() {
                       {item.description}
                     </p>
 
-                    {/* Decorative element */}
-                    <div className="mt-5 flex gap-1">
-                      {[...Array(5)].map((_, j) => (
+                    {/* Minimal progress dots */}
+                    <div className="mt-5 flex gap-1.5">
+                      {[...Array(3)].map((_, j) => (
                         <div
                           key={j}
-                          className={`h-1 rounded-full ${
-                            j < 3 ? item.accent : "bg-surface-muted"
-                          }`}
-                          style={{ width: j === 0 ? 24 : j === 1 ? 16 : j === 2 ? 8 : 8 }}
+                          className="w-1.5 h-1.5 rounded-full"
+                          style={{
+                            backgroundColor: j === 0 ? item.color : "#E8E5DF",
+                          }}
                         />
                       ))}
                     </div>

@@ -61,8 +61,18 @@ export default function FeaturedBuildsShowcase() {
   const project = projects[active];
 
   return (
-    <section className="bg-surface-cream py-24 md:py-32">
+    <section className="py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-4">
+        <ScrollReveal className="text-center mb-4">
+          <p className="font-serif italic text-text-tertiary text-base">
+            The Builds
+          </p>
+        </ScrollReveal>
+        <ScrollReveal className="text-center mb-16">
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-text-primary">
+            What Are We <span className="italic">Building?</span>
+          </h2>
+        </ScrollReveal>
         <ScrollReveal>
           <div className="relative rounded-3xl overflow-hidden border-[3px] border-white shadow-2xl">
             <div className="rounded-3xl overflow-hidden relative">
@@ -77,9 +87,6 @@ export default function FeaturedBuildsShowcase() {
                   transition={{ duration: 0.8 }}
                 />
               </AnimatePresence>
-
-              {/* Subtle decorative dot */}
-              <div className="absolute top-1/3 right-1/3 w-4 h-4 rounded-full bg-brand-orange/60 z-[1]" />
 
               {/* Content */}
               <div className="relative z-10 p-8 md:p-12 min-h-[500px] md:min-h-[600px] flex flex-col justify-between">

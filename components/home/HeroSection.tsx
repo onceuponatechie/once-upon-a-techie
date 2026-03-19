@@ -53,8 +53,7 @@ export default function HeroSection() {
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{
-        background:
-          "linear-gradient(135deg, #FAFAF7 0%, #F0EDE8 100%)",
+        background: "#f5f0ef",
       }}
     >
       {/* Radial glow */}
@@ -74,17 +73,16 @@ export default function HeroSection() {
           <SmileyGreeting />
         </motion.div>
 
-        {/* Blue dot + Pill badge row */}
+        {/* Pill badge row */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="flex items-center justify-center gap-6 mb-10"
+          className="flex items-center justify-center mb-10"
         >
-          <span className="w-3 h-3 rounded-full bg-brand-blue" />
-          <div className="inline-flex items-center gap-2 glassmorphism rounded-full px-4 py-2">
+          <div className="inline-flex items-center gap-2 bg-white rounded-full px-5 py-2.5 shadow-md border border-surface-muted/60">
             <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
-            <span className="text-sm font-sans text-text-secondary">
+            <span className="text-sm font-sans font-medium text-text-primary">
               Open to Collaborations
             </span>
           </div>

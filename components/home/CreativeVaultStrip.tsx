@@ -46,14 +46,14 @@ function Card({ bg, label }: { bg: string; label: string }) {
 
 export default function CreativeVaultStrip() {
   return (
-    <section className="bg-surface-cream py-0">
+    <section className="py-0">
       <div className="max-w-6xl mx-auto px-4">
         {/* Main container with white outer border */}
         <div className="relative rounded-3xl overflow-hidden border-[3px] border-white shadow-2xl">
           {/* Black background for gaps */}
           <div className="bg-black rounded-3xl overflow-hidden h-[600px] md:h-[800px] relative">
             {/* 3-column scrolling grid */}
-            <div className="absolute inset-0 grid grid-cols-3 gap-3 p-3">
+            <div className="absolute inset-0 grid grid-cols-2 md:grid-cols-3 gap-3 p-3">
               {/* Column 1 - scrolls UP (fast) */}
               <div className="overflow-hidden relative">
                 <div className="animate-scroll-up-fast flex flex-col gap-3">
@@ -72,8 +72,8 @@ export default function CreativeVaultStrip() {
                 </div>
               </div>
 
-              {/* Column 3 - scrolls UP (slow) */}
-              <div className="overflow-hidden relative">
+              {/* Column 3 - scrolls UP (slow) - hidden on mobile */}
+              <div className="overflow-hidden relative hidden md:block">
                 <div className="animate-scroll-up-slow flex flex-col gap-3">
                   {[...col3Cards, ...col3Cards].map((card, i) => (
                     <Card key={`c3-${i}`} bg={card.bg} label={card.label} />

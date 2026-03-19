@@ -39,7 +39,6 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Conceptually submits to /api/newsletter
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 4000);
   };
@@ -56,8 +55,8 @@ export default function ContactPage() {
           {/* Left Side */}
           <div>
             <ScrollReveal>
-              <p className="font-serif italic text-brand-orange text-sm mb-3">
-                contact
+              <p className="font-serif italic text-text-tertiary text-sm mb-3">
+                Contact
               </p>
               <h1 className="font-serif text-4xl md:text-5xl font-normal text-text-primary mb-6 leading-tight">
                 Let&apos;s build an{" "}
@@ -83,7 +82,7 @@ export default function ContactPage() {
                         key={social.label}
                         href={social.href}
                         aria-label={social.label}
-                        className="w-11 h-11 rounded-full bg-surface-light flex items-center justify-center text-text-secondary hover:bg-brand-orange hover:text-white transition-all duration-300"
+                        className="w-11 h-11 rounded-full bg-white border border-surface-muted/40 flex items-center justify-center text-text-secondary hover:bg-text-primary hover:text-white hover:border-text-primary transition-all duration-300"
                       >
                         <Icon size={16} />
                       </a>
@@ -92,35 +91,11 @@ export default function ContactPage() {
                 </div>
               </div>
             </ScrollReveal>
-
-            {/* Decorative element */}
-            <ScrollReveal delay={0.25}>
-              <div className="mt-16 hidden lg:block">
-                <div className="flex gap-2">
-                  {["bg-brand-orange", "bg-brand-lavender", "bg-brand-green", "bg-brand-blue", "bg-brand-yellow"].map(
-                    (color, i) => (
-                      <motion.div
-                        key={color}
-                        className={`${color} rounded-full`}
-                        style={{ width: 8 + i * 4, height: 8 + i * 4 }}
-                        animate={{ y: [0, -6, 0] }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          delay: i * 0.2,
-                          ease: "easeInOut",
-                        }}
-                      />
-                    )
-                  )}
-                </div>
-              </div>
-            </ScrollReveal>
           </div>
 
           {/* Right Side - Form */}
           <ScrollReveal delay={0.1} direction="right">
-            <div className="glassmorphism rounded-3xl p-8 md:p-10">
+            <div className="bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-surface-muted/40">
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -151,7 +126,7 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Your name"
-                      className="w-full bg-surface-light/60 border border-surface-muted rounded-xl px-4 py-3 text-sm font-sans text-text-primary placeholder:text-text-tertiary outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/30 transition-all duration-300"
+                      className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary placeholder:text-text-tertiary outline-none focus:border-text-primary focus:ring-1 focus:ring-text-primary/20 transition-all duration-300"
                     />
                   </div>
 
@@ -167,7 +142,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="you@example.com"
-                      className="w-full bg-surface-light/60 border border-surface-muted rounded-xl px-4 py-3 text-sm font-sans text-text-primary placeholder:text-text-tertiary outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/30 transition-all duration-300"
+                      className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary placeholder:text-text-tertiary outline-none focus:border-text-primary focus:ring-1 focus:ring-text-primary/20 transition-all duration-300"
                     />
                   </div>
 
@@ -181,7 +156,7 @@ export default function ContactPage() {
                       required
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full bg-surface-light/60 border border-surface-muted rounded-xl px-4 py-3 text-sm font-sans text-text-primary outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/30 transition-all duration-300 appearance-none"
+                      className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary outline-none focus:border-text-primary focus:ring-1 focus:ring-text-primary/20 transition-all duration-300 appearance-none"
                     >
                       <option value="" disabled>
                         Select a topic
@@ -206,7 +181,7 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Tell me about your project or just say hello..."
-                      className="w-full bg-surface-light/60 border border-surface-muted rounded-xl px-4 py-3 text-sm font-sans text-text-primary placeholder:text-text-tertiary outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/30 transition-all duration-300 resize-none"
+                      className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary placeholder:text-text-tertiary outline-none focus:border-text-primary focus:ring-1 focus:ring-text-primary/20 transition-all duration-300 resize-none"
                     />
                   </div>
 
@@ -215,7 +190,7 @@ export default function ContactPage() {
                     type="submit"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full rounded-xl bg-brand-orange text-white py-3.5 text-sm font-sans font-medium hover:bg-brand-orange/90 transition-colors duration-300 flex items-center justify-center gap-2"
+                    className="w-full rounded-xl bg-text-primary text-white py-3.5 text-sm font-sans font-medium hover:bg-text-primary/90 transition-colors duration-300 flex items-center justify-center gap-2"
                   >
                     Send Message
                     <Send size={14} />

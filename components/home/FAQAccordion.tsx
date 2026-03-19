@@ -87,7 +87,7 @@ export default function FAQAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="bg-surface-cream py-24 md:py-32">
+    <section className="py-24 md:py-32">
       <div className="max-w-3xl mx-auto px-6">
         <ScrollReveal className="text-center mb-4">
           <p className="font-serif italic text-text-tertiary text-base">
@@ -101,7 +101,7 @@ export default function FAQAccordion() {
         </ScrollReveal>
 
         <ScrollReveal>
-          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm">
+          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-surface-muted/40">
             {faqs.map((faq, i) => (
               <FAQItem
                 key={i}
