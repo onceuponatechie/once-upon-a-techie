@@ -82,7 +82,7 @@ export default function ContactPage() {
                         key={social.label}
                         href={social.href}
                         aria-label={social.label}
-                        className="w-11 h-11 rounded-full bg-white border border-surface-muted/40 flex items-center justify-center text-text-secondary hover:bg-text-primary hover:text-white hover:border-text-primary transition-all duration-300"
+                        className="w-11 h-11 rounded-full bg-white border border-surface-muted/40 flex items-center justify-center text-text-secondary hover:bg-brand-orange hover:text-white hover:border-brand-orange transition-all duration-300"
                       >
                         <Icon size={16} />
                       </a>
@@ -95,15 +95,15 @@ export default function ContactPage() {
 
           {/* Right Side - Form */}
           <ScrollReveal delay={0.1} direction="right">
-            <div className="bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-surface-muted/40">
+            <div className="bg-white/80 backdrop-blur-xl rounded-3xl p-8 md:p-10 shadow-sm border-2 border-white/70" style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8)" }}>
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   className="flex flex-col items-center justify-center py-16 text-center"
                 >
-                  <div className="w-16 h-16 rounded-full bg-brand-green/10 flex items-center justify-center mb-5">
-                    <Send size={24} className="text-brand-green" />
+                  <div className="w-16 h-16 rounded-full bg-brand-orange/10 flex items-center justify-center mb-5">
+                    <Send size={24} className="text-brand-orange" />
                   </div>
                   <h3 className="font-serif text-xl font-normal text-text-primary mb-2">
                     Message <span className="font-serif italic">Sent!</span>
@@ -125,7 +125,7 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Your name"
-                      className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary placeholder:text-text-tertiary outline-none focus:border-text-primary focus:ring-1 focus:ring-text-primary/20 transition-all duration-300"
+                      className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary placeholder:text-text-tertiary outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/20 transition-all duration-300"
                     />
                   </div>
                   <div>
@@ -139,7 +139,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="you@example.com"
-                      className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary placeholder:text-text-tertiary outline-none focus:border-text-primary focus:ring-1 focus:ring-text-primary/20 transition-all duration-300"
+                      className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary placeholder:text-text-tertiary outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/20 transition-all duration-300"
                     />
                   </div>
                   <div>
@@ -151,7 +151,7 @@ export default function ContactPage() {
                       required
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary outline-none focus:border-text-primary focus:ring-1 focus:ring-text-primary/20 transition-all duration-300 appearance-none"
+                      className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/20 transition-all duration-300 appearance-none"
                     >
                       <option value="" disabled>
                         Select a topic
@@ -174,14 +174,14 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Tell me about your project or just say hello..."
-                      className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary placeholder:text-text-tertiary outline-none focus:border-text-primary focus:ring-1 focus:ring-text-primary/20 transition-all duration-300 resize-none"
+                      className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary placeholder:text-text-tertiary outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/20 transition-all duration-300 resize-none"
                     />
                   </div>
                   <motion.button
                     type="submit"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full rounded-xl bg-text-primary text-white py-3.5 text-sm font-sans font-medium hover:bg-text-primary/90 transition-colors duration-300 flex items-center justify-center gap-2"
+                    className="w-full rounded-xl bg-brand-orange text-white py-3.5 text-sm font-sans font-medium hover:bg-brand-orange/90 transition-colors duration-300 flex items-center justify-center gap-2"
                   >
                     Send Message
                     <Send size={14} />

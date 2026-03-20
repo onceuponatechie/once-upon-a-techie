@@ -50,7 +50,6 @@ function ClusteredPill({
         boxShadow:
           "0 8px 30px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)",
       }}
-      whileHover={{ scale: 1.08, rotate: 0 }}
       transition={{ type: "spring", stiffness: 200, damping: 15 }}
     >
       <span

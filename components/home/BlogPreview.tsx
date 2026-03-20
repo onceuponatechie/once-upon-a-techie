@@ -69,10 +69,10 @@ function BlogCard({ post }: { post: (typeof posts)[0] }) {
       <AnimatePresence>
         {hovered && (
           <motion.div
-            className="absolute top-0 right-0 w-44 h-28 md:w-52 md:h-32 rounded-bl-2xl overflow-hidden z-10"
-            initial={{ x: 60, y: -40, opacity: 0 }}
+            className="absolute top-3 right-3 w-40 h-24 md:w-48 md:h-28 rounded-2xl overflow-hidden z-10 shadow-lg"
+            initial={{ x: 40, y: -30, opacity: 0 }}
             animate={{ x: 0, y: 0, opacity: 1 }}
-            exit={{ x: 60, y: -40, opacity: 0 }}
+            exit={{ x: 40, y: -30, opacity: 0 }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
             style={{ backgroundColor: post.imageBg }}
           >

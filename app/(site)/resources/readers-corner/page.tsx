@@ -2,23 +2,23 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { BookOpen, FileText, Bookmark, Camera } from "lucide-react";
+import { FileText, Bookmark, Camera, ChevronDown } from "lucide-react";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 
 const tabs = [
-  { id: "reading", label: "Currently Reading", icon: BookOpen },
   { id: "notes", label: "Book Notes", icon: FileText },
   { id: "articles", label: "Saved Articles", icon: Bookmark },
   { id: "stories", label: "Visual Stories", icon: Camera },
 ];
 
-type BookItem = {
+type NoteItem = {
   id: number;
   title: string;
   author: string;
   excerpt: string;
   color: string;
   imageUrl: string;
+  notes: string[];
 };
 
 type ArticleItem = {
@@ -34,102 +34,115 @@ type StoryItem = {
   title: string;
   subtitle: string;
   color: string;
+  imageUrl: string;
 };
 
-const readingData: BookItem[] = [
+const notesData: NoteItem[] = [
   {
     id: 1,
-    title: "The Design of Everyday Things",
-    author: "Don Norman",
-    excerpt: "Exploring how good design is actually about good communication between object and user.",
-    color: "#E8703A",
-    imageUrl: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=300&q=80",
-  },
-  {
-    id: 2,
-    title: "Show Your Work!",
-    author: "Austin Kleon",
-    excerpt: "A manifesto for sharing your creative process with the world.",
-    color: "#B4A7D6",
-    imageUrl: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=300&q=80",
-  },
-  {
-    id: 3,
-    title: "Atomic Habits",
-    author: "James Clear",
-    excerpt: "Small changes, remarkable results. Currently on chapter 12.",
-    color: "#2D6A4F",
-    imageUrl: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=300&q=80",
-  },
-  {
-    id: 4,
-    title: "Refactoring UI",
-    author: "Adam Wathan & Steve Schoger",
-    excerpt: "Design tips for developers who want to make things look polished.",
-    color: "#4A90D9",
-    imageUrl: "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=300&q=80",
-  },
-];
-
-const notesData: BookItem[] = [
-  {
-    id: 5,
     title: "Steal Like an Artist",
     author: "Austin Kleon",
     excerpt: "Nothing is original. Everything is a remix. The key is to curate what inspires you.",
     color: "#F5D060",
     imageUrl: "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=300&q=80",
+    notes: [
+      "Don't wait until you know who you are to get started.",
+      "Write the book you want to read.",
+      "Creativity is subtraction — choose what to leave out.",
+      "The best way to find your voice is to use it.",
+    ],
   },
   {
-    id: 6,
+    id: 2,
     title: "Don't Make Me Think",
     author: "Steve Krug",
     excerpt: "Usability is about people and how they understand things, not about technology.",
     color: "#E8703A",
     imageUrl: "https://images.unsplash.com/photo-1524578271613-d550eacf6090?w=300&q=80",
+    notes: [
+      "If something requires a large investment of time or effort, it's less likely to be used.",
+      "Get rid of half the words on each page, then get rid of half of what's left.",
+      "The most important thing you can do is test — one user early is better than fifty near the end.",
+    ],
   },
   {
-    id: 7,
+    id: 3,
     title: "Deep Work",
     author: "Cal Newport",
     excerpt: "Professional activities performed in a state of distraction-free concentration.",
     color: "#B4A7D6",
     imageUrl: "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=300&q=80",
+    notes: [
+      "Clarity about what matters provides clarity about what does not.",
+      "The ability to perform deep work is becoming increasingly rare and increasingly valuable.",
+      "If you don't produce, you won't thrive — no matter how skilled or talented you are.",
+    ],
   },
   {
-    id: 8,
+    id: 4,
     title: "Zero to One",
     author: "Peter Thiel",
     excerpt: "Every moment in business happens only once. The next Bill Gates will not build an OS.",
     color: "#2D6A4F",
     imageUrl: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=300&q=80",
+    notes: [
+      "The most contrarian thing of all is not to oppose the crowd but to think for yourself.",
+      "Brilliant thinking is rare, but courage is in even shorter supply than genius.",
+      "A startup messed up at its foundation cannot be fixed.",
+    ],
+  },
+  {
+    id: 5,
+    title: "The Design of Everyday Things",
+    author: "Don Norman",
+    excerpt: "Exploring how good design is actually about good communication between object and user.",
+    color: "#4A90D9",
+    imageUrl: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=300&q=80",
+    notes: [
+      "Design is really an act of communication.",
+      "When things go wrong, people tend to blame themselves — good design prevents that.",
+      "Two of the most important characteristics of good design are discoverability and understanding.",
+    ],
+  },
+  {
+    id: 6,
+    title: "Atomic Habits",
+    author: "James Clear",
+    excerpt: "Small changes, remarkable results. The compound effect of tiny improvements.",
+    color: "#E8703A",
+    imageUrl: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=300&q=80",
+    notes: [
+      "You do not rise to the level of your goals. You fall to the level of your systems.",
+      "Every action you take is a vote for the type of person you wish to become.",
+      "Habits are the compound interest of self-improvement.",
+    ],
   },
 ];
 
 const articlesData: ArticleItem[] = [
   {
-    id: 9,
+    id: 7,
     title: "Why Design Systems Fail",
     source: "Smashing Magazine",
     excerpt: "An in-depth look at what makes design systems succeed or crumble in large organizations.",
     color: "#4A90D9",
   },
   {
-    id: 10,
+    id: 8,
     title: "The Future of AI in Design",
     source: "UX Collective",
     excerpt: "How artificial intelligence is reshaping the way we approach design problems.",
     color: "#E8703A",
   },
   {
-    id: 11,
+    id: 9,
     title: "Building in Public: A Guide",
     source: "IndieHackers",
     excerpt: "The benefits and strategies for sharing your journey while building products.",
     color: "#F5D060",
   },
   {
-    id: 12,
+    id: 10,
     title: "CSS Container Queries Changed Everything",
     source: "CSS Tricks",
     excerpt: "Container queries are the most significant CSS feature in a decade.",
@@ -139,35 +152,44 @@ const articlesData: ArticleItem[] = [
 
 const storiesData: StoryItem[] = [
   {
-    id: 13,
+    id: 11,
     title: "Tokyo Design Week",
     subtitle: "A visual journey through Tokyo's most inspiring design spaces and exhibitions.",
     color: "#2D6A4F",
+    imageUrl: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80",
   },
   {
-    id: 14,
+    id: 12,
     title: "My Workspace Evolution",
     subtitle: "How my workspace changed over the past two years of remote work.",
     color: "#4A90D9",
+    imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80",
   },
   {
-    id: 15,
+    id: 13,
     title: "Sketchbook Pages",
     subtitle: "Raw pages from my daily sketching practice. Imperfect and proud of it.",
     color: "#E8703A",
+    imageUrl: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80",
   },
   {
-    id: 16,
+    id: 14,
     title: "Conference Moments",
     subtitle: "Best moments from design and tech conferences this year, captured on film.",
     color: "#F5D060",
+    imageUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80",
   },
 ];
 
-/* Book card with image */
-function BookCard({ item }: { item: BookItem }) {
+/* Book note card with click-to-reveal notes */
+function BookNoteCard({ item }: { item: NoteItem }) {
+  const [expanded, setExpanded] = useState(false);
+
   return (
-    <div className="bg-white rounded-2xl overflow-hidden border border-surface-muted/40 group hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+    <div
+      className="bg-white rounded-2xl overflow-hidden border border-surface-muted/40 group hover:shadow-lg transition-all duration-300 cursor-pointer"
+      onClick={() => setExpanded(!expanded)}
+    >
       <div
         className="w-full h-48 bg-cover bg-center"
         style={{ backgroundImage: `url('${item.imageUrl}')` }}
@@ -184,12 +206,43 @@ function BookCard({ item }: { item: BookItem }) {
         <p className="font-sans text-sm text-text-secondary leading-relaxed">
           {item.excerpt}
         </p>
+        <button className="mt-3 flex items-center gap-1 text-xs font-sans font-medium text-brand-orange">
+          {expanded ? "Hide notes" : "View my notes"}
+          <motion.span
+            animate={{ rotate: expanded ? 180 : 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <ChevronDown size={14} />
+          </motion.span>
+        </button>
       </div>
+      <AnimatePresence>
+        {expanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <div className="px-5 pb-5 border-t border-surface-muted/40 pt-4">
+              <ul className="space-y-2">
+                {item.notes.map((note, i) => (
+                  <li key={i} className="flex gap-2 text-sm font-sans text-text-secondary leading-relaxed">
+                    <span className="text-brand-orange mt-0.5 flex-shrink-0">•</span>
+                    <span>{note}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
-/* Article row - no card, just clean list item */
+/* Article row - clean list item, no card */
 function ArticleRow({ item }: { item: ArticleItem }) {
   return (
     <div className="group py-5 border-b border-surface-muted/40 last:border-0 flex items-start gap-4">
@@ -214,13 +267,15 @@ function ArticleRow({ item }: { item: ArticleItem }) {
   );
 }
 
-/* Visual story card - image-style with text overlay */
+/* Visual story card - image with text overlay */
 function StoryCard({ item }: { item: StoryItem }) {
   return (
-    <div
-      className="rounded-2xl overflow-hidden relative min-h-[280px] group cursor-pointer"
-      style={{ backgroundColor: item.color }}
-    >
+    <div className="rounded-2xl overflow-hidden relative min-h-[280px] group cursor-pointer">
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url('${item.imageUrl}')` }}
+      />
+      <div className="absolute inset-0" style={{ backgroundColor: `${item.color}40` }} />
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 p-6">
         <h3 className="font-serif text-xl text-white mb-2">
@@ -237,7 +292,7 @@ function StoryCard({ item }: { item: StoryItem }) {
 }
 
 export default function ReadersCornerPage() {
-  const [activeTab, setActiveTab] = useState("reading");
+  const [activeTab, setActiveTab] = useState("notes");
 
   return (
     <section className="pt-32 pb-24 px-6">
@@ -295,12 +350,12 @@ export default function ReadersCornerPage() {
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.35 }}
           >
-            {/* Reading & Notes: cards with images */}
-            {(activeTab === "reading" || activeTab === "notes") && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                {(activeTab === "reading" ? readingData : notesData).map((item, i) => (
+            {/* Book Notes: cards with click-to-reveal */}
+            {activeTab === "notes" && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {notesData.map((item, i) => (
                   <ScrollReveal key={item.id} delay={i * 0.06}>
-                    <BookCard item={item} />
+                    <BookNoteCard item={item} />
                   </ScrollReveal>
                 ))}
               </div>
@@ -317,7 +372,7 @@ export default function ReadersCornerPage() {
               </div>
             )}
 
-            {/* Visual Stories: visual cards with text overlay */}
+            {/* Visual Stories: visual cards with image and text overlay */}
             {activeTab === "stories" && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 {storiesData.map((item, i) => (

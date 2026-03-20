@@ -67,9 +67,9 @@ export default function ProcessSteps() {
               >
                 {/* 3D glassmorphism card */}
                 <div
-                  className="bg-white/80 backdrop-blur-xl rounded-3xl p-7 relative overflow-hidden border border-white/60"
+                  className="bg-white/70 backdrop-blur-xl rounded-3xl p-7 relative overflow-hidden border-2 border-white/80"
                   style={{
-                    boxShadow: "0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8)",
+                    boxShadow: "0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba(255,255,255,0.4)",
                   }}
                 >
                   {/* Subtle gradient sheen */}

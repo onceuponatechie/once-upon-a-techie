@@ -1,30 +1,28 @@
 "use client";
 
 import Link from "next/link";
+import { BookOpen } from "lucide-react";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 
 export default function ReadersCornerPreview() {
   return (
     <section className="py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Italicized label matching other sections */}
-        <ScrollReveal className="text-center mb-4">
-          <p className="font-serif italic text-text-tertiary text-base">
-            Reader&apos;s Corner
-          </p>
-        </ScrollReveal>
-        <ScrollReveal className="text-center mb-16">
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-text-primary">
-            Books, <span className="italic">thoughts,</span> and everything in between
-          </h2>
-        </ScrollReveal>
-
         <ScrollReveal>
           {/* White container with padding */}
           <div className="bg-white rounded-3xl shadow-sm border border-surface-muted/40 p-4 md:p-5">
             <div className="flex flex-col md:flex-row gap-6 min-h-[360px] md:min-h-[400px]">
               {/* Left side - info */}
               <div className="flex-1 flex flex-col justify-center py-4 px-4 md:px-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <BookOpen size={18} className="text-brand-orange" />
+                  <span className="font-serif italic text-text-tertiary text-sm">
+                    Reader&apos;s Corner
+                  </span>
+                </div>
+                <h3 className="font-serif text-2xl md:text-3xl text-text-primary mb-4">
+                  Books, <span className="italic">thoughts,</span> and everything in between
+                </h3>
                 <p className="font-sans text-sm text-text-secondary leading-relaxed mb-8 max-w-sm">
                   A curated space for books I&apos;m reading, articles that
                   caught my eye, random notes, excerpts, and whatever fits a

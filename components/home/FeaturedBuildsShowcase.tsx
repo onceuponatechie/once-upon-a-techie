@@ -112,7 +112,7 @@ export default function FeaturedBuildsShowcase() {
                 </AnimatePresence>
 
                 {/* Bottom section */}
-                <div className="flex flex-col md:flex-row items-end justify-between gap-6">
+                <div className="flex flex-row items-end justify-between gap-6">
                   {/* Left info */}
                   <div className="flex-1">
                     <AnimatePresence mode="wait">
