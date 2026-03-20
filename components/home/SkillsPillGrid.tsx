@@ -25,46 +25,43 @@ const rightPills = [
 ];
 
 const sentence =
-  "Writing the unofficial diary of a techie, building towards products with great experience";
+  "Writing the unofficial diary of a techie, building towards products that don\u2019t need explaining.";
 
-function SkillPill({
+function ClusteredPill({
   label,
   color,
   Icon,
-  direction,
-  delay,
+  rotate,
+  offsetX,
+  offsetY,
 }: {
   label: string;
   color: string;
   Icon: React.ElementType;
-  direction: "left" | "right";
-  delay: number;
+  rotate: number;
+  offsetX: number;
+  offsetY: number;
 }) {
   return (
-    <ScrollReveal
-      direction={direction}
-      delay={delay}
-      className="inline-flex"
+    <motion.div
+      className="inline-flex items-center gap-2.5 bg-white shadow-lg rounded-full px-4 py-2.5 border border-white/40 absolute"
+      style={{
+        transform: `rotate(${rotate}deg) translate(${offsetX}px, ${offsetY}px)`,
+        boxShadow:
+          "0 8px 30px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)",
+      }}
+      transition={{ type: "spring", stiffness: 200, damping: 15 }}
     >
-      <div
-        className="inline-flex items-center gap-2.5 bg-white shadow-lg rounded-full px-4 py-2.5 border border-white/40"
-        style={{
-          transform: "perspective(800px) rotateY(5deg) rotateX(2deg)",
-          boxShadow:
-            "0 8px 30px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)",
-        }}
+      <span
+        className="w-8 h-8 rounded-full flex items-center justify-center"
+        style={{ backgroundColor: `${color}20` }}
       >
-        <span
-          className="w-8 h-8 rounded-full flex items-center justify-center"
-          style={{ backgroundColor: `${color}20` }}
-        >
-          <Icon size={16} style={{ color }} />
-        </span>
-        <span className="text-sm font-sans font-medium text-text-primary whitespace-nowrap">
-          {label}
-        </span>
-      </div>
-    </ScrollReveal>
+        <Icon size={16} style={{ color }} />
+      </span>
+      <span className="text-sm font-sans font-medium text-text-primary whitespace-nowrap">
+        {label}
+      </span>
+    </motion.div>
   );
 }
 
@@ -78,8 +75,8 @@ function ScrollRevealText() {
   const words = sentence.split(" ");
 
   return (
-    <div ref={ref} className="max-w-2xl text-center mx-auto">
-      <p className="font-sans text-2xl md:text-[32px] lg:text-[36px] leading-relaxed">
+    <div ref={ref} className="max-w-xl text-center mx-auto">
+      <p className="font-serif text-[22px] md:text-[28px] lg:text-[32px] leading-[1.4]">
         {words.map((word, i) => {
           const start = i / words.length;
           const end = (i + 1) / words.length;
@@ -119,57 +116,69 @@ function Word({
   );
 }
 
+// Clustered positions for left pills (random-ish offsets)
+const leftPositions = [
+  { rotate: -8, offsetX: -10, offsetY: 0 },
+  { rotate: 5, offsetX: 15, offsetY: 70 },
+  { rotate: -3, offsetX: -25, offsetY: 145 },
+];
+
+// Clustered positions for right pills
+const rightPositions = [
+  { rotate: 6, offsetX: 10, offsetY: 5 },
+  { rotate: -4, offsetX: -15, offsetY: 75 },
+  { rotate: 8, offsetX: 20, offsetY: 140 },
+];
+
 export default function SkillsPillGrid() {
   return (
-    <section className="bg-surface-cream py-24 md:py-32">
+    <section className="py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
-        {/* Label */}
+        {/* Label - no lines */}
         <ScrollReveal className="text-center mb-12">
           <p className="font-serif italic text-text-tertiary text-base">
-            <span className="inline-block w-8 h-[1px] bg-text-tertiary/30 align-middle mr-3" />
-            Hello!
-            <span className="inline-block w-8 h-[1px] bg-text-tertiary/30 align-middle ml-3" />
+            What I Do
           </p>
         </ScrollReveal>
 
         {/* Main layout with pills */}
         <div className="relative flex items-start justify-center">
-          {/* Left pills - desktop */}
-          <div className="hidden lg:flex flex-col gap-4 pt-4 mr-8">
+          {/* Left pills - clustered, desktop */}
+          <div className="hidden lg:block relative w-[200px] h-[220px] mr-8 mt-2">
             {leftPills.map((pill, i) => (
-              <SkillPill
-                key={pill.label}
-                {...pill}
-                direction="left"
-                delay={0.2 + i * 0.15}
-              />
+              <ScrollReveal key={pill.label} direction="left" delay={0.2 + i * 0.15} className="inline-flex">
+                <ClusteredPill
+                  {...pill}
+                  {...leftPositions[i]}
+                />
+              </ScrollReveal>
             ))}
           </div>
 
           {/* Center text - scroll triggered grey to black */}
           <ScrollRevealText />
 
-          {/* Right pills - desktop */}
-          <div className="hidden lg:flex flex-col gap-4 pt-4 ml-8">
+          {/* Right pills - clustered, desktop */}
+          <div className="hidden lg:block relative w-[200px] h-[220px] ml-8 mt-2">
             {rightPills.map((pill, i) => (
-              <SkillPill
-                key={pill.label}
-                {...pill}
-                direction="right"
-                delay={0.3 + i * 0.15}
-              />
+              <ScrollReveal key={pill.label} direction="right" delay={0.3 + i * 0.15} className="inline-flex">
+                <ClusteredPill
+                  {...pill}
+                  {...rightPositions[i]}
+                />
+              </ScrollReveal>
             ))}
           </div>
         </div>
 
-        {/* Mobile pills - go beneath text on smaller screens */}
+        {/* Mobile pills - clustered wrap */}
         <div className="flex flex-wrap justify-center gap-3 mt-10 lg:hidden">
           {[...leftPills, ...rightPills].map((pill, i) => (
             <ScrollReveal key={pill.label} delay={0.1 * i}>
-              <div
+              <motion.div
                 className="inline-flex items-center gap-2 bg-white shadow-lg rounded-full px-3 py-2 border border-white/40"
                 style={{
-                  transform: "perspective(600px) rotateY(3deg)",
+                  transform: `rotate(${i % 2 === 0 ? -3 : 4}deg)`,
                   boxShadow: "0 6px 20px rgba(0,0,0,0.1)",
                 }}
               >
@@ -182,7 +191,7 @@ export default function SkillsPillGrid() {
                 <span className="text-xs font-sans font-medium text-text-primary">
                   {pill.label}
                 </span>
-              </div>
+              </motion.div>
             </ScrollReveal>
           ))}
         </div>

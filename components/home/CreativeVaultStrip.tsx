@@ -7,24 +7,24 @@ const col1Cards = [
   { bg: "#8B7355", label: "Resume Template" },
   { bg: "#9B59B6", label: "Design System Guide" },
   { bg: "#5D4E37", label: "Freelancer Kit" },
-  { bg: "#8B7355", label: "Resume Template" },
-  { bg: "#9B59B6", label: "Design System Guide" },
-  { bg: "#5D4E37", label: "Freelancer Kit" },
+  { bg: "#7B68EE", label: "Content Calendar" },
+  { bg: "#2D6A4F", label: "Brand Kit" },
+  { bg: "#E8703A", label: "Pitch Deck" },
 ];
 
 const col2Cards = [
-  { bg: "#7B68EE", label: "Content Calendar" },
-  { bg: "#2D6A4F", label: "Brand Kit" },
-  { bg: "#E8703A", label: "Pitch Deck" },
-  { bg: "#7B68EE", label: "Content Calendar" },
-  { bg: "#2D6A4F", label: "Brand Kit" },
-  { bg: "#E8703A", label: "Pitch Deck" },
-];
-
-const col3Cards = [
   { bg: "#4A90D9", label: "E-commerce Template" },
   { bg: "#34495E", label: "Social Media Pack" },
   { bg: "#2C3E50", label: "Dev Starter Kit" },
+  { bg: "#9B59B6", label: "Design System Guide" },
+  { bg: "#8B7355", label: "Resume Template" },
+  { bg: "#5D4E37", label: "Freelancer Kit" },
+];
+
+const col3Cards = [
+  { bg: "#7B68EE", label: "Content Calendar" },
+  { bg: "#2D6A4F", label: "Brand Kit" },
+  { bg: "#E8703A", label: "Pitch Deck" },
   { bg: "#4A90D9", label: "E-commerce Template" },
   { bg: "#34495E", label: "Social Media Pack" },
   { bg: "#2C3E50", label: "Dev Starter Kit" },
@@ -46,14 +46,14 @@ function Card({ bg, label }: { bg: string; label: string }) {
 
 export default function CreativeVaultStrip() {
   return (
-    <section className="bg-surface-cream py-0">
+    <section className="py-0">
       <div className="max-w-6xl mx-auto px-4">
         {/* Main container with white outer border */}
         <div className="relative rounded-3xl overflow-hidden border-[3px] border-white shadow-2xl">
           {/* Black background for gaps */}
           <div className="bg-black rounded-3xl overflow-hidden h-[600px] md:h-[800px] relative">
-            {/* 3-column scrolling grid */}
-            <div className="absolute inset-0 grid grid-cols-3 gap-3 p-3">
+            {/* Scrolling grid - 2 cols mobile, 3 cols desktop */}
+            <div className="absolute inset-0 grid grid-cols-2 md:grid-cols-3 gap-3 p-3">
               {/* Column 1 - scrolls UP (fast) */}
               <div className="overflow-hidden relative">
                 <div className="animate-scroll-up-fast flex flex-col gap-3">
@@ -63,17 +63,17 @@ export default function CreativeVaultStrip() {
                 </div>
               </div>
 
-              {/* Column 2 - scrolls DOWN */}
+              {/* Column 2 - scrolls UP (slow) */}
               <div className="overflow-hidden relative">
-                <div className="animate-scroll-down flex flex-col gap-3">
+                <div className="animate-scroll-up flex flex-col gap-3">
                   {[...col2Cards, ...col2Cards].map((card, i) => (
                     <Card key={`c2-${i}`} bg={card.bg} label={card.label} />
                   ))}
                 </div>
               </div>
 
-              {/* Column 3 - scrolls UP (slow) */}
-              <div className="overflow-hidden relative">
+              {/* Column 3 - scrolls UP (slow) - hidden on mobile */}
+              <div className="overflow-hidden relative hidden md:block">
                 <div className="animate-scroll-up-slow flex flex-col gap-3">
                   {[...col3Cards, ...col3Cards].map((card, i) => (
                     <Card key={`c3-${i}`} bg={card.bg} label={card.label} />

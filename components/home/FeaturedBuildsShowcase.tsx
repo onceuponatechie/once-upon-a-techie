@@ -61,8 +61,18 @@ export default function FeaturedBuildsShowcase() {
   const project = projects[active];
 
   return (
-    <section className="bg-surface-cream py-24 md:py-32">
+    <section className="py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-4">
+        <ScrollReveal className="text-center mb-4">
+          <p className="font-serif italic text-text-tertiary text-base">
+            The Builds
+          </p>
+        </ScrollReveal>
+        <ScrollReveal className="text-center mb-16">
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-text-primary">
+            What Are We <span className="italic">Building?</span>
+          </h2>
+        </ScrollReveal>
         <ScrollReveal>
           <div className="relative rounded-3xl overflow-hidden border-[3px] border-white shadow-2xl">
             <div className="rounded-3xl overflow-hidden relative">
@@ -78,11 +88,8 @@ export default function FeaturedBuildsShowcase() {
                 />
               </AnimatePresence>
 
-              {/* Subtle decorative dot */}
-              <div className="absolute top-1/3 right-1/3 w-4 h-4 rounded-full bg-brand-orange/60 z-[1]" />
-
               {/* Content */}
-              <div className="relative z-10 p-8 md:p-12 min-h-[500px] md:min-h-[600px] flex flex-col justify-between">
+              <div className="relative z-10 p-6 md:p-10 min-h-[420px] md:min-h-[500px] flex flex-col justify-between">
                 {/* Top - tool pills */}
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -105,7 +112,7 @@ export default function FeaturedBuildsShowcase() {
                 </AnimatePresence>
 
                 {/* Bottom section */}
-                <div className="flex flex-col md:flex-row items-end justify-between gap-8">
+                <div className="flex flex-row items-end justify-between gap-6">
                   {/* Left info */}
                   <div className="flex-1">
                     <AnimatePresence mode="wait">
@@ -116,7 +123,7 @@ export default function FeaturedBuildsShowcase() {
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.5 }}
                       >
-                        <h3 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mt-2 mb-4 whitespace-pre-line leading-[1.05]">
+                        <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white mt-2 mb-4 whitespace-pre-line leading-[1.05]">
                           {project.title}
                         </h3>
                         <p className="font-sans text-white/70 text-sm max-w-md mb-6 leading-relaxed">
@@ -133,13 +140,13 @@ export default function FeaturedBuildsShowcase() {
                     </AnimatePresence>
                   </div>
 
-                  {/* Right thumbnails */}
-                  <div className="flex gap-3">
+                  {/* Right thumbnails - 4:3 ratio (half height) */}
+                  <div className="flex gap-2">
                     {projects.map((p, i) => (
                       <button
                         key={i}
                         onClick={() => setActive(i)}
-                        className={`w-[100px] h-[140px] md:w-[120px] md:h-[170px] rounded-xl overflow-hidden border-2 transition-all duration-300 flex flex-col items-center justify-center px-2 text-center ${
+                        className={`w-[90px] h-[68px] md:w-[110px] md:h-[82px] rounded-lg overflow-hidden border-2 transition-all duration-300 flex flex-col items-center justify-center px-2 text-center ${
                           i === active
                             ? "border-white shadow-xl scale-105"
                             : "border-white/20 opacity-60 hover:opacity-80"
@@ -148,16 +155,13 @@ export default function FeaturedBuildsShowcase() {
                           background: `linear-gradient(135deg, ${p.bg}, ${p.bg}cc)`,
                         }}
                       >
-                        <span className="text-white text-xs font-sans font-medium leading-tight">
+                        <span className="text-white text-[10px] md:text-xs font-sans font-medium leading-tight">
                           {p.slug
                             .split("-")
                             .map(
                               (w) => w.charAt(0).toUpperCase() + w.slice(1)
                             )
                             .join(" ")}
-                        </span>
-                        <span className="text-white/50 text-[10px] font-sans mt-1 leading-tight">
-                          {p.subtitle}
                         </span>
                       </button>
                     ))}
@@ -180,7 +184,7 @@ export default function FeaturedBuildsShowcase() {
               </button>
 
               {/* Counter dots */}
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
                 {projects.map((_, i) => (
                   <button
                     key={i}

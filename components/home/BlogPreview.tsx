@@ -58,26 +58,26 @@ function BlogCard({ post }: { post: (typeof posts)[0] }) {
 
   return (
     <motion.div
-      className="group relative bg-surface-light rounded-2xl p-6 overflow-hidden"
+      className="group relative bg-white rounded-2xl p-6 overflow-hidden shadow-sm border border-surface-muted/40 hover:shadow-lg transition-shadow duration-300"
       animate={{ y: hovered ? -4 : 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onTouchStart={() => setHovered((h) => !h)}
     >
-      {/* Hover image slide-in from top-right */}
+      {/* Hover image slide-in from top-right - landscape, sticks to card border */}
       <AnimatePresence>
         {hovered && (
           <motion.div
-            className="absolute top-0 right-0 w-32 h-32 rounded-bl-3xl overflow-hidden z-10"
-            initial={{ x: 60, y: -60, opacity: 0 }}
+            className="absolute top-3 right-3 w-40 h-24 md:w-48 md:h-28 rounded-2xl overflow-hidden z-10 shadow-lg"
+            initial={{ x: 40, y: -30, opacity: 0 }}
             animate={{ x: 0, y: 0, opacity: 1 }}
-            exit={{ x: 60, y: -60, opacity: 0 }}
+            exit={{ x: 40, y: -30, opacity: 0 }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
             style={{ backgroundColor: post.imageBg }}
           >
             <div className="w-full h-full flex items-center justify-center">
-              <post.Icon size={32} className="text-white/80" />
+              <post.Icon size={36} className="text-white/80" />
             </div>
           </motion.div>
         )}
@@ -116,8 +116,8 @@ function BlogCard({ post }: { post: (typeof posts)[0] }) {
         {post.excerpt}
       </p>
 
-      {/* Read more capsule */}
-      <span className="inline-flex items-center px-4 py-2 rounded-full bg-surface-cream text-sm font-sans font-medium text-text-primary border border-surface-muted/50 group-hover:bg-brand-orange group-hover:text-white group-hover:border-brand-orange transition-all duration-300">
+      {/* Read more capsule - blue */}
+      <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-sans font-medium text-white transition-all duration-300" style={{ backgroundColor: "#5dcdf1" }}>
         Read more →
       </span>
     </motion.div>
@@ -126,7 +126,7 @@ function BlogCard({ post }: { post: (typeof posts)[0] }) {
 
 export default function BlogPreview() {
   return (
-    <section className="bg-surface-cream py-24 md:py-32">
+    <section className="py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
         <ScrollReveal className="text-center mb-4">
           <p className="font-serif italic text-text-tertiary text-base">

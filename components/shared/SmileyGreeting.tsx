@@ -76,12 +76,12 @@ export default function SmileyGreeting() {
             {/* Hand */}
             <path
               d="M8 22 C6 18 7 14 9 12 L11 10 C12 9 14 10 13 12 L12 15 L14 9 C15 7 17 8 16 10 L15 14 L17 8 C18 6 20 7 19 9 L18 14 L20 9 C21 7 23 8 22 10 L20 17 L23 14 C24.5 12.5 26 13.5 25 15 L19 24 C17 27 13 28 10 26 Z"
-              fill="#F5D060"
-              stroke="#E8C840"
+              fill="#1A1A1A"
+              stroke="#333333"
               strokeWidth="0.5"
             />
             {/* Glossy highlight */}
-            <ellipse cx="16" cy="14" rx="4" ry="3" fill="white" opacity="0.15" />
+            <ellipse cx="16" cy="14" rx="4" ry="3" fill="white" opacity="0.08" />
             {/* Motion lines */}
             <path d="M27 10 L30 8" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" opacity="0.3" />
             <path d="M28 14 L31 13" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" opacity="0.3" />
