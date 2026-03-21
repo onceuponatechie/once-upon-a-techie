@@ -2,29 +2,20 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 
 const faqs = [
   {
-    question: "What kind of projects do you take on?",
+    question: "What kind of work do you do?",
     answer:
       "I work on product design, web development, automation tools, and creative builds. If it involves turning an idea into something people can use and love, I'm interested.",
   },
   {
-    question: "How does your process work?",
+    question: "Are you available for freelance work?",
     answer:
-      "It starts with discovery — understanding your problem and audience. Then I design solutions, build prototypes, and iterate until we've got something amazing.",
-  },
-  {
-    question: "Do you offer free resources?",
-    answer:
-      "Yes! Check out The Creative Vault for templates, guides, and tools. Some are free, some are premium — all are made with love.",
-  },
-  {
-    question: "Can I collaborate with you?",
-    answer:
-      "Absolutely. I'm always open to collaborations — especially if they involve interesting problems, creative storytelling, or building something that hasn't existed before.",
+      "It depends on the project and timeline. Reach out through the contact page and let's see if we're a good fit for each other.",
   },
   {
     question: "What tools do you use?",
@@ -32,13 +23,23 @@ const faqs = [
       "My toolkit includes Figma, Next.js, Python, Tailwind CSS, Framer Motion, Sanity CMS, and a healthy dose of AI tools. I pick what works best for each project.",
   },
   {
-    question: "How do I get in touch?",
+    question: "Do you offer free resources?",
     answer:
-      "Head over to the contact page and fill out the form, or shoot me a DM on any social platform. I typically respond within 24 hours.",
+      "Yes! Check out The Creative Vault for templates, guides, and tools. Some are free, some are premium — all are made with love.",
+  },
+  {
+    question: "Can I collaborate with you on content?",
+    answer:
+      "Absolutely. I'm always open to collaborations — especially if they involve interesting problems, creative storytelling, or building something that hasn't existed before.",
+  },
+  {
+    question: "How can I stay updated?",
+    answer:
+      "Subscribe to the newsletter in the footer, or follow me on social media. I share new builds, articles, and resources regularly.",
   },
 ];
 
-function FAQItem({
+function FAQPill({
   faq,
   isOpen,
   onToggle,
@@ -48,21 +49,26 @@ function FAQItem({
   onToggle: () => void;
 }) {
   return (
-    <div className="border-b border-surface-muted last:border-0">
+    <div className="w-full">
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between py-5 text-left"
+        className="w-full flex items-center justify-between rounded-full px-6 py-4 transition-all duration-300 border-2 border-white/60"
+        style={{
+          background: "rgba(255,255,255,0.5)",
+          backdropFilter: "blur(12px)",
+          boxShadow: "0 2px 12px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.6)",
+        }}
       >
-        <span className="font-sans text-base text-text-primary pr-4">
+        <span className="font-sans text-sm md:text-base text-text-primary text-left pr-4">
           {faq.question}
         </span>
-        <motion.span
-          animate={{ rotate: isOpen ? 45 : 0 }}
-          transition={{ duration: 0.2 }}
-          className="text-xl text-text-tertiary flex-shrink-0"
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.25 }}
+          className="w-9 h-9 rounded-full bg-text-primary flex items-center justify-center flex-shrink-0"
         >
-          +
-        </motion.span>
+          <ChevronDown size={16} className="text-white" />
+        </motion.div>
       </button>
       <AnimatePresence>
         {isOpen && (
@@ -73,7 +79,7 @@ function FAQItem({
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <p className="font-sans text-sm text-text-secondary leading-relaxed pb-5">
+            <p className="font-sans text-sm text-text-secondary leading-relaxed px-6 pt-3 pb-2">
               {faq.answer}
             </p>
           </motion.div>
@@ -100,20 +106,19 @@ export default function FAQAccordion() {
           </h2>
         </ScrollReveal>
 
-        <ScrollReveal>
-          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-surface-muted/40">
-            {faqs.map((faq, i) => (
-              <FAQItem
-                key={i}
+        <div className="flex flex-col gap-3">
+          {faqs.map((faq, i) => (
+            <ScrollReveal key={i} delay={i * 0.05}>
+              <FAQPill
                 faq={faq}
                 isOpen={openIndex === i}
                 onToggle={() =>
                   setOpenIndex(openIndex === i ? null : i)
                 }
               />
-            ))}
-          </div>
-        </ScrollReveal>
+            </ScrollReveal>
+          ))}
+        </div>
 
         {/* CTA card */}
         <ScrollReveal delay={0.2} className="mt-12">

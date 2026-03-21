@@ -18,7 +18,7 @@ const config: Config = {
         },
         surface: {
           white: "#FFFFFF",
-          cream: "#f9f6f3",
+          cream: "#F5EFE6",
           warm: "#F5F0E8",
           light: "#F5F3EF",
           muted: "#E8E5DF",

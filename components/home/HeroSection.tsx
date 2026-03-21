@@ -6,10 +6,10 @@ import Link from "next/link";
 import SmileyGreeting from "@/components/shared/SmileyGreeting";
 
 const thumbnails = [
-  { bg: "#2D6A4F", label: "Project 1" },
-  { bg: "#4A90D9", label: "Project 2" },
-  { bg: "#B4A7D6", label: "Project 3" },
-  { bg: "#E8703A", label: "Project 4" },
+  { src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=130&fit=crop&q=80", label: "Dashboard" },
+  { src: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=200&h=130&fit=crop&q=80", label: "Code" },
+  { src: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=200&h=130&fit=crop&q=80", label: "Design" },
+  { src: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=200&h=130&fit=crop&q=80", label: "Mobile" },
 ];
 
 function MediaBox() {
@@ -24,12 +24,12 @@ function MediaBox() {
 
   return (
     <span className="inline-flex align-middle mx-1">
-      <span className="relative w-[48px] h-[32px] md:w-[64px] md:h-[40px] rounded-xl md:rounded-2xl overflow-hidden bg-dark-card border border-white/20 shadow-md inline-block align-middle">
+      <span className="relative w-[48px] h-[32px] md:w-[64px] md:h-[40px] rounded-xl md:rounded-2xl overflow-hidden border border-white/20 shadow-md inline-block align-middle">
         {thumbnails.map((thumb, i) => (
           <motion.span
             key={i}
-            className="absolute inset-0 rounded-xl md:rounded-2xl"
-            style={{ backgroundColor: thumb.bg }}
+            className="absolute inset-0 rounded-xl md:rounded-2xl bg-cover bg-center"
+            style={{ backgroundImage: `url('${thumb.src}')` }}
             initial={{ opacity: 0 }}
             animate={{ opacity: i === current ? 1 : 0 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -53,11 +53,11 @@ export default function HeroSection() {
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{
-        background: "#f9f6f3",
+        background: "linear-gradient(135deg, #FAFAF7 0%, #F5EFE6 60%, #F5EFE6 100%)",
       }}
     >
-      {/* Radial glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-white/50 rounded-full blur-3xl pointer-events-none" />
+      {/* Radial white glow from top left */}
+      <div className="absolute top-0 left-0 w-[800px] h-[500px] bg-white/40 rounded-full blur-3xl pointer-events-none" />
 
       <motion.div
         style={{ y }}
@@ -80,7 +80,7 @@ export default function HeroSection() {
           transition={{ delay: 0.4 }}
           className="flex items-center justify-center mb-10"
         >
-          <div className="inline-flex items-center gap-2 bg-white rounded-full px-5 py-2.5 shadow-md border border-surface-muted/60">
+          <div className="inline-flex items-center gap-2 bg-white rounded-full px-5 py-2.5 shadow-[0_1px_3px_rgba(0,0,0,0.04)] border border-surface-muted/30">
             <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
             <span className="text-sm font-sans font-medium text-text-primary">
               Open to Collaborations
