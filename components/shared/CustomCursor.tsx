@@ -49,8 +49,8 @@ export default function CustomCursor() {
       start + (end - start) * factor;
 
     const animate = () => {
-      cursorPos.current.x = lerp(cursorPos.current.x, mousePos.current.x, 0.15);
-      cursorPos.current.y = lerp(cursorPos.current.y, mousePos.current.y, 0.15);
+      cursorPos.current.x = lerp(cursorPos.current.x, mousePos.current.x, 0.6);
+      cursorPos.current.y = lerp(cursorPos.current.y, mousePos.current.y, 0.6);
 
       if (cursorRef.current) {
         cursorRef.current.style.transform = `translate3d(${cursorPos.current.x}px, ${cursorPos.current.y}px, 0) translate(-50%, -50%)`;

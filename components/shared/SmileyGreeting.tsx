@@ -6,7 +6,7 @@ export default function SmileyGreeting() {
   return (
     <div
       className="relative rounded-full overflow-hidden"
-      style={{ width: 56, height: 56, backgroundColor: "#F5D060" }}
+      style={{ width: 56, height: 56, backgroundColor: "#FFEDAB" }}
     >
       <motion.div
         className="flex flex-col"
@@ -22,7 +22,7 @@ export default function SmileyGreeting() {
         {/* Smiley Face */}
         <div className="w-[56px] h-[56px] flex items-center justify-center">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <circle cx="20" cy="20" r="18" fill="#F5D060" />
+            <circle cx="20" cy="20" r="18" fill="#FFEDAB" />
             {/* Rosy cheeks */}
             <circle cx="10" cy="24" r="4" fill="#F0A0A0" opacity="0.4" />
             <circle cx="30" cy="24" r="4" fill="#F0A0A0" opacity="0.4" />
