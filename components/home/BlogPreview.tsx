@@ -179,17 +179,17 @@ export default function BlogPreview() {
           </h2>
         </ScrollReveal>
 
-        {/* Layout: large card left, 2 stacked cards right */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Layout: large card left, 2 stacked cards right — equal height */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6" style={{ minHeight: "520px" }}>
           {/* Featured large card */}
-          <ScrollReveal>
+          <ScrollReveal className="h-full">
             <FeaturedCard post={posts[0]} />
           </ScrollReveal>
 
-          {/* Two side cards stacked */}
-          <div className="flex flex-col gap-6">
+          {/* Two side cards stacked — each takes exactly half the height */}
+          <div className="flex flex-col gap-6 h-full">
             {posts.slice(1).map((post, i) => (
-              <ScrollReveal key={post.title} delay={0.1 + i * 0.1}>
+              <ScrollReveal key={post.title} delay={0.1 + i * 0.1} className="flex-1">
                 <SideCard post={post} />
               </ScrollReveal>
             ))}

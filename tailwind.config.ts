@@ -36,7 +36,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        serif: ["'Playfair Display'", "Georgia", "serif"],
+        serif: ["'DM Sans'", "system-ui", "sans-serif"],
         sans: ["'Inter'", "system-ui", "sans-serif"],
       },
       backdropBlur: {

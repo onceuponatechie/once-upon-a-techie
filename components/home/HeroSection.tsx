@@ -3,7 +3,6 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import SmileyGreeting from "@/components/shared/SmileyGreeting";
 
 const thumbnails = [
   { src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=130&fit=crop&q=80", label: "Dashboard" },
@@ -51,7 +50,7 @@ export default function HeroSection() {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative flex items-start justify-center overflow-hidden pt-24 pb-8 md:pt-28 md:pb-12"
       style={{
         background: "linear-gradient(135deg, #FAFAF7 0%, #F5EFE6 60%, #F5EFE6 100%)",
       }}
@@ -63,26 +62,16 @@ export default function HeroSection() {
         style={{ y }}
         className="relative z-10 max-w-4xl mx-auto px-6 text-center"
       >
-        {/* Smiley */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex justify-center mb-6"
-        >
-          <SmileyGreeting />
-        </motion.div>
-
         {/* Pill badge row */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="flex items-center justify-center mb-10"
+          transition={{ delay: 0.2 }}
+          className="flex items-center justify-center mb-8"
         >
-          <div className="inline-flex items-center gap-2 bg-white rounded-full px-5 py-2.5 shadow-[0_1px_3px_rgba(0,0,0,0.04)] border border-surface-muted/30">
+          <div className="inline-flex items-center gap-2 bg-white rounded-full px-4 py-2 shadow-[0_1px_3px_rgba(0,0,0,0.04)] border border-surface-muted/30">
             <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
-            <span className="text-sm font-sans font-medium text-text-primary">
+            <span className="text-xs font-sans font-medium text-text-primary">
               Open to Collaborations
             </span>
           </div>
@@ -92,24 +81,23 @@ export default function HeroSection() {
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="font-serif text-[40px] md:text-[56px] lg:text-[64px] leading-[1.1] tracking-tight text-text-primary mb-6"
+          transition={{ delay: 0.4, duration: 0.8 }}
+          className="font-serif text-[36px] md:text-[52px] lg:text-[60px] leading-[1.1] tracking-tight text-text-primary mb-5 font-bold"
         >
-          <span className="italic">Products,</span>{" "}
-          <span className="italic">people,</span> and the
+          Products, people, and the
           <br className="hidden sm:block" />
           <MediaBox />{" "}
-          <span className="italic">stories</span> that connect
+          <span className="italic">why</span> that connects
           <br className="hidden sm:block" />
           <MediaBox /> them.
         </motion.h1>
 
-        {/* Subheadline - light weight */}
+        {/* Subheadline */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9 }}
-          className="font-sans text-base md:text-lg font-light text-text-secondary tracking-widest mb-10"
+          transition={{ delay: 0.7 }}
+          className="font-sans text-base md:text-lg font-light text-text-secondary tracking-widest mb-8"
         >
           Creator · Builder · Storyteller
         </motion.p>
@@ -118,7 +106,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1 }}
+          transition={{ delay: 0.9 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Link

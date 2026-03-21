@@ -1,133 +1,80 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import ScrollReveal from "@/components/shared/ScrollReveal";
+import {
+  Box,
+  Settings,
+  Code2,
+  MessageCircle,
+  Search,
+  Pen,
+} from "lucide-react";
 
 const allPills = [
-  { label: "Product Building", color: "#E8703A", emoji: "🧱" },
-  { label: "Automation", color: "#2D6A4F", emoji: "⚙️" },
-  { label: "Python", color: "#4A90D9", emoji: "🐍" },
-  { label: "Storytelling", color: "#B4A7D6", emoji: "✍️" },
-  { label: "Research", color: "#4A90D9", emoji: "🔍" },
-  { label: "Design", color: "#F5D060", emoji: "🎨" },
+  { label: "Product Building", Icon: Box },
+  { label: "Automation", Icon: Settings },
+  { label: "Python", Icon: Code2 },
+  { label: "Storytelling", Icon: MessageCircle },
+  { label: "Research", Icon: Search },
+  { label: "Design", Icon: Pen },
 ];
 
-const sentence =
-  "Writing the unofficial diary of a techie, building towards products that don\u2019t need explaining.";
-
-function ScrollRevealText() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.8", "end 0.4"],
-  });
-
-  const words = sentence.split(" ");
-
-  return (
-    <div ref={ref} className="max-w-xl text-center mx-auto">
-      <p className="font-serif text-[22px] md:text-[28px] lg:text-[32px] leading-[1.4]">
-        {words.map((word, i) => {
-          const start = i / words.length;
-          const end = (i + 1) / words.length;
-          return (
-            <Word
-              key={i}
-              word={word}
-              range={[start, end]}
-              progress={scrollYProgress}
-            />
-          );
-        })}
-      </p>
-    </div>
-  );
-}
-
-function Word({
-  word,
-  range,
-  progress,
-}: {
-  word: string;
-  range: [number, number];
-  progress: ReturnType<typeof useScroll>["scrollYProgress"];
-}) {
-  const opacity = useTransform(progress, range, [0.2, 1]);
-  const color = useTransform(progress, range, ["#CCCCCC", "#1A1A1A"]);
-
-  return (
-    <motion.span
-      style={{ opacity, color }}
-      className="inline-block mr-[0.3em] transition-none"
-    >
-      {word}
-    </motion.span>
-  );
-}
-
-function FloatingPill({
-  label,
-  color,
-  emoji,
-  delay,
-}: {
-  label: string;
-  color: string;
-  emoji: string;
-  delay: number;
-}) {
-  return (
-    <motion.div
-      className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 border-2 border-white/70"
-      style={{
-        background: "rgba(255,255,255,0.55)",
-        backdropFilter: "blur(12px)",
-        boxShadow:
-          "0 4px 16px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8), 0 0 0 1px rgba(255,255,255,0.3)",
-      }}
-      animate={{
-        y: [0, -6, 0, 4, 0],
-      }}
-      transition={{
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay,
-      }}
-    >
-      <span className="text-base leading-none">{emoji}</span>
-      <span className="text-xs font-sans font-medium text-text-primary whitespace-nowrap">
-        {label}
-      </span>
-      <span
-        className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-        style={{ backgroundColor: color }}
-      />
-    </motion.div>
-  );
-}
+/* Clustered positions for the pills */
+const positions = [
+  { rotate: -6, x: -20, y: 0 },
+  { rotate: 4, x: 30, y: -10 },
+  { rotate: -3, x: 70, y: 15 },
+  { rotate: 7, x: -10, y: 5 },
+  { rotate: -5, x: 50, y: -5 },
+  { rotate: 3, x: 10, y: 10 },
+];
 
 export default function SkillsPillGrid() {
   return (
     <section className="py-24 md:py-32">
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Label */}
-        <ScrollReveal className="text-center mb-12">
-          <p className="font-serif italic text-text-tertiary text-base">
-            What I Do
-          </p>
+      <div className="max-w-5xl mx-auto px-6">
+        {/* Big bold headline text */}
+        <ScrollReveal>
+          <h2 className="font-serif text-[32px] md:text-[48px] lg:text-[56px] leading-[1.15] font-bold text-text-primary text-center mb-14">
+            The unofficial diary of a techie,{" "}
+            <span className="italic" style={{ color: "#6B8F71" }}>
+              building
+            </span>{" "}
+            towards{" "}
+            <span className="italic" style={{ color: "#6B8F71" }}>
+              products
+            </span>{" "}
+            that don&apos;t need explaining.
+          </h2>
         </ScrollReveal>
 
-        {/* Center text */}
-        <ScrollRevealText />
-
-        {/* Floating pills beneath text — same layout on mobile and desktop */}
-        <div className="flex flex-wrap justify-center gap-3 mt-12">
+        {/* Clustered white pills */}
+        <div className="flex flex-wrap justify-center gap-3">
           {allPills.map((pill, i) => (
-            <ScrollReveal key={pill.label} delay={0.1 * i}>
-              <FloatingPill {...pill} delay={i * 0.5} />
+            <ScrollReveal key={pill.label} delay={0.08 * i}>
+              <motion.div
+                className="inline-flex items-center gap-2.5 bg-white shadow-sm rounded-full px-4 py-2.5 border border-surface-muted/40"
+                style={{
+                  transform: `rotate(${positions[i].rotate}deg)`,
+                }}
+                animate={{
+                  y: [0, -4, 0, 3, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.4,
+                }}
+              >
+                <span className="w-7 h-7 rounded-full bg-surface-light flex items-center justify-center">
+                  <pill.Icon size={14} className="text-text-secondary" />
+                </span>
+                <span className="text-sm font-sans font-medium text-text-primary whitespace-nowrap">
+                  {pill.label}
+                </span>
+              </motion.div>
             </ScrollReveal>
           ))}
         </div>

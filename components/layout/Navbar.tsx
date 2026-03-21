@@ -19,12 +19,19 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-4 z-50 mx-auto max-w-4xl px-4">
-        <div className="bg-white/70 backdrop-blur-xl border border-white/40 rounded-full pl-6 pr-2 py-2 shadow-sm flex items-center">
+      <nav className="sticky top-0 z-50 w-full">
+        <div
+          className="w-full px-6 md:px-10 py-3 flex items-center border-b border-white/30"
+          style={{
+            background: "linear-gradient(145deg, rgba(255,255,255,0.55) 0%, rgba(250,248,244,0.5) 100%)",
+            backdropFilter: "blur(16px)",
+            boxShadow: "0 2px 12px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.8)",
+          }}
+        >
           {/* Logo */}
           <Link
             href="/"
-            className="font-serif text-base font-medium text-text-primary whitespace-nowrap flex-shrink-0"
+            className="font-serif text-base font-bold text-text-primary whitespace-nowrap flex-shrink-0"
           >
             Once Upon a Techie
           </Link>
@@ -49,7 +56,7 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* CTA - snugged to the right */}
+          {/* CTA */}
           <Link
             href="/contact"
             className="hidden md:flex rounded-full bg-brand-orange text-white px-5 py-2.5 text-[13px] font-medium hover:bg-brand-orange/90 transition-colors flex-shrink-0"
@@ -57,13 +64,13 @@ export default function Navbar() {
             Build With Me
           </Link>
 
-          {/* Mobile Hamburger */}
+          {/* Mobile Hamburger - orange circle */}
           <button
             onClick={() => setMobileOpen(true)}
-            className="md:hidden bg-white/70 backdrop-blur-xl border border-white/40 rounded-full w-10 h-10 flex items-center justify-center ml-auto"
+            className="md:hidden bg-brand-orange rounded-full w-10 h-10 flex items-center justify-center ml-auto"
             aria-label="Open menu"
           >
-            <Menu size={18} />
+            <Menu size={18} className="text-white" />
           </button>
         </div>
       </nav>
@@ -75,14 +82,14 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-[#f9f6f3]/95 backdrop-blur-xl flex flex-col items-center justify-center"
+            className="fixed inset-0 z-[100] bg-[#F5EFE6]/95 backdrop-blur-xl flex flex-col items-center justify-center"
           >
             <button
               onClick={() => setMobileOpen(false)}
-              className="absolute top-6 right-6 bg-white/70 backdrop-blur-xl border border-white/40 rounded-full w-10 h-10 flex items-center justify-center"
+              className="absolute top-6 right-6 bg-brand-orange rounded-full w-10 h-10 flex items-center justify-center"
               aria-label="Close menu"
             >
-              <X size={18} />
+              <X size={18} className="text-white" />
             </button>
             <div className="flex flex-col items-center gap-8">
               {navLinks.map((link, i) => (
@@ -95,7 +102,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="font-serif text-3xl text-text-primary hover:text-brand-orange transition-colors"
+                    className="font-serif text-3xl font-bold text-text-primary hover:text-brand-orange transition-colors"
                   >
                     {link.label}
                   </Link>
