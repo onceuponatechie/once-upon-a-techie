@@ -6,11 +6,11 @@ export default function SmileyGreeting() {
   return (
     <div
       className="relative rounded-full overflow-hidden"
-      style={{ width: 56, height: 56, backgroundColor: "#FFEDAB" }}
+      style={{ width: 64, height: 64, backgroundColor: "#FFEDAB" }}
     >
       <motion.div
         className="flex flex-col"
-        animate={{ y: [0, 0, -56, -56] }}
+        animate={{ y: [0, 0, -64, -64] }}
         transition={{
           duration: 3.8,
           times: [0, 0.395, 0.5, 1],
@@ -20,18 +20,18 @@ export default function SmileyGreeting() {
         }}
       >
         {/* Smiley Face */}
-        <div className="w-[56px] h-[56px] flex items-center justify-center">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <circle cx="20" cy="20" r="18" fill="#FFEDAB" />
+        <div className="w-[64px] h-[64px] flex items-center justify-center">
+          <svg width="46" height="46" viewBox="0 0 46 46" fill="none">
+            <circle cx="23" cy="23" r="21" fill="#FFEDAB" />
             {/* Rosy cheeks */}
-            <circle cx="10" cy="24" r="4" fill="#F0A0A0" opacity="0.4" />
-            <circle cx="30" cy="24" r="4" fill="#F0A0A0" opacity="0.4" />
+            <circle cx="11" cy="28" r="4.5" fill="#F0A0A0" opacity="0.4" />
+            <circle cx="35" cy="28" r="4.5" fill="#F0A0A0" opacity="0.4" />
             {/* Left eye - winking */}
             <motion.ellipse
-              cx="13"
-              cy="17"
-              rx="2.5"
-              ry="3"
+              cx="15"
+              cy="19"
+              rx="2.8"
+              ry="3.5"
               fill="#1A1A1A"
               animate={{ scaleY: [1, 1, 0.1, 1, 1] }}
               transition={{
@@ -42,50 +42,87 @@ export default function SmileyGreeting() {
               }}
             />
             {/* Right eye */}
-            <ellipse cx="27" cy="17" rx="2.5" ry="3" fill="#1A1A1A" />
+            <ellipse cx="31" cy="19" rx="2.8" ry="3.5" fill="#1A1A1A" />
             {/* Eye shine */}
-            <circle cx="14" cy="15.5" r="1" fill="white" opacity="0.8" />
-            <circle cx="28" cy="15.5" r="1" fill="white" opacity="0.8" />
+            <circle cx="16" cy="17.5" r="1.2" fill="white" opacity="0.8" />
+            <circle cx="32" cy="17.5" r="1.2" fill="white" opacity="0.8" />
             {/* Smile */}
             <path
-              d="M12 26 Q20 34 28 26"
+              d="M14 30 Q23 39 32 30"
               stroke="#1A1A1A"
-              strokeWidth="2"
+              strokeWidth="2.2"
               strokeLinecap="round"
               fill="none"
             />
             {/* Glossy highlight */}
-            <ellipse cx="20" cy="10" rx="10" ry="5" fill="white" opacity="0.15" />
+            <ellipse cx="23" cy="11" rx="12" ry="6" fill="white" opacity="0.15" />
           </svg>
         </div>
-        {/* Waving Hand */}
-        <div className="w-[56px] h-[56px] flex items-center justify-center">
+        {/* Waving Hand — bigger, more fluid, natural open palm */}
+        <div className="w-[64px] h-[64px] flex items-center justify-center">
           <motion.svg
-            width="36"
-            height="36"
-            viewBox="0 0 36 36"
+            width="48"
+            height="48"
+            viewBox="0 0 48 48"
             fill="none"
-            animate={{ rotate: [0, 14, -8, 14, -4, 10, 0] }}
+            animate={{ rotate: [0, 18, -12, 18, -6, 14, 0] }}
             transition={{
-              duration: 1.2,
+              duration: 1.4,
               repeat: Infinity,
-              repeatDelay: 0.3,
+              repeatDelay: 0.2,
+              ease: "easeInOut",
             }}
-            style={{ originX: "0.7", originY: "0.8" }}
+            style={{ originX: "0.65", originY: "0.85" }}
           >
-            {/* Hand */}
+            {/* Palm base */}
             <path
-              d="M8 22 C6 18 7 14 9 12 L11 10 C12 9 14 10 13 12 L12 15 L14 9 C15 7 17 8 16 10 L15 14 L17 8 C18 6 20 7 19 9 L18 14 L20 9 C21 7 23 8 22 10 L20 17 L23 14 C24.5 12.5 26 13.5 25 15 L19 24 C17 27 13 28 10 26 Z"
+              d="M14 34 C11 28 11 22 13 18 L14.5 15 C15 13.5 17 13 17.5 15 L17 19
+                 L19 12 C19.5 10 21.5 10 21.5 12.5 L20.5 19
+                 L22 11 C22.5 9 24.5 9 24.5 11.5 L23.5 19
+                 L25 12 C25.5 10 27.5 10 27.5 12.5 L25.5 22
+                 L29 17 C30 15.5 32 16 31 18 L25 29 C23 33 18 35 14 34 Z"
               fill="#1A1A1A"
-              stroke="#333333"
-              strokeWidth="0.5"
             />
-            {/* Glossy highlight */}
-            <ellipse cx="16" cy="14" rx="4" ry="3" fill="white" opacity="0.08" />
+            {/* Finger highlights for depth */}
+            <path
+              d="M17.5 15 L17 19"
+              stroke="#333"
+              strokeWidth="0.6"
+              strokeLinecap="round"
+              opacity="0.4"
+            />
+            <path
+              d="M21.5 12.5 L20.5 19"
+              stroke="#333"
+              strokeWidth="0.6"
+              strokeLinecap="round"
+              opacity="0.4"
+            />
+            <path
+              d="M24.5 11.5 L23.5 19"
+              stroke="#333"
+              strokeWidth="0.6"
+              strokeLinecap="round"
+              opacity="0.4"
+            />
+            <path
+              d="M27.5 12.5 L25.5 22"
+              stroke="#333"
+              strokeWidth="0.6"
+              strokeLinecap="round"
+              opacity="0.4"
+            />
+            {/* Subtle glossy highlight on palm */}
+            <ellipse cx="22" cy="22" rx="5" ry="4" fill="white" opacity="0.06" />
             {/* Motion lines */}
-            <path d="M27 10 L30 8" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" opacity="0.3" />
-            <path d="M28 14 L31 13" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" opacity="0.3" />
-            <path d="M26 7 L28 4" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" opacity="0.3" />
+            <motion.g
+              animate={{ opacity: [0.4, 0.15, 0.4] }}
+              transition={{ duration: 1.4, repeat: Infinity }}
+            >
+              <path d="M33 12 L37 9" stroke="#1A1A1A" strokeWidth="1.8" strokeLinecap="round" opacity="0.3" />
+              <path d="M34 17 L38 15" stroke="#1A1A1A" strokeWidth="1.8" strokeLinecap="round" opacity="0.25" />
+              <path d="M32 8 L34 4" stroke="#1A1A1A" strokeWidth="1.8" strokeLinecap="round" opacity="0.2" />
+            </motion.g>
           </motion.svg>
         </div>
       </motion.div>

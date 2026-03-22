@@ -49,7 +49,7 @@ export default function BuildCaseStudyPage() {
           </Link>
         </ScrollReveal>
 
-        {/* Hero — text overlaid on image, matching builds page style */}
+        {/* Hero — text overlaid on image */}
         <ScrollReveal>
           <div className="rounded-2xl overflow-hidden relative min-h-[360px] md:min-h-[480px] mb-16">
             <div
@@ -75,7 +75,7 @@ export default function BuildCaseStudyPage() {
                     href={buildData.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-sans font-medium text-text-primary transition-colors"
+                    className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-sans font-medium text-text-primary transition-colors hover:brightness-95"
                     style={{ backgroundColor: "#c8e636" }}
                   >
                     Live Demo
@@ -99,10 +99,10 @@ export default function BuildCaseStudyPage() {
           </div>
         </ScrollReveal>
 
-        {/* Body Content — 3 columns */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20">
+        {/* Body Content — 3 columns with warm card bg */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
           <ScrollReveal delay={0.1} direction="left">
-            <div>
+            <div className="rounded-2xl p-6" style={{ backgroundColor: "#f7f2eb" }}>
               <h3 className="font-serif text-lg font-bold text-text-primary mb-3">
                 The Challenge
               </h3>
@@ -112,7 +112,7 @@ export default function BuildCaseStudyPage() {
             </div>
           </ScrollReveal>
           <ScrollReveal delay={0.2}>
-            <div>
+            <div className="rounded-2xl p-6" style={{ backgroundColor: "#f7f2eb" }}>
               <h3 className="font-serif text-lg font-bold text-text-primary mb-3">
                 The Approach
               </h3>
@@ -122,7 +122,7 @@ export default function BuildCaseStudyPage() {
             </div>
           </ScrollReveal>
           <ScrollReveal delay={0.3} direction="right">
-            <div>
+            <div className="rounded-2xl p-6" style={{ backgroundColor: "#f7f2eb" }}>
               <h3 className="font-serif text-lg font-bold text-text-primary mb-3">
                 The Outcome
               </h3>
@@ -133,7 +133,7 @@ export default function BuildCaseStudyPage() {
           </ScrollReveal>
         </div>
 
-        {/* Screenshot Gallery — image cards matching builds page */}
+        {/* Screenshot Gallery */}
         <ScrollReveal>
           <h2 className="font-serif text-xl font-bold text-text-primary mb-6">
             Screenshot Gallery

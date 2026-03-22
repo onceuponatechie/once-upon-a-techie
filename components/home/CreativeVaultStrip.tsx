@@ -97,6 +97,9 @@ export default function CreativeVaultStrip() {
             {/* Top overlay gradient */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#F5EFE6]/30 via-transparent to-[#F5EFE6]/30 pointer-events-none" />
 
+            {/* 25% black overlay — sits above cards but below center button */}
+            <div className="absolute inset-0 bg-black/25 pointer-events-none z-[5]" />
+
             {/* Center button */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
               <div className="flex flex-col items-center gap-3 pointer-events-auto">

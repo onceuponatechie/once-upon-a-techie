@@ -10,12 +10,21 @@ const personas = [
     description:
       "I craft visual stories, write about the intersection of tech and creativity, and turn abstract ideas into tangible experiences that resonate.",
     icon: (
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="4" y="4" width="40" height="40" rx="12" fill="#1A1A1A" />
-        <path d="M24 14L28 22H20L24 14Z" fill="#E8703A" />
-        <circle cx="24" cy="30" r="5" fill="#6B8F71" />
-        <rect x="15" y="24" width="4" height="8" rx="2" fill="#4A90D9" />
-        <rect x="29" y="24" width="4" height="8" rx="2" fill="#B4A7D6" />
+      <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+        {/* 3D base */}
+        <rect x="4" y="6" width="48" height="46" rx="14" fill="#C85A2A" />
+        <rect x="4" y="4" width="48" height="46" rx="14" fill="#E8703A" />
+        {/* Highlight */}
+        <rect x="6" y="6" width="44" height="20" rx="12" fill="white" opacity="0.15" />
+        {/* Paintbrush */}
+        <rect x="24" y="14" width="4" height="22" rx="2" fill="white" opacity="0.9" transform="rotate(-15 26 25)" />
+        <ellipse cx="21" cy="37" rx="6" ry="4" fill="#FFD93D" transform="rotate(-15 21 37)" />
+        {/* Paint drops */}
+        <circle cx="17" cy="20" r="4" fill="#FF6B8A" opacity="0.8" />
+        <circle cx="36" cy="18" r="3" fill="#4A90D9" opacity="0.7" />
+        <circle cx="38" cy="28" r="3.5" fill="#6BCB77" opacity="0.7" />
+        {/* Sparkle */}
+        <path d="M40 12 L41.5 15 L44.5 16 L41.5 17 L40 20 L38.5 17 L35.5 16 L38.5 15 Z" fill="white" opacity="0.6" />
       </svg>
     ),
     image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&h=400&fit=crop&q=80",
@@ -25,11 +34,21 @@ const personas = [
     description:
       "From MVPs to full products — I design and develop tools, apps, and platforms using modern technologies that people actually enjoy using.",
     icon: (
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="4" y="4" width="40" height="40" rx="12" fill="#1A1A1A" />
-        <path d="M16 32L24 16L32 32H16Z" fill="#4A90D9" opacity="0.8" />
-        <rect x="21" y="22" width="6" height="10" rx="1" fill="#E8703A" />
-        <circle cx="24" cy="19" r="3" fill="#FFEDAB" />
+      <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+        {/* 3D base */}
+        <rect x="4" y="6" width="48" height="46" rx="14" fill="#3A70B9" />
+        <rect x="4" y="4" width="48" height="46" rx="14" fill="#4A90D9" />
+        {/* Highlight */}
+        <rect x="6" y="6" width="44" height="20" rx="12" fill="white" opacity="0.15" />
+        {/* Code brackets */}
+        <path d="M18 20 L12 28 L18 36" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" opacity="0.9" />
+        <path d="M38 20 L44 28 L38 36" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" opacity="0.9" />
+        {/* Slash */}
+        <path d="M30 16 L26 40" stroke="#FFD93D" strokeWidth="2.5" strokeLinecap="round" opacity="0.8" />
+        {/* Cursor blink */}
+        <rect x="22" y="26" width="2" height="8" rx="1" fill="#c8e636" opacity="0.9" />
+        {/* Sparkle */}
+        <circle cx="42" cy="14" r="2" fill="white" opacity="0.4" />
       </svg>
     ),
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&q=80",
@@ -39,10 +58,25 @@ const personas = [
     description:
       "Every product has a story. I connect brands with people through narrative design, content strategy, and authentic voice that builds lasting trust.",
     icon: (
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="4" y="4" width="40" height="40" rx="12" fill="#1A1A1A" />
-        <path d="M14 20C14 17 17 15 20 15H28C31 15 34 17 34 20V28C34 31 31 33 28 33H20C17 33 14 31 14 28V20Z" fill="#6B8F71" opacity="0.6" />
-        <path d="M18 22H30M18 26H26" stroke="white" strokeWidth="2" strokeLinecap="round" />
+      <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+        {/* 3D base */}
+        <rect x="4" y="6" width="48" height="46" rx="14" fill="#557F5B" />
+        <rect x="4" y="4" width="48" height="46" rx="14" fill="#6B8F71" />
+        {/* Highlight */}
+        <rect x="6" y="6" width="44" height="20" rx="12" fill="white" opacity="0.15" />
+        {/* Open book */}
+        <path d="M28 16 L28 40" stroke="white" strokeWidth="1.5" opacity="0.5" />
+        <path d="M28 16 C24 14 16 14 12 16 L12 38 C16 36 24 36 28 38" fill="white" opacity="0.2" stroke="white" strokeWidth="1.5" />
+        <path d="M28 16 C32 14 40 14 44 16 L44 38 C40 36 32 36 28 38" fill="white" opacity="0.15" stroke="white" strokeWidth="1.5" />
+        {/* Text lines */}
+        <path d="M16 22 L24 22" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
+        <path d="M16 26 L22 26" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
+        <path d="M16 30 L23 30" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity="0.3" />
+        <path d="M32 22 L40 22" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
+        <path d="M34 26 L40 26" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
+        {/* Sparkles */}
+        <circle cx="42" cy="12" r="1.5" fill="#FFD93D" opacity="0.7" />
+        <circle cx="14" cy="12" r="1" fill="#FFD93D" opacity="0.5" />
       </svg>
     ),
     image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=600&h=400&fit=crop&q=80",

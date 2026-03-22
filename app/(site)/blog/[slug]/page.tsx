@@ -6,6 +6,17 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Twitter, Linkedin, Link2, Check } from "lucide-react";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 
+const categoryColors: Record<string, string> = {
+  Design: "#B4A7D6",
+  Creator: "#FF6B8A",
+  Productivity: "#D4A853",
+  Creative: "#FF8E53",
+  Dev: "#306998",
+  Building: "#4A90D9",
+  Storytelling: "#E8703A",
+  Automation: "#6B8F71",
+};
+
 const postData = {
   title: "Design Systems That Actually Scale",
   category: "Design",
@@ -77,6 +88,8 @@ export default function BlogPostPage() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const catColor = categoryColors[postData.category] || "#E8703A";
+
   return (
     <>
       {/* Reading Progress Bar */}
@@ -109,7 +122,10 @@ export default function BlogPostPage() {
           <ScrollReveal>
             <div className="mb-8">
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-[11px] font-sans font-medium uppercase tracking-wider text-brand-orange">
+                <span
+                  className="text-[11px] font-sans font-semibold uppercase tracking-wider"
+                  style={{ color: catColor }}
+                >
                   {postData.category}
                 </span>
                 <span className="text-[11px] font-sans text-text-tertiary">
@@ -127,13 +143,13 @@ export default function BlogPostPage() {
               {/* Share Buttons */}
               <div className="flex items-center gap-3">
                 <span className="text-xs font-sans text-text-tertiary mr-1">Share</span>
-                <a href="#" className="w-9 h-9 rounded-full bg-surface-light flex items-center justify-center text-text-secondary hover:bg-brand-blue hover:text-white transition-all duration-300" aria-label="Share on Twitter">
+                <a href="#" className="w-9 h-9 rounded-full flex items-center justify-center text-text-secondary hover:text-white transition-all duration-300" style={{ backgroundColor: "#f7f2eb" }} aria-label="Share on Twitter">
                   <Twitter size={14} />
                 </a>
-                <a href="#" className="w-9 h-9 rounded-full bg-surface-light flex items-center justify-center text-text-secondary hover:bg-brand-blue hover:text-white transition-all duration-300" aria-label="Share on LinkedIn">
+                <a href="#" className="w-9 h-9 rounded-full flex items-center justify-center text-text-secondary hover:text-white transition-all duration-300" style={{ backgroundColor: "#f7f2eb" }} aria-label="Share on LinkedIn">
                   <Linkedin size={14} />
                 </a>
-                <button onClick={handleCopyLink} className="w-9 h-9 rounded-full bg-surface-light flex items-center justify-center text-text-secondary hover:bg-brand-orange hover:text-white transition-all duration-300" aria-label="Copy link">
+                <button onClick={handleCopyLink} className="w-9 h-9 rounded-full flex items-center justify-center text-text-secondary hover:bg-brand-orange hover:text-white transition-all duration-300" style={{ backgroundColor: "#f7f2eb" }} aria-label="Copy link">
                   {copied ? <Check size={14} /> : <Link2 size={14} />}
                 </button>
               </div>
@@ -167,33 +183,40 @@ export default function BlogPostPage() {
             ))}
           </div>
 
-          {/* Related Posts — same card style as blog listing */}
+          {/* Related Posts — matching homepage card style */}
           <ScrollReveal>
             <div className="border-t border-surface-muted pt-12">
               <h3 className="font-serif text-xl font-bold text-text-primary mb-8">
                 Keep Reading
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                {postData.relatedPosts.map((related) => (
-                  <Link
-                    key={related.slug}
-                    href={`/blog/${related.slug}`}
-                    className="group block rounded-2xl overflow-hidden border border-surface-muted/30 bg-white hover:shadow-md transition-all duration-300"
-                  >
-                    <div
-                      className="w-full h-32 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                      style={{ backgroundImage: `url('${related.image}')` }}
-                    />
-                    <div className="p-4">
-                      <span className="text-[11px] font-sans font-medium uppercase tracking-wider text-brand-orange">
-                        {related.category}
-                      </span>
-                      <h4 className="font-serif text-sm font-bold text-text-primary mt-1 group-hover:text-brand-orange transition-colors duration-300">
-                        {related.title}
-                      </h4>
-                    </div>
-                  </Link>
-                ))}
+                {postData.relatedPosts.map((related) => {
+                  const relCatColor = categoryColors[related.category] || "#E8703A";
+                  return (
+                    <Link
+                      key={related.slug}
+                      href={`/blog/${related.slug}`}
+                      className="group block rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg"
+                      style={{ backgroundColor: "#f7f2eb" }}
+                    >
+                      <div
+                        className="w-full h-32 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                        style={{ backgroundImage: `url('${related.image}')` }}
+                      />
+                      <div className="p-4">
+                        <span
+                          className="text-[10px] font-sans font-semibold uppercase tracking-wider"
+                          style={{ color: relCatColor }}
+                        >
+                          {related.category}
+                        </span>
+                        <h4 className="font-serif text-sm font-bold text-text-primary mt-1 group-hover:text-brand-orange transition-colors duration-300">
+                          {related.title}
+                        </h4>
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </ScrollReveal>

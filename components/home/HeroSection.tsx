@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
+import SmileyGreeting from "@/components/shared/SmileyGreeting";
 
 const thumbnails = [
   { src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=130&fit=crop&q=80", label: "Dashboard" },
@@ -52,26 +53,32 @@ export default function HeroSection() {
       ref={ref}
       className="relative flex items-start justify-center overflow-hidden pt-24 pb-8 md:pt-28 md:pb-12"
       style={{
-        background: "linear-gradient(135deg, #FAFAF7 0%, #F5EFE6 60%, #F5EFE6 100%)",
+        background: "#F5EFE6",
       }}
     >
-      {/* Radial white glow from top left */}
-      <div className="absolute top-0 left-0 w-[800px] h-[500px] bg-white/40 rounded-full blur-3xl pointer-events-none" />
+      {/* Subtle warm radial glow — no hard edges */}
+      <div
+        className="absolute top-0 left-0 w-full h-full pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 70% 60% at 20% 10%, rgba(250,248,244,0.6) 0%, transparent 70%)",
+        }}
+      />
 
       <motion.div
         style={{ y }}
         className="relative z-10 max-w-4xl mx-auto px-6 text-center"
       >
-        {/* Pill badge row */}
+        {/* Smiley + Pill badge row */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="flex items-center justify-center mb-8"
+          className="flex items-center justify-center gap-3 mb-8"
         >
+          <SmileyGreeting />
           <div className="inline-flex items-center gap-2 bg-white rounded-full px-4 py-2 shadow-[0_1px_3px_rgba(0,0,0,0.04)] border border-surface-muted/30">
             <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
-            <span className="text-xs font-sans font-medium text-text-primary">
+            <span className="text-[10px] font-sans font-medium text-text-primary">
               Open to Collaborations
             </span>
           </div>
