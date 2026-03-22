@@ -60,7 +60,7 @@ export default function Navbar() {
           {/* Mobile Hamburger */}
           <button
             onClick={() => setMobileOpen(true)}
-            className="md:hidden bg-white/70 backdrop-blur-xl border border-white/40 rounded-full w-10 h-10 flex items-center justify-center ml-auto"
+            className="md:hidden bg-brand-orange rounded-full w-10 h-10 flex items-center justify-center ml-auto text-white"
             aria-label="Open menu"
           >
             <Menu size={18} />
@@ -79,7 +79,7 @@ export default function Navbar() {
           >
             <button
               onClick={() => setMobileOpen(false)}
-              className="absolute top-6 right-6 bg-white/70 backdrop-blur-xl border border-white/40 rounded-full w-10 h-10 flex items-center justify-center"
+              className="absolute top-6 right-6 bg-brand-orange rounded-full w-10 h-10 flex items-center justify-center text-white"
               aria-label="Close menu"
             >
               <X size={18} />

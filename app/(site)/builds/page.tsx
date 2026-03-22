@@ -70,10 +70,10 @@ export default function BuildsPage() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <ScrollReveal>
-          <p className="font-serif italic text-brand-blue text-sm mb-3">
+          <p className="font-serif italic text-text-tertiary text-sm mb-3">
             builds
           </p>
-          <h1 className="font-serif text-4xl md:text-5xl font-normal text-text-primary mb-4">
+          <h1 className="font-serif text-4xl md:text-5xl font-bold text-text-primary mb-4">
             The Ship <span className="font-serif italic">Log</span>
           </h1>
           <p className="font-sans text-text-secondary text-base max-w-xl mb-12">

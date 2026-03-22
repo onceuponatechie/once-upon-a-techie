@@ -1,135 +1,183 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import ScrollReveal from "@/components/shared/ScrollReveal";
+import { motion, useScroll, useTransform } from "framer-motion";
+
+/* ── Custom bespoke 3D SVG icons ── */
+const ProductIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+    <rect x="2" y="4" width="20" height="16" rx="3" fill="#4A90D9" />
+    <rect x="2" y="4" width="20" height="5" rx="3" fill="#5BA0E9" />
+    <circle cx="5.5" cy="6.5" r="1" fill="#FF6B6B" />
+    <circle cx="8.5" cy="6.5" r="1" fill="#FFD93D" />
+    <circle cx="11.5" cy="6.5" r="1" fill="#6BCB77" />
+    <rect x="5" y="12" width="6" height="2" rx="1" fill="white" opacity="0.6" />
+    <rect x="5" y="15.5" width="10" height="1.5" rx="0.75" fill="white" opacity="0.3" />
+  </svg>
+);
+
+const AutomationIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+    <circle cx="12" cy="12" r="10" fill="#2D6A4F" />
+    <circle cx="12" cy="12" r="7" fill="#3D8A6F" />
+    <path d="M12 6 L12 12 L16 14" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const PythonIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+    <rect x="3" y="3" width="18" height="18" rx="4" fill="#306998" />
+    <path d="M12 3 L12 10 C12 11 11 12 10 12 L7 12" stroke="#FFD43B" strokeWidth="2.5" strokeLinecap="round" />
+    <path d="M12 21 L12 14 C12 13 13 12 14 12 L17 12" stroke="#FFD43B" strokeWidth="2.5" strokeLinecap="round" />
+    <circle cx="9" cy="6.5" r="1.2" fill="#FFD43B" />
+    <circle cx="15" cy="17.5" r="1.2" fill="#FFD43B" />
+  </svg>
+);
+
+const StorytellingIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+    <path d="M4 4 C4 4 4 2 6 2 L18 2 C20 2 20 4 20 4 L20 18 C20 20 18 20 18 20 L6 20 C4 20 4 18 4 18 Z" fill="#B4A7D6" />
+    <path d="M4 4 L20 4 L20 18 L4 18 Z" fill="#C9BFE3" />
+    <rect x="7" y="7" width="10" height="1.5" rx="0.75" fill="white" opacity="0.7" />
+    <rect x="7" y="10" width="7" height="1.5" rx="0.75" fill="white" opacity="0.5" />
+    <rect x="7" y="13" width="9" height="1.5" rx="0.75" fill="white" opacity="0.4" />
+  </svg>
+);
+
+const ResearchIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+    <circle cx="11" cy="11" r="7" fill="#4A90D9" />
+    <circle cx="11" cy="11" r="5" fill="#6BA3E3" />
+    <circle cx="11" cy="11" r="2" fill="white" opacity="0.5" />
+    <path d="M16 16 L21 21" stroke="#3A70B9" strokeWidth="3" strokeLinecap="round" />
+  </svg>
+);
+
+const DesignIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+    <rect x="2" y="2" width="20" height="20" rx="4" fill="#F5D060" />
+    <circle cx="9" cy="9" r="3" fill="white" opacity="0.4" />
+    <rect x="13" y="6" width="5" height="5" rx="1" fill="white" opacity="0.35" />
+    <path d="M6 16 L12 13 L15 17 L18 15 L18 18 C18 19.1 17.1 20 16 20 L8 20 C6.9 20 6 19.1 6 18 Z" fill="white" opacity="0.5" />
+  </svg>
+);
 
 const allPills = [
-  { label: "Product Building", color: "#E8703A", emoji: "🧱" },
-  { label: "Automation", color: "#2D6A4F", emoji: "⚙️" },
-  { label: "Python", color: "#4A90D9", emoji: "🐍" },
-  { label: "Storytelling", color: "#B4A7D6", emoji: "✍️" },
-  { label: "Research", color: "#4A90D9", emoji: "🔍" },
-  { label: "Design", color: "#F5D060", emoji: "🎨" },
+  { label: "Product Building", icon: ProductIcon, bgColor: "#E8F1FB" },
+  { label: "Automation", icon: AutomationIcon, bgColor: "#E5F0E8" },
+  { label: "Python", icon: PythonIcon, bgColor: "#E5EDF5" },
+  { label: "Storytelling", icon: StorytellingIcon, bgColor: "#EEEBF5" },
+  { label: "Research", icon: ResearchIcon, bgColor: "#E8F1FB" },
+  { label: "Design", icon: DesignIcon, bgColor: "#FDF5E0" },
 ];
 
-const sentence =
-  "Writing the unofficial diary of a techie, building towards products that don\u2019t need explaining.";
+/* ── Word-by-word scroll reveal text ── */
+const headlineWords = [
+  { text: "The", accent: false },
+  { text: "unofficial", accent: false },
+  { text: "diary", accent: false },
+  { text: "of", accent: false },
+  { text: "a", accent: false },
+  { text: "techie,", accent: false },
+  { text: "building", accent: true },
+  { text: "towards", accent: false },
+  { text: "products", accent: true },
+  { text: "that", accent: false },
+  { text: "don\u2019t", accent: false },
+  { text: "need", accent: false },
+  { text: "explaining.", accent: false },
+];
 
 function ScrollRevealText() {
-  const ref = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.8", "end 0.4"],
+    target: containerRef,
+    offset: ["start 0.85", "start 0.35"],
   });
 
-  const words = sentence.split(" ");
-
   return (
-    <div ref={ref} className="max-w-xl text-center mx-auto">
-      <p className="font-serif text-[22px] md:text-[28px] lg:text-[32px] leading-[1.4]">
-        {words.map((word, i) => {
-          const start = i / words.length;
-          const end = (i + 1) / words.length;
-          return (
-            <Word
-              key={i}
-              word={word}
-              range={[start, end]}
-              progress={scrollYProgress}
-            />
-          );
-        })}
-      </p>
+    <div ref={containerRef} className="mb-14">
+      <h2 className="font-serif text-[28px] md:text-[44px] lg:text-[52px] leading-[1.2] font-bold text-center max-w-4xl mx-auto">
+        {headlineWords.map((w, i) => (
+          <ScrollWord
+            key={i}
+            word={w.text}
+            isAccent={w.accent}
+            index={i}
+            total={headlineWords.length}
+            progress={scrollYProgress}
+          />
+        ))}
+      </h2>
     </div>
   );
 }
 
-function Word({
+function ScrollWord({
   word,
-  range,
+  isAccent,
+  index,
+  total,
   progress,
 }: {
   word: string;
-  range: [number, number];
+  isAccent: boolean;
+  index: number;
+  total: number;
   progress: ReturnType<typeof useScroll>["scrollYProgress"];
 }) {
-  const opacity = useTransform(progress, range, [0.2, 1]);
-  const color = useTransform(progress, range, ["#CCCCCC", "#1A1A1A"]);
+  const start = index / total;
+  const end = (index + 1) / total;
+  const opacity = useTransform(progress, [start, end], [0.15, 1]);
+  const yOff = useTransform(progress, [start, end], [8, 0]);
 
   return (
     <motion.span
-      style={{ opacity, color }}
-      className="inline-block mr-[0.3em] transition-none"
+      style={isAccent ? { opacity, y: yOff, color: "#6B8F71" } : { opacity, y: yOff }}
+      className={`inline-block mr-[0.3em] ${isAccent ? "italic" : ""}`}
     >
       {word}
     </motion.span>
   );
 }
 
-function FloatingPill({
-  label,
-  color,
-  emoji,
-  delay,
-}: {
-  label: string;
-  color: string;
-  emoji: string;
-  delay: number;
-}) {
-  return (
-    <motion.div
-      className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 border-2 border-white/70"
-      style={{
-        background: "rgba(255,255,255,0.55)",
-        backdropFilter: "blur(12px)",
-        boxShadow:
-          "0 4px 16px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8), 0 0 0 1px rgba(255,255,255,0.3)",
-      }}
-      animate={{
-        y: [0, -6, 0, 4, 0],
-      }}
-      transition={{
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay,
-      }}
-    >
-      <span className="text-base leading-none">{emoji}</span>
-      <span className="text-xs font-sans font-medium text-text-primary whitespace-nowrap">
-        {label}
-      </span>
-      <span
-        className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-        style={{ backgroundColor: color }}
-      />
-    </motion.div>
-  );
-}
-
 export default function SkillsPillGrid() {
   return (
     <section className="py-24 md:py-32">
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Label */}
-        <ScrollReveal className="text-center mb-12">
-          <p className="font-serif italic text-text-tertiary text-base">
-            What I Do
-          </p>
-        </ScrollReveal>
-
-        {/* Center text */}
+      <div className="max-w-5xl mx-auto px-6">
+        {/* Scroll-reveal headline — no label */}
         <ScrollRevealText />
 
-        {/* Floating pills beneath text — same layout on mobile and desktop */}
-        <div className="flex flex-wrap justify-center gap-3 mt-12">
-          {allPills.map((pill, i) => (
-            <ScrollReveal key={pill.label} delay={0.1 * i}>
-              <FloatingPill {...pill} delay={i * 0.5} />
-            </ScrollReveal>
-          ))}
+        {/* 3D bespoke icon pills — clustered */}
+        <div className="flex flex-wrap justify-center gap-3">
+          {allPills.map((pill, i) => {
+            const Icon = pill.icon;
+            return (
+              <motion.div
+                key={pill.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, margin: "-40px" }}
+                transition={{ delay: 0.08 * i, duration: 0.5 }}
+                className="inline-flex items-center gap-2.5 rounded-full px-4 py-2.5 border-2 border-white/70"
+                style={{
+                  background: "linear-gradient(145deg, rgba(255,255,255,0.7) 0%, rgba(250,248,244,0.55) 100%)",
+                  backdropFilter: "blur(12px)",
+                  boxShadow: "0 4px 16px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.9)",
+                }}
+              >
+                <span
+                  className="w-8 h-8 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: pill.bgColor }}
+                >
+                  <Icon />
+                </span>
+                <span className="text-sm font-sans font-medium text-text-primary whitespace-nowrap">
+                  {pill.label}
+                </span>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -6,6 +6,17 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 
+const categoryColors: Record<string, string> = {
+  Building: "#4A90D9",
+  Storytelling: "#E8703A",
+  Automation: "#2D6A4F",
+  Design: "#B4A7D6",
+  Dev: "#306998",
+  Creator: "#FF6B8A",
+  Creative: "#FF8E53",
+  Productivity: "#D4A853",
+};
+
 const posts = [
   {
     title: "Why Every Builder Needs a Side Project",
@@ -43,36 +54,29 @@ function FeaturedCard({ post }: { post: (typeof posts)[0] }) {
   return (
     <Link href="/blog" className="block h-full">
       <div
-        className="relative rounded-2xl overflow-hidden h-full min-h-[480px] group"
+        className="relative rounded-2xl overflow-hidden h-full min-h-[520px] group"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        {/* Background image */}
         <div
           className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
           style={{ backgroundImage: `url('${post.imageBg}')` }}
         />
-        {/* Dark overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/10" />
 
-        {/* Top meta */}
-        <div className="absolute top-5 left-5 right-5 z-10 flex items-center gap-4">
-          <span className="text-xs font-sans text-white/80">
+        <div className="absolute top-5 left-5 right-5 z-10 flex items-center gap-3">
+          <span
+            className="text-[10px] font-sans font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full"
+            style={{ backgroundColor: "rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.9)" }}
+          >
             {post.category}
           </span>
-          <span className="text-white/40">·</span>
-          <span className="text-xs font-sans text-white/70">
-            {post.date}
-          </span>
-          <span className="text-white/40">·</span>
-          <span className="text-xs font-sans text-white/70">
-            {post.readTime}
-          </span>
+          <span className="text-xs font-sans text-white/60">{post.date}</span>
+          <span className="text-xs font-sans text-white/60">{post.readTime}</span>
         </div>
 
-        {/* Bottom title / excerpt on hover */}
         <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-          <h3 className="font-serif text-2xl md:text-3xl text-white mb-3 leading-tight">
+          <h3 className="font-serif text-2xl md:text-3xl text-white mb-3 leading-tight font-bold">
             {post.title}
           </h3>
           <AnimatePresence>
@@ -90,7 +94,6 @@ function FeaturedCard({ post }: { post: (typeof posts)[0] }) {
           </AnimatePresence>
         </div>
 
-        {/* Arrow button */}
         <div className="absolute top-5 right-5 z-10">
           <div className="w-10 h-10 rounded-full bg-[#c8e636] flex items-center justify-center">
             <ArrowRight size={16} className="text-text-primary" />
@@ -101,63 +104,56 @@ function FeaturedCard({ post }: { post: (typeof posts)[0] }) {
   );
 }
 
-/* Side blog card (right, no image by default, hover shows image) */
+/* Side blog card — revamped modern Framer aesthetic */
 function SideCard({ post }: { post: (typeof posts)[0] }) {
-  const [hovered, setHovered] = useState(false);
+  const catColor = categoryColors[post.category] || "#E8703A";
 
   return (
-    <Link href="/blog" className="block">
+    <Link href="/blog" className="block h-full">
       <div
-        className="relative bg-white rounded-2xl p-6 overflow-hidden border border-surface-muted/30 hover:shadow-md transition-all duration-300 h-full"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+        className="rounded-2xl overflow-hidden h-full flex flex-col group transition-all duration-300 hover:shadow-lg border border-surface-muted/20"
+        style={{ backgroundColor: "#fafaf7" }}
       >
-        {/* Hover image slide-in */}
-        <AnimatePresence>
-          {hovered && (
-            <motion.div
-              className="absolute top-3 right-3 w-36 h-24 md:w-40 md:h-28 rounded-xl overflow-hidden z-10 shadow-lg"
-              initial={{ x: 30, y: -20, opacity: 0 }}
-              animate={{ x: 0, y: 0, opacity: 1 }}
-              exit={{ x: 30, y: -20, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            >
-              <div
-                className="w-full h-full bg-cover bg-center"
-                style={{ backgroundImage: `url('${post.imageBg}')` }}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Title */}
-        <div className="flex items-start justify-between gap-3 mb-4">
-          <h3 className="font-serif text-lg md:text-xl text-text-primary leading-snug flex-1">
-            {post.title}
-          </h3>
-          <div className="w-9 h-9 rounded-full bg-[#c8e636] flex items-center justify-center flex-shrink-0">
-            <ArrowRight size={14} className="text-text-primary" />
+        {/* Image strip at top */}
+        <div className="relative h-32 overflow-hidden flex-shrink-0">
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+            style={{ backgroundImage: `url('${post.imageBg}')` }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/15" />
+          <div className="absolute top-3 right-3 z-10">
+            <div className="w-8 h-8 rounded-full bg-[#c8e636] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <ArrowRight size={12} className="text-text-primary" />
+            </div>
           </div>
         </div>
 
-        {/* Excerpt */}
-        <p className="font-sans text-sm text-text-secondary leading-relaxed mb-5">
-          {post.excerpt}
-        </p>
-
-        {/* Meta */}
-        <div className="flex items-center gap-2 mt-auto">
-          <span className="text-[11px] font-sans font-medium text-text-tertiary uppercase tracking-wider">
+        {/* Content */}
+        <div className="p-5 flex flex-col flex-1">
+          {/* Category — colored, above date */}
+          <span
+            className="text-[10px] font-sans font-semibold uppercase tracking-widest mb-2"
+            style={{ color: catColor }}
+          >
             {post.category}
           </span>
-          <span className="text-text-tertiary/40">·</span>
-          <span className="text-xs font-sans text-text-tertiary">
-            {post.date}
-          </span>
-          <span className="text-text-tertiary/40">·</span>
-          <span className="text-xs font-sans text-text-tertiary">
-            {post.readTime}
-          </span>
+
+          {/* Date + read time */}
+          <div className="flex items-center gap-2 mb-3">
+            <span className="text-[11px] font-sans text-text-tertiary">{post.date}</span>
+            <span className="text-text-tertiary/40">·</span>
+            <span className="text-[11px] font-sans text-text-tertiary">{post.readTime}</span>
+          </div>
+
+          {/* Title */}
+          <h3 className="font-serif text-lg text-text-primary leading-snug font-bold group-hover:text-brand-orange transition-colors duration-300 mb-2">
+            {post.title}
+          </h3>
+
+          {/* Excerpt */}
+          <p className="font-sans text-xs text-text-secondary leading-relaxed mt-auto">
+            {post.excerpt}
+          </p>
         </div>
       </div>
     </Link>
@@ -179,17 +175,16 @@ export default function BlogPreview() {
           </h2>
         </ScrollReveal>
 
-        {/* Layout: large card left, 2 stacked cards right */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Featured large card */}
-          <ScrollReveal>
+        {/* Layout: featured left, 2 stacked right — side cards fill featured height */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6" style={{ minHeight: "520px" }}>
+          <ScrollReveal className="h-full">
             <FeaturedCard post={posts[0]} />
           </ScrollReveal>
 
-          {/* Two side cards stacked */}
-          <div className="flex flex-col gap-6">
+          {/* Two side cards — each takes exactly half the height */}
+          <div className="flex flex-col gap-3 h-full" style={{ minHeight: "520px" }}>
             {posts.slice(1).map((post, i) => (
-              <ScrollReveal key={post.title} delay={0.1 + i * 0.1}>
+              <ScrollReveal key={post.title} delay={0.1 + i * 0.1} className="flex-1">
                 <SideCard post={post} />
               </ScrollReveal>
             ))}
