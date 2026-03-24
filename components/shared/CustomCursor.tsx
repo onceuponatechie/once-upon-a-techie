@@ -1,87 +1,78 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { motion, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
-  const cursorRef = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = useState(false);
-  const [isTouch, setIsTouch] = useState(false);
-  const mousePos = useRef({ x: 0, y: 0 });
-  const cursorPos = useRef({ x: 0, y: 0 });
-  const rafRef = useRef<number>();
+  const [isVisible, setIsVisible] = useState(false);
+
+  const cursorX = useSpring(0, { damping: 20, stiffness: 300, mass: 0.5 });
+  const cursorY = useSpring(0, { damping: 20, stiffness: 300, mass: 0.5 });
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (window.matchMedia("(pointer: coarse)").matches) {
-      setIsTouch(true);
-      return;
-    }
-
-    const handleMouseMove = (e: MouseEvent) => {
-      mousePos.current = { x: e.clientX, y: e.clientY };
+    const onMove = (e: MouseEvent) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+      if (!isVisible) setIsVisible(true);
     };
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (
-        target.closest("a") ||
-        target.closest("button") ||
-        target.closest('[role="button"]') ||
-        target.closest("[data-cursor='pointer']")
-      ) {
-        setIsHovering(true);
-      }
+    const onEnter = () => setIsVisible(true);
+    const onLeave = () => setIsVisible(false);
+
+    const addHoverListeners = () => {
+      document.querySelectorAll("a, button, [data-hover]").forEach((el) => {
+        el.addEventListener("mouseenter", () => setIsHovering(true));
+        el.addEventListener("mouseleave", () => setIsHovering(false));
+      });
     };
 
-    const handleMouseOut = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (
-        target.closest("a") ||
-        target.closest("button") ||
-        target.closest('[role="button"]') ||
-        target.closest("[data-cursor='pointer']")
-      ) {
-        setIsHovering(false);
-      }
-    };
+    window.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseenter", onEnter);
+    document.addEventListener("mouseleave", onLeave);
 
-    const lerp = (start: number, end: number, factor: number) =>
-      start + (end - start) * factor;
-
-    const animate = () => {
-      cursorPos.current.x = lerp(cursorPos.current.x, mousePos.current.x, 0.6);
-      cursorPos.current.y = lerp(cursorPos.current.y, mousePos.current.y, 0.6);
-
-      if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate3d(${cursorPos.current.x}px, ${cursorPos.current.y}px, 0) translate(-50%, -50%)`;
-      }
-      rafRef.current = requestAnimationFrame(animate);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseover", handleMouseOver);
-    document.addEventListener("mouseout", handleMouseOut);
-    rafRef.current = requestAnimationFrame(animate);
+    addHoverListeners();
+    const observer = new MutationObserver(addHoverListeners);
+    observer.observe(document.body, { childList: true, subtree: true });
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseover", handleMouseOver);
-      document.removeEventListener("mouseout", handleMouseOut);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      window.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseenter", onEnter);
+      document.removeEventListener("mouseleave", onLeave);
+      observer.disconnect();
     };
-  }, []);
-
-  if (isTouch) return null;
+  }, [cursorX, cursorY, isVisible]);
 
   return (
-    <div
-      ref={cursorRef}
-      className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full transition-[width,height,background-color] duration-200 ease-out"
-      style={{
-        width: isHovering ? 25 : 20,
-        height: isHovering ? 25 : 20,
-        backgroundColor: isHovering ? "#B4A7D6" : "#4A90D9",
-      }}
-    />
+    <>
+      <motion.div
+        className="fixed top-0 left-0 z-[9999] pointer-events-none rounded-full"
+        style={{
+          x: cursorX,
+          y: cursorY,
+          translateX: "-50%",
+          translateY: "-50%",
+          width: isHovering ? 48 : 16,
+          height: isHovering ? 48 : 16,
+          backgroundColor: isHovering ? "#e9d5ff" : "#5dcdf1",
+          opacity: isVisible ? 1 : 0,
+          transition: "width 0.2s, height 0.2s, background-color 0.2s",
+        }}
+      />
+      <motion.div
+        className="fixed top-0 left-0 z-[9998] pointer-events-none rounded-full border-2"
+        style={{
+          x: cursorX,
+          y: cursorY,
+          translateX: "-50%",
+          translateY: "-50%",
+          width: isHovering ? 64 : 40,
+          height: isHovering ? 64 : 40,
+          borderColor: isHovering ? "#e9d5ff" : "#5dcdf1",
+          opacity: isVisible ? 0.4 : 0,
+          transition: "width 0.3s, height 0.3s, border-color 0.3s",
+        }}
+      />
+    </>
   );
 }

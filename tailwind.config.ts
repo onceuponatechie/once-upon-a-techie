@@ -11,52 +11,48 @@ const config: Config = {
       colors: {
         brand: {
           orange: "#E8703A",
-          lavender: "#B4A7D6",
-          green: "#2D6A4F",
-          blue: "#4A90D9",
-          yellow: "#F5D060",
         },
-        surface: {
-          white: "#FFFFFF",
-          cream: "#F5EFE6",
-          warm: "#F5F0E8",
-          light: "#F5F3EF",
-          muted: "#E8E5DF",
-        },
+        butterYellow: "#FDE68A",
+        lavender: "#e9d5ff",
+        lightGreen: "#d5ffd8",
+        cursorBlue: "#5dcdf1",
+        sageGreen: "#8DA399",
+        lightCream: "#FAFAF7",
+        lightOatmeal: "#F5EFE6",
         text: {
           primary: "#1A1A1A",
           secondary: "#4A4A4A",
           tertiary: "#888888",
           inverse: "#FFFFFF",
         },
-        dark: {
-          bg: "#141414",
-          card: "#1E1E1E",
-          muted: "#2A2A2A",
+        surface: {
+          muted: "#E8E5DF",
         },
       },
       fontFamily: {
-        serif: ["'Playfair Display'", "Georgia", "serif"],
         sans: ["'Inter'", "system-ui", "sans-serif"],
-      },
-      backdropBlur: {
-        16: "16px",
+        display: ["'Playfair Display'", "Georgia", "serif"],
       },
       keyframes: {
-        "scroll-up": {
+        "ticker-up": {
           "0%": { transform: "translateY(0)" },
           "100%": { transform: "translateY(-50%)" },
         },
-        "scroll-down": {
+        "ticker-down": {
           "0%": { transform: "translateY(-50%)" },
           "100%": { transform: "translateY(0)" },
         },
+        "gradient-shift": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
       },
       animation: {
-        "scroll-up": "scroll-up 30s linear infinite",
-        "scroll-up-slow": "scroll-up 40s linear infinite",
-        "scroll-up-fast": "scroll-up 25s linear infinite",
-        "scroll-down": "scroll-down 35s linear infinite",
+        "ticker-up-slow": "ticker-up 30s linear infinite",
+        "ticker-up-mid": "ticker-up 25s linear infinite",
+        "ticker-up-fast": "ticker-up 28s linear infinite",
+        "ticker-down-slow": "ticker-down 30s linear infinite",
+        "gradient-shift": "gradient-shift 4s ease infinite",
       },
     },
   },

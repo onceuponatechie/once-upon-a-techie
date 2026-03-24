@@ -1,109 +1,119 @@
 "use client";
 
-import { useState } from "react";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import Link from "next/link";
-import { Github, Twitter, Linkedin, Instagram } from "lucide-react";
-import ScrollReveal from "@/components/shared/ScrollReveal";
 
-const socials = [
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Github, href: "#", label: "GitHub" },
-];
-
-const navLinks = [
-  { label: "FREEBIES", href: "/resources" },
-  { label: "BLOG", href: "/blog" },
-  { label: "READER'S CORNER", href: "/resources/readers-corner" },
-  { label: "APPS", href: "/builds" },
+const footerLinks = [
+  {
+    heading: "Explore",
+    links: [
+      { href: "/builds", label: "Builds" },
+      { href: "/blog", label: "Stories" },
+      { href: "/resources", label: "Resources" },
+      { href: "/about", label: "About" },
+    ],
+  },
+  {
+    heading: "Resources",
+    links: [
+      { href: "/resources", label: "Templates" },
+      { href: "/resources", label: "Guides" },
+      { href: "/resources", label: "Freebies" },
+      { href: "/resources/readers-corner", label: "Reader's Corner" },
+    ],
+  },
+  {
+    heading: "Connect",
+    links: [
+      { href: "/contact", label: "Build With Me" },
+      { href: "#", label: "Twitter / X" },
+      { href: "#", label: "LinkedIn" },
+      { href: "#", label: "GitHub" },
+    ],
+  },
+  {
+    heading: "Legal",
+    links: [
+      { href: "#", label: "Privacy" },
+      { href: "#", label: "Terms" },
+    ],
+  },
 ];
 
 export default function Footer() {
-  const [email, setEmail] = useState("");
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false, margin: "-50px" });
 
   return (
-    <footer className="px-4 md:px-6 pb-4 md:pb-6 mt-20">
-      <div className="bg-dark-bg rounded-3xl overflow-hidden relative">
-        {/* Top glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[100px] bg-white/5 rounded-full blur-3xl pointer-events-none" />
+    <footer
+      ref={ref}
+      className="relative mt-12 bg-[#111] text-white rounded-t-[3rem] md:rounded-t-[4rem] overflow-hidden"
+    >
+      {/* Large reveal text */}
+      <div className="px-6 pt-20 pb-12">
+        <motion.h2
+          initial={{ opacity: 0, y: 60 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+          transition={{ duration: 0.8 }}
+          className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-center max-w-4xl mx-auto leading-tight"
+        >
+          Let&apos;s build something real.
+        </motion.h2>
+      </div>
 
-        <div className="max-w-6xl mx-auto px-6 pt-20 pb-10">
-          {/* Label */}
-          <ScrollReveal>
-            <p className="text-white/40 font-serif italic text-base text-center mb-4">
-              Don&apos;t be a stranger
-            </p>
-          </ScrollReveal>
+      {/* Glassmorphic CTA shell */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        className="flex justify-center pb-16"
+      >
+        <Link
+          href="/contact"
+          className="glass-dark rounded-full px-8 py-4 text-lg font-semibold hover:bg-white/20 transition-colors"
+        >
+          Start a Conversation →
+        </Link>
+      </motion.div>
 
-          {/* Headline */}
-          <ScrollReveal delay={0.1}>
-            <div className="text-center mb-14">
-              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white/50 mb-1">
-                Let&apos;s <span className="font-bold text-white/70">build</span> an
-              </h2>
-              <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white font-bold tracking-tight">
-                Experience
-              </h2>
-            </div>
-          </ScrollReveal>
-
-          {/* Newsletter */}
-          <ScrollReveal delay={0.2}>
-            <div className="max-w-md mx-auto mb-16">
-              <div className="rounded-full p-1 flex items-center border border-white/15" style={{ background: "rgba(255,255,255,0.06)", backdropFilter: "blur(8px)" }}>
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 bg-transparent text-white px-5 py-3 text-sm outline-none placeholder:text-white/35"
-                />
-                <button className="rounded-full bg-brand-orange text-white px-6 py-3 text-sm font-medium hover:bg-brand-orange/90 transition-colors flex-shrink-0">
-                  Subscribe
-                </button>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          {/* Social icons + nav links row */}
-          <ScrollReveal delay={0.3}>
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-10">
-              {/* Social icons */}
-              <div className="flex gap-3">
-                {socials.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    aria-label={social.label}
-                    className="w-11 h-11 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:bg-brand-orange hover:border-brand-orange hover:text-white transition-all duration-300"
-                  >
-                    <social.icon size={16} />
-                  </a>
+      {/* 4-column link grid */}
+      <div className="border-t border-white/10 px-6 py-12">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+          {footerLinks.map((section) => (
+            <div key={section.heading}>
+              <h4 className="text-sm font-semibold text-white/40 uppercase tracking-wider mb-4">
+                {section.heading}
+              </h4>
+              <ul className="space-y-2">
+                {section.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-white/70 hover:text-white transition-colors text-sm"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
                 ))}
-              </div>
-
-              {/* Nav links */}
-              <div className="flex flex-wrap items-center gap-6 md:gap-8">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    className="text-white/50 text-xs font-sans tracking-wider hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
+              </ul>
             </div>
-          </ScrollReveal>
+          ))}
+        </div>
+      </div>
 
-          {/* Divider + copyright */}
-          <div className="border-t border-white/10 pt-6 text-center">
-            <p className="text-white/25 text-xs font-sans">
-              © Once Upon a Techie, 2026
-            </p>
-          </div>
+      {/* Bottom bar */}
+      <div className="border-t border-white/10 px-6 py-6">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-white/40 text-sm">
+            © {new Date().getFullYear()} Once Upon a Techie. All rights reserved.
+          </p>
+          <Link
+            href="/"
+            className="font-display text-lg font-bold text-white/60 hover:text-white transition-colors"
+          >
+            OUaT
+          </Link>
         </div>
       </div>
     </footer>

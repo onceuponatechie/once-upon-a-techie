@@ -1,74 +1,64 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
-import Link from "next/link";
-import GiftBox from "@/components/icons/GiftBox";
 
 export default function StickyWidget() {
-  const [visible, setVisible] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (sessionStorage.getItem("widget-dismissed") === "true") {
-      setDismissed(true);
-      return;
-    }
-    const timer = setTimeout(() => setVisible(true), 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleDismiss = () => {
-    setDismissed(true);
-    setVisible(false);
-    sessionStorage.setItem("widget-dismissed", "true");
-  };
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <AnimatePresence>
-      {visible && !dismissed && (
+      {isOpen && (
         <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
-          transition={{ type: "spring", stiffness: 260, damping: 24 }}
-          className="fixed bottom-6 right-6 z-50 max-w-[140px]"
+          initial={{ opacity: 0, y: 40, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 40, scale: 0.9 }}
+          transition={{ type: "spring", damping: 20, stiffness: 300 }}
+          className="fixed bottom-6 right-6 z-[90] w-72"
         >
-          <div className="relative bg-white/90 backdrop-blur-md border border-white/50 rounded-2xl shadow-xl p-2">
-            {/* Close */}
+          <div className="glass rounded-3xl p-4 shadow-lg relative">
+            {/* Close button */}
             <button
-              onClick={handleDismiss}
-              className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-white shadow-md flex items-center justify-center text-text-tertiary hover:text-text-primary transition-colors"
-              aria-label="Close"
+              onClick={() => setIsOpen(false)}
+              className="absolute top-3 right-3 w-6 h-6 rounded-full bg-white/60 hover:bg-white/80 flex items-center justify-center text-text-secondary text-xs transition-colors"
+              aria-label="Close widget"
             >
-              <X size={10} />
+              ✕
             </button>
 
-            {/* NEW badge */}
-            <span className="absolute -top-2 -left-1 bg-red-500 text-white text-[8px] font-bold uppercase px-1.5 py-0.5 rounded-md">
-              NEW
-            </span>
-
-            {/* Thumbnail placeholder */}
-            <div className="w-full h-16 rounded-xl bg-gradient-to-br from-brand-orange/20 to-brand-lavender/20 mb-2 flex items-center justify-center">
-              <GiftBox className="w-6 h-6" />
+            {/* Media area */}
+            <div className="w-full aspect-video rounded-2xl bg-surface-muted mb-3 overflow-hidden relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-orange/20 to-lavender/20" />
+              <div className="absolute bottom-2 left-2">
+                <span className="bg-brand-orange text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                  New
+                </span>
+              </div>
             </div>
 
-            {/* Title */}
-            <p className="text-[10px] font-sans font-medium text-text-primary leading-tight mb-1">
-              Free Resource Pack
-            </p>
-
-            {/* CTA */}
-            <Link
-              href="/resources"
-              className="text-[10px] font-sans font-medium text-brand-orange hover:underline inline-flex items-center gap-1"
-            >
-              Take a Peek
-              <GiftBox className="w-3 h-3" />
-            </Link>
+            {/* Buttons */}
+            <div className="flex gap-2">
+              <button className="flex-1 text-sm font-medium text-text-primary hover:text-brand-orange transition-colors text-left">
+                Take a peek
+              </button>
+              <button className="w-9 h-9 rounded-full bg-white/60 hover:bg-white/80 flex items-center justify-center transition-colors">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect x="3" y="8" width="18" height="14" rx="2" />
+                  <path d="M12 8V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v4" />
+                  <path d="M18 8V4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4" />
+                  <line x1="12" y1="8" x2="12" y2="22" />
+                </svg>
+              </button>
+            </div>
           </div>
         </motion.div>
       )}

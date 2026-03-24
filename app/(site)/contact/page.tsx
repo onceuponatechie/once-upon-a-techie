@@ -1,197 +1,109 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Twitter, Github, Linkedin, Instagram, Mail, Send } from "lucide-react";
-import ScrollReveal from "@/components/shared/ScrollReveal";
-
-const socials = [
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Mail, href: "mailto:hello@example.com", label: "Email" },
-];
-
-const subjects = [
-  "Just saying hi",
-  "Freelance project",
-  "Full-time opportunity",
-  "Collaboration idea",
-  "Speaking / Podcast",
-  "Something else",
-];
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 
 export default function ContactPage() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false, margin: "-50px" });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "",
     message: "",
   });
-  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
-  };
-
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="pt-32 pb-24 px-6"
-    >
-      <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20">
-          {/* Left Side */}
+    <div ref={ref} className="px-6 pt-32 pb-24">
+      <div className="max-w-3xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6 }}
+          className="mb-12"
+        >
+          <h1 className="font-display text-4xl md:text-6xl font-bold mb-4">
+            Build With Me
+          </h1>
+          <p className="text-text-secondary text-lg">
+            Got a project in mind? Let&apos;s make something great together.
+          </p>
+        </motion.div>
+
+        <motion.form
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="space-y-6"
+          onSubmit={(e) => e.preventDefault()}
+        >
           <div>
-            <ScrollReveal>
-              <p className="font-serif italic text-text-tertiary text-sm mb-3">
-                Contact
-              </p>
-              <h1 className="font-serif text-4xl md:text-5xl font-normal text-text-primary mb-6 leading-tight">
-                Let&apos;s build an{" "}
-                <span className="font-serif italic">Experience.</span>
-              </h1>
-              <p className="font-sans text-text-secondary text-base leading-relaxed mb-10 max-w-md">
-                Whether you have a project in mind, want to collaborate, or
-                just want to say hello — I would love to hear from you.
-                Drop me a message and I will get back within 48 hours.
-              </p>
-            </ScrollReveal>
-
-            <ScrollReveal delay={0.15}>
-              <div>
-                <p className="font-sans text-xs font-medium uppercase tracking-wider text-text-tertiary mb-4">
-                  Find me on
-                </p>
-                <div className="flex gap-3">
-                  {socials.map((social) => {
-                    const Icon = social.icon;
-                    return (
-                      <a
-                        key={social.label}
-                        href={social.href}
-                        aria-label={social.label}
-                        className="w-11 h-11 rounded-full bg-white border border-surface-muted/40 flex items-center justify-center text-text-secondary hover:bg-brand-orange hover:text-white hover:border-brand-orange transition-all duration-300"
-                      >
-                        <Icon size={16} />
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
-            </ScrollReveal>
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-text-secondary mb-2"
+            >
+              Name
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full px-5 py-3.5 rounded-2xl bg-white/60 border border-white/80 text-text-primary placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-brand-orange/30"
+              placeholder="Your name"
+              required
+            />
           </div>
-
-          {/* Right Side - Form */}
-          <ScrollReveal delay={0.1} direction="right">
-            <div className="bg-white/80 backdrop-blur-xl rounded-3xl p-8 md:p-10 shadow-sm border-2 border-white/70" style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8)" }}>
-              {submitted ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="flex flex-col items-center justify-center py-16 text-center"
-                >
-                  <div className="w-16 h-16 rounded-full bg-brand-orange/10 flex items-center justify-center mb-5">
-                    <Send size={24} className="text-brand-orange" />
-                  </div>
-                  <h3 className="font-serif text-xl font-normal text-text-primary mb-2">
-                    Message <span className="font-serif italic">Sent!</span>
-                  </h3>
-                  <p className="font-sans text-sm text-text-secondary">
-                    Thanks for reaching out. I will get back to you soon.
-                  </p>
-                </motion.div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label className="block font-sans text-xs font-medium uppercase tracking-wider text-text-tertiary mb-2">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Your name"
-                      className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary placeholder:text-text-tertiary outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/20 transition-all duration-300"
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-sans text-xs font-medium uppercase tracking-wider text-text-tertiary mb-2">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="you@example.com"
-                      className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary placeholder:text-text-tertiary outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/20 transition-all duration-300"
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-sans text-xs font-medium uppercase tracking-wider text-text-tertiary mb-2">
-                      What is this about?
-                    </label>
-                    <select
-                      name="subject"
-                      required
-                      value={formData.subject}
-                      onChange={handleChange}
-                      className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/20 transition-all duration-300 appearance-none"
-                    >
-                      <option value="" disabled>
-                        Select a topic
-                      </option>
-                      {subjects.map((s) => (
-                        <option key={s} value={s}>
-                          {s}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block font-sans text-xs font-medium uppercase tracking-wider text-text-tertiary mb-2">
-                      Message
-                    </label>
-                    <textarea
-                      name="message"
-                      required
-                      rows={5}
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="Tell me about your project or just say hello..."
-                      className="w-full bg-surface-cream border border-surface-muted/60 rounded-xl px-4 py-3 text-sm font-sans text-text-primary placeholder:text-text-tertiary outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/20 transition-all duration-300 resize-none"
-                    />
-                  </div>
-                  <motion.button
-                    type="submit"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full rounded-xl bg-brand-orange text-white py-3.5 text-sm font-sans font-medium hover:bg-brand-orange/90 transition-colors duration-300 flex items-center justify-center gap-2"
-                  >
-                    Send Message
-                    <Send size={14} />
-                  </motion.button>
-                </form>
-              )}
-            </div>
-          </ScrollReveal>
-        </div>
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-text-secondary mb-2"
+            >
+              Email
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full px-5 py-3.5 rounded-2xl bg-white/60 border border-white/80 text-text-primary placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-brand-orange/30"
+              placeholder="your@email.com"
+              required
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="message"
+              className="block text-sm font-medium text-text-secondary mb-2"
+            >
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows={5}
+              value={formData.message}
+              onChange={handleChange}
+              className="w-full px-5 py-3.5 rounded-2xl bg-white/60 border border-white/80 text-text-primary placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-brand-orange/30 resize-none"
+              placeholder="Tell me about your project..."
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="bg-brand-orange text-white font-semibold px-8 py-3.5 rounded-full hover:bg-brand-orange/90 transition-colors"
+          >
+            Send Message →
+          </button>
+        </motion.form>
       </div>
-    </motion.section>
+    </div>
   );
 }

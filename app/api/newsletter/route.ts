@@ -1,42 +1,38 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
 import { z } from "zod";
 
-function getResend() {
-  return new Resend(process.env.RESEND_API_KEY || "re_placeholder");
-}
-
-const subscribeSchema = z.object({
-  email: z.string().email("Please provide a valid email address."),
+const schema = z.object({
+  email: z.string().email(),
 });
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
   try {
-    const body = await req.json();
-    const { email } = subscribeSchema.parse(body);
+    const body = await request.json();
+    const { email } = schema.parse(body);
 
-    const resend = getResend();
-    await resend.contacts.create({
-      email,
-      audienceId: process.env.RESEND_AUDIENCE_ID!,
-    });
-
-    return NextResponse.json(
-      { message: "Successfully subscribed!" },
-      { status: 200 },
-    );
-  } catch (err) {
-    if (err instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: err.issues[0].message },
-        { status: 400 },
-      );
+    // If Resend API key is configured, send welcome email
+    if (process.env.RESEND_API_KEY) {
+      const { Resend } = await import("resend");
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      await resend.emails.send({
+        from: process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev",
+        to: email,
+        subject: "Welcome to Once Upon a Techie!",
+        text: "Thanks for subscribing! You'll get stories, builds, and creative insights — no spam.",
+      });
     }
 
-    console.error("Newsletter subscription error:", err);
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { error: "Invalid email address" },
+        { status: 400 }
+      );
+    }
     return NextResponse.json(
-      { error: "Something went wrong. Please try again." },
-      { status: 500 },
+      { error: "Something went wrong" },
+      { status: 500 }
     );
   }
 }
