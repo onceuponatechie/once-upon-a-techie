@@ -17,11 +17,8 @@ body {
 }
 
 @media (pointer: fine) {
-  body {
-    cursor: none;
-  }
-  a, button, [role="button"], [data-cursor="pointer"] {
-    cursor: none;
+  * {
+    cursor: none !important;
   }
 }
 

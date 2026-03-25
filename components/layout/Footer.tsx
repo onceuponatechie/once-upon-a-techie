@@ -1,109 +1,92 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { Github, Twitter, Linkedin, Instagram } from "lucide-react";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 
-const socials = [
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Github, href: "#", label: "GitHub" },
-];
-
-const navLinks = [
-  { label: "FREEBIES", href: "/resources" },
-  { label: "BLOG", href: "/blog" },
-  { label: "READER'S CORNER", href: "/resources/readers-corner" },
-  { label: "APPS", href: "/builds" },
-];
+const footerLinks = {
+  Navigate: [
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Stories", href: "/blog" },
+    { label: "Builds", href: "/builds" },
+  ],
+  Resources: [
+    { label: "Creative Vault", href: "/resources" },
+    { label: "Freebies", href: "/resources" },
+    { label: "Reader's Corner", href: "/resources/readers-corner" },
+  ],
+  Connect: [
+    { label: "Twitter", href: "#", icon: Twitter },
+    { label: "Instagram", href: "#", icon: Instagram },
+    { label: "LinkedIn", href: "#", icon: Linkedin },
+    { label: "GitHub", href: "#", icon: Github },
+  ],
+  Brand: [
+    { label: "Press Kit", href: "#" },
+    { label: "Style Guide", href: "#" },
+  ],
+};
 
 export default function Footer() {
-  const [email, setEmail] = useState("");
-
   return (
-    <footer className="px-4 md:px-6 pb-4 md:pb-6 mt-20">
-      <div className="bg-dark-bg rounded-3xl overflow-hidden relative">
-        {/* Top glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[100px] bg-white/5 rounded-full blur-3xl pointer-events-none" />
+    <footer className="relative w-full bg-[#111] text-white pt-32 pb-10 px-6 mt-20 rounded-t-[3rem] md:rounded-t-[4rem] border-t border-white/20">
+      {/* Top glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[100px] bg-white/5 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="max-w-6xl mx-auto px-6 pt-20 pb-10">
-          {/* Label */}
-          <ScrollReveal>
-            <p className="text-white/40 font-serif italic text-base text-center mb-4">
-              Don&apos;t be a stranger
-            </p>
-          </ScrollReveal>
+      <div className="max-w-6xl mx-auto">
+        {/* Big headline */}
+        <ScrollReveal>
+          <h2 className="font-display text-5xl md:text-7xl lg:text-[7rem] leading-[0.95] tracking-tight text-center mb-16">
+            Let&apos;s build
+            <br />
+            something{" "}
+            <span className="italic">real.</span>
+          </h2>
+        </ScrollReveal>
 
-          {/* Headline */}
-          <ScrollReveal delay={0.1}>
-            <div className="text-center mb-14">
-              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white/50 mb-1">
-                Let&apos;s <span className="font-bold text-white/70">build</span> an
-              </h2>
-              <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white font-bold tracking-tight">
-                Experience
-              </h2>
-            </div>
-          </ScrollReveal>
-
-          {/* Newsletter */}
-          <ScrollReveal delay={0.2}>
-            <div className="max-w-md mx-auto mb-16">
-              <div className="rounded-full p-1 flex items-center border border-white/15" style={{ background: "rgba(255,255,255,0.06)", backdropFilter: "blur(8px)" }}>
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 bg-transparent text-white px-5 py-3 text-sm outline-none placeholder:text-white/35"
-                />
-                <button className="rounded-full bg-brand-orange text-white px-6 py-3 text-sm font-medium hover:bg-brand-orange/90 transition-colors flex-shrink-0">
-                  Subscribe
-                </button>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          {/* Social icons + nav links row */}
-          <ScrollReveal delay={0.3}>
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-10">
-              {/* Social icons */}
-              <div className="flex gap-3">
-                {socials.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    aria-label={social.label}
-                    className="w-11 h-11 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:bg-brand-orange hover:border-brand-orange hover:text-white transition-all duration-300"
-                  >
-                    <social.icon size={16} />
-                  </a>
-                ))}
-              </div>
-
-              {/* Nav links */}
-              <div className="flex flex-wrap items-center gap-6 md:gap-8">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    className="text-white/50 text-xs font-sans tracking-wider hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </ScrollReveal>
-
-          {/* Divider + copyright */}
-          <div className="border-t border-white/10 pt-6 text-center">
-            <p className="text-white/25 text-xs font-sans">
-              © Once Upon a Techie, 2026
-            </p>
+        {/* Glassmorphic CTA */}
+        <ScrollReveal delay={0.1} className="flex justify-center mb-24">
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-full p-2">
+            <Link
+              href="/contact"
+              className="inline-flex rounded-full bg-brandOrange text-white px-8 py-4 font-sans text-sm font-medium hover:bg-brandOrange/90 transition-colors"
+            >
+              Build With Me →
+            </Link>
           </div>
+        </ScrollReveal>
+
+        {/* Footer link grid */}
+        <ScrollReveal delay={0.2}>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-16">
+            {Object.entries(footerLinks).map(([category, links]) => (
+              <div key={category}>
+                <h4 className="text-xs font-sans font-medium text-white/30 uppercase tracking-wider mb-4">
+                  {category}
+                </h4>
+                <ul className="space-y-3">
+                  {links.map((link) => (
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
+                        className="text-sm font-sans text-white/50 hover:text-white transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
+
+        {/* Copyright */}
+        <div className="border-t border-white/10 pt-8 text-center">
+          <p className="text-white/25 text-xs font-sans">
+            © Once Upon a Techie, 2026
+          </p>
         </div>
       </div>
     </footer>

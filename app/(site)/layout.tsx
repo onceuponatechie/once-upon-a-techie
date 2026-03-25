@@ -13,7 +13,7 @@ export default function SiteLayout({
     <>
       <CustomCursor />
       <Navbar />
-      <main className="min-h-screen">{children}</main>
+      <main className="min-h-screen pt-20">{children}</main>
       <Footer />
     </>
   );

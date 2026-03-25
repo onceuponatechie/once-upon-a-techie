@@ -34,25 +34,25 @@ export default function StickyWidget() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: "spring", stiffness: 260, damping: 24 }}
-          className="fixed bottom-6 right-6 z-50 max-w-[140px]"
+          className="fixed bottom-6 right-6 z-50 w-[140px]"
         >
           <div className="relative bg-white/90 backdrop-blur-md border border-white/50 rounded-2xl shadow-xl p-2">
             {/* Close */}
             <button
               onClick={handleDismiss}
-              className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-white shadow-md flex items-center justify-center text-text-tertiary hover:text-text-primary transition-colors"
+              className="absolute -top-2.5 -right-2.5 w-6 h-6 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-400 hover:text-gray-700 transition-colors"
               aria-label="Close"
             >
               <X size={10} />
             </button>
 
             {/* NEW badge */}
-            <span className="absolute -top-2 -left-1 bg-red-500 text-white text-[8px] font-bold uppercase px-1.5 py-0.5 rounded-md">
+            <span className="absolute -top-2 -left-1 bg-brandOrange text-white text-[8px] font-bold uppercase px-1.5 py-0.5 rounded-md">
               NEW
             </span>
 
             {/* Thumbnail placeholder */}
-            <div className="w-full h-16 rounded-xl bg-gradient-to-br from-brand-orange/20 to-brand-lavender/20 mb-2 flex items-center justify-center">
+            <div className="w-full aspect-[4/3] rounded-xl bg-gradient-to-br from-brandOrange/20 to-lavender/30 mb-2 flex items-center justify-center">
               <GiftBox className="w-6 h-6" />
             </div>
 
@@ -62,13 +62,15 @@ export default function StickyWidget() {
             </p>
 
             {/* CTA */}
-            <Link
-              href="/resources"
-              className="text-[10px] font-sans font-medium text-brand-orange hover:underline inline-flex items-center gap-1"
-            >
-              Take a Peek
-              <GiftBox className="w-3 h-3" />
-            </Link>
+            <div className="flex items-center gap-1">
+              <Link
+                href="/resources"
+                className="text-[10px] font-sans font-medium text-brandOrange hover:underline"
+              >
+                Take a peek
+              </Link>
+              <GiftBox className="w-3 h-3 text-brandOrange" />
+            </div>
           </div>
         </motion.div>
       )}

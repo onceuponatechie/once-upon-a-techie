@@ -12,7 +12,7 @@ const thumbnails = [
   { src: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=200&h=130&fit=crop&q=80", label: "Mobile" },
 ];
 
-function MediaBox() {
+function InlineMedia() {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -23,12 +23,12 @@ function MediaBox() {
   }, []);
 
   return (
-    <span className="inline-flex align-middle mx-1">
-      <span className="relative w-[48px] h-[32px] md:w-[64px] md:h-[40px] rounded-xl md:rounded-2xl overflow-hidden border border-white/20 shadow-md inline-block align-middle">
+    <span className="inline-flex align-middle mx-2">
+      <span className="relative w-[90px] md:w-[130px] h-[0.8em] rounded-[2rem] overflow-hidden bg-gray-200 inline-block align-middle">
         {thumbnails.map((thumb, i) => (
           <motion.span
             key={i}
-            className="absolute inset-0 rounded-xl md:rounded-2xl bg-cover bg-center"
+            className="absolute inset-0 rounded-[2rem] bg-cover bg-center"
             style={{ backgroundImage: `url('${thumb.src}')` }}
             initial={{ opacity: 0 }}
             animate={{ opacity: i === current ? 1 : 0 }}
@@ -51,7 +51,7 @@ export default function HeroSection() {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-20 px-6 overflow-hidden"
       style={{
         background: "linear-gradient(135deg, #FAFAF7 0%, #F5EFE6 60%, #F5EFE6 100%)",
       }}
@@ -61,12 +61,13 @@ export default function HeroSection() {
 
       <motion.div
         style={{ y }}
-        className="relative z-10 max-w-4xl mx-auto px-6 text-center"
+        className="relative z-10 max-w-5xl mx-auto text-center"
       >
         {/* Smiley */}
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: false }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex justify-center mb-6"
         >
@@ -76,12 +77,13 @@ export default function HeroSection() {
         {/* Pill badge row */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
           transition={{ delay: 0.4 }}
           className="flex items-center justify-center mb-10"
         >
-          <div className="inline-flex items-center gap-2 bg-white rounded-full px-5 py-2.5 shadow-[0_1px_3px_rgba(0,0,0,0.04)] border border-surface-muted/30">
-            <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
+          <div className="inline-flex items-center gap-2 bg-white border border-gray-200 rounded-full px-4 py-1.5 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
             <span className="text-sm font-sans font-medium text-text-primary">
               Open to Collaborations
             </span>
@@ -91,25 +93,27 @@ export default function HeroSection() {
         {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
           transition={{ delay: 0.6, duration: 0.8 }}
-          className="font-serif text-[40px] md:text-[56px] lg:text-[64px] leading-[1.1] tracking-tight text-text-primary mb-6"
+          className="font-display text-6xl md:text-[5.5rem] leading-[1.05] tracking-tight text-text-primary"
         >
           <span className="italic">Products,</span>{" "}
           <span className="italic">people,</span> and the
-          <br className="hidden sm:block" />
-          <MediaBox />{" "}
+          <br />
+          <InlineMedia />{" "}
           <span className="italic">stories</span> that connect
-          <br className="hidden sm:block" />
-          <MediaBox /> them.
+          <br />
+          <InlineMedia /> them.
         </motion.h1>
 
-        {/* Subheadline - light weight */}
+        {/* Subheadline */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
           transition={{ delay: 0.9 }}
-          className="font-sans text-base md:text-lg font-light text-text-secondary tracking-widest mb-10"
+          className="text-lg md:text-xl font-sans text-gray-600 mt-10 tracking-wide"
         >
           Creator · Builder · Storyteller
         </motion.p>
@@ -117,19 +121,20 @@ export default function HeroSection() {
         {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
           transition={{ delay: 1.1 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10"
         >
           <Link
             href="/builds"
-            className="rounded-full bg-brand-orange text-white px-8 py-4 font-sans font-medium hover:bg-brand-orange/90 transition-colors shadow-lg shadow-brand-orange/20"
+            className="rounded-full bg-brandOrange text-white px-8 py-4 font-sans font-medium hover:bg-brandOrange/90 transition-colors shadow-lg shadow-brandOrange/20"
           >
-            Explore My Work →
+            Start With This →
           </Link>
           <Link
             href="/resources"
-            className="font-sans text-text-secondary hover:text-brand-orange transition-colors underline underline-offset-4 decoration-text-secondary/40 hover:decoration-brand-orange"
+            className="font-sans text-gray-500 hover:text-brandOrange transition-colors underline underline-offset-4 decoration-gray-300 hover:decoration-brandOrange"
           >
             Or grab a freebie →
           </Link>
