@@ -1,7 +1,6 @@
 import HeroSection from "@/components/home/HeroSection";
 import CreativeVaultStrip from "@/components/home/CreativeVaultStrip";
-import SkillsPillGrid from "@/components/home/SkillsPillGrid";
-import ProcessSteps from "@/components/home/ProcessSteps";
+import ChooseYourAdventure from "@/components/home/ChooseYourAdventure";
 import FeaturedBuildsShowcase from "@/components/home/FeaturedBuildsShowcase";
 import BlogPreview from "@/components/home/BlogPreview";
 import ReadersCornerPreview from "@/components/home/ReadersCornerPreview";
@@ -13,8 +12,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <CreativeVaultStrip />
-      <SkillsPillGrid />
-      <ProcessSteps />
+      <ChooseYourAdventure />
       <FeaturedBuildsShowcase />
       <BlogPreview />
       <ReadersCornerPreview />
