@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 
 /* ------------------------------------------------------------------ */
-/*  SVG Icons — custom illustrated style                               */
+/*  3D Colorful SVG Icons                                              */
 /* ------------------------------------------------------------------ */
 
 function BookQuillIcon() {
@@ -17,49 +17,57 @@ function BookQuillIcon() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Open book */}
+      {/* Book shadow */}
+      <ellipse cx="32" cy="56" rx="20" ry="4" fill="#E8703A" opacity="0.15" />
+      {/* Book body — left page */}
       <path
-        d="M8 48V16C8 14 10 12 12 12H28C30 12 32 14 32 16V48"
+        d="M10 14C10 12 12 10 14 10H30C31.1 10 32 10.9 32 12V48C32 48 28 46 22 46H14C12 46 10 44 10 42V14Z"
+        fill="#FDE68A"
         stroke="#1A1A1A"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
+        strokeWidth="1.5"
       />
+      {/* Book body — right page */}
       <path
-        d="M56 48V16C56 14 54 12 52 12H36C34 12 32 14 32 16V48"
+        d="M54 14C54 12 52 10 50 10H34C32.9 10 32 10.9 32 12V48C32 48 36 46 42 46H50C52 46 54 44 54 42V14Z"
+        fill="#FFF3D0"
         stroke="#1A1A1A"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
+        strokeWidth="1.5"
       />
       {/* Page lines — left */}
-      <line x1="14" y1="20" x2="26" y2="20" stroke="#1A1A1A" strokeWidth="1" opacity="0.3" />
-      <line x1="14" y1="26" x2="26" y2="26" stroke="#1A1A1A" strokeWidth="1" opacity="0.3" />
-      <line x1="14" y1="32" x2="24" y2="32" stroke="#1A1A1A" strokeWidth="1" opacity="0.3" />
+      <line x1="16" y1="20" x2="27" y2="20" stroke="#E8703A" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
+      <line x1="16" y1="26" x2="27" y2="26" stroke="#E8703A" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
+      <line x1="16" y1="32" x2="25" y2="32" stroke="#E8703A" strokeWidth="1.5" strokeLinecap="round" opacity="0.3" />
       {/* Page lines — right */}
-      <line x1="38" y1="20" x2="50" y2="20" stroke="#1A1A1A" strokeWidth="1" opacity="0.3" />
-      <line x1="38" y1="26" x2="50" y2="26" stroke="#1A1A1A" strokeWidth="1" opacity="0.3" />
-      <line x1="38" y1="32" x2="48" y2="32" stroke="#1A1A1A" strokeWidth="1" opacity="0.3" />
-      {/* Quill pen */}
+      <line x1="37" y1="20" x2="48" y2="20" stroke="#E8703A" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
+      <line x1="37" y1="26" x2="48" y2="26" stroke="#E8703A" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
+      <line x1="37" y1="32" x2="46" y2="32" stroke="#E8703A" strokeWidth="1.5" strokeLinecap="round" opacity="0.3" />
+      {/* Spine highlight */}
+      <path d="M32 12V48" stroke="#1A1A1A" strokeWidth="1.5" opacity="0.3" />
+      {/* Quill pen — colorful */}
       <path
-        d="M44 8C44 8 50 14 48 22C46 30 42 36 40 40L38 42"
-        stroke="#1A1A1A"
+        d="M46 4C46 4 52 10 50 18C48 26 44 32 42 36L40 38"
+        stroke="#4A90D9"
         strokeWidth="2"
         strokeLinecap="round"
         fill="none"
       />
       <path
-        d="M38 42L36 48L40 44"
-        stroke="#1A1A1A"
+        d="M46 4C46 4 48 6 47 10"
+        fill="#4A90D9"
+        opacity="0.3"
+      />
+      <path
+        d="M40 38L38 44L42 40"
+        stroke="#E8703A"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        fill="none"
+        fill="#E8703A"
+        opacity="0.8"
       />
       {/* Ink drop */}
-      <circle cx="36" cy="50" r="2" fill="#1A1A1A" />
+      <circle cx="38" cy="46" r="2.5" fill="#4A90D9" />
+      <circle cx="38" cy="46" r="1" fill="#fff" opacity="0.5" />
     </svg>
   );
 }
@@ -73,56 +81,61 @@ function WrenchBoltIcon() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Lightning bolt behind */}
+      {/* Shadow */}
+      <ellipse cx="32" cy="58" rx="18" ry="3.5" fill="#B4A7D6" opacity="0.2" />
+      {/* Lightning bolt — colorful */}
       <path
-        d="M36 8L28 28H36L28 48"
-        stroke="#1A1A1A"
-        strokeWidth="2"
+        d="M38 6L28 26H38L28 50"
+        fill="none"
+        stroke="#F5D060"
+        strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"
-        fill="none"
-        opacity="0.5"
       />
-      {/* Wrench at ~30deg */}
+      <path
+        d="M38 6L28 26H38L28 50"
+        fill="none"
+        stroke="#E8703A"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        opacity="0.4"
+      />
+      {/* Glow behind bolt */}
+      <path
+        d="M38 6L28 26H38L28 50"
+        stroke="#F5D060"
+        strokeWidth="8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        opacity="0.1"
+      />
+      {/* Wrench — 3D styled */}
       <g transform="rotate(30, 32, 32)">
-        <path
-          d="M20 18C16 14 16 8 20 4C20 4 24 8 28 8L40 20V26L44 30C48 34 48 40 44 44L40 40H34L22 28C22 24 18 20 18 20Z"
-          stroke="#1A1A1A"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-          transform="translate(2,6) scale(0.8)"
-        />
+        {/* Handle */}
+        <rect x="20" y="30" width="24" height="6" rx="3" fill="#B4A7D6" stroke="#1A1A1A" strokeWidth="1.5" />
+        {/* Handle highlight */}
+        <rect x="22" y="31" width="20" height="2" rx="1" fill="#D4C8EE" opacity="0.6" />
         {/* Wrench head */}
         <path
-          d="M14 44L24 34"
+          d="M42 26C46 26 50 30 50 34C50 38 46 42 42 42L42 38C44 38 46 36 46 34C46 32 44 30 42 30L42 26Z"
+          fill="#9B8EC4"
           stroke="#1A1A1A"
-          strokeWidth="2.5"
-          strokeLinecap="round"
+          strokeWidth="1.5"
         />
+        {/* Wrench head inner */}
         <path
-          d="M10 48L14 44L18 48L14 52Z"
-          stroke="#1A1A1A"
-          strokeWidth="2"
-          strokeLinejoin="round"
+          d="M42 28C45 28 48 31 48 34C48 37 45 40 42 40"
           fill="none"
-        />
-        {/* Handle */}
-        <path
-          d="M24 34L42 16"
-          stroke="#1A1A1A"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        />
-        {/* Wrench jaw */}
-        <path
-          d="M42 16L48 10M42 16L48 22"
-          stroke="#1A1A1A"
-          strokeWidth="2"
-          strokeLinecap="round"
+          stroke="#D4C8EE"
+          strokeWidth="1"
+          opacity="0.5"
         />
       </g>
+      {/* Sparkle accents */}
+      <circle cx="20" cy="14" r="1.5" fill="#F5D060" />
+      <circle cx="48" cy="46" r="1" fill="#B4A7D6" />
+      <circle cx="14" cy="40" r="1" fill="#E8703A" opacity="0.6" />
     </svg>
   );
 }
@@ -136,44 +149,100 @@ function LightbulbPlayIcon() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Glow */}
-      <circle cx="32" cy="26" r="22" fill="#FFF7E0" opacity="0.5" />
-      {/* Bulb */}
+      {/* Shadow */}
+      <ellipse cx="32" cy="58" rx="14" ry="3" fill="#2D6A4F" opacity="0.15" />
+      {/* Outer glow */}
+      <circle cx="32" cy="26" r="24" fill="#F5D060" opacity="0.08" />
+      <circle cx="32" cy="26" r="18" fill="#F5D060" opacity="0.12" />
+      {/* Bulb body */}
       <path
-        d="M22 28C22 20 26 14 32 14C38 14 42 20 42 28C42 34 38 36 38 40H26C26 36 22 34 22 28Z"
+        d="M22 28C22 19 26 13 32 13C38 13 42 19 42 28C42 34 38 37 38 41H26C26 37 22 34 22 28Z"
+        fill="#F5D060"
         stroke="#1A1A1A"
+        strokeWidth="1.5"
+      />
+      {/* Bulb highlight */}
+      <path
+        d="M26 20C27 16 30 14 32 14"
+        stroke="#FFF"
         strokeWidth="2"
         strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
+        opacity="0.6"
       />
       {/* Base */}
-      <line x1="26" y1="44" x2="38" y2="44" stroke="#1A1A1A" strokeWidth="2" strokeLinecap="round" />
-      <line x1="28" y1="48" x2="36" y2="48" stroke="#1A1A1A" strokeWidth="2" strokeLinecap="round" />
-      <path d="M30 48L31 52H33L34 48" stroke="#1A1A1A" strokeWidth="2" strokeLinejoin="round" />
-      {/* Play button inside bulb */}
+      <rect x="26" y="41" width="12" height="3" rx="1" fill="#E8E5DF" stroke="#1A1A1A" strokeWidth="1.5" />
+      <rect x="27" y="44" width="10" height="3" rx="1" fill="#D9D5CF" stroke="#1A1A1A" strokeWidth="1.5" />
+      <path d="M30 47L31 51H33L34 47" fill="#B8B3AB" stroke="#1A1A1A" strokeWidth="1.5" strokeLinejoin="round" />
+      {/* Play button — colorful */}
       <path
-        d="M29 24L37 28L29 32Z"
+        d="M29 23L38 28L29 33Z"
+        fill="#2D6A4F"
         stroke="#1A1A1A"
-        strokeWidth="2"
+        strokeWidth="1.5"
         strokeLinejoin="round"
-        fill="none"
       />
-      {/* Ray lines */}
-      <line x1="32" y1="4" x2="32" y2="8" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
-      <line x1="48" y1="12" x2="45" y2="15" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
-      <line x1="16" y1="12" x2="19" y2="15" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
-      <line x1="52" y1="28" x2="48" y2="28" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
-      <line x1="12" y1="28" x2="16" y2="28" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
+      {/* Play button highlight */}
+      <path
+        d="M30 25L34 27.5L30 30Z"
+        fill="#4DAF7C"
+        opacity="0.5"
+      />
+      {/* Ray lines — colorful */}
+      <line x1="32" y1="2" x2="32" y2="6" stroke="#F5D060" strokeWidth="2" strokeLinecap="round" />
+      <line x1="50" y1="10" x2="47" y2="13" stroke="#E8703A" strokeWidth="2" strokeLinecap="round" />
+      <line x1="14" y1="10" x2="17" y2="13" stroke="#E8703A" strokeWidth="2" strokeLinecap="round" />
+      <line x1="54" y1="28" x2="50" y2="28" stroke="#F5D060" strokeWidth="2" strokeLinecap="round" />
+      <line x1="10" y1="28" x2="14" y2="28" stroke="#F5D060" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function CompassStarIcon() {
+  return (
+    <svg
+      width="64"
+      height="64"
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Shadow */}
+      <ellipse cx="32" cy="58" rx="16" ry="3" fill="#4A90D9" opacity="0.15" />
+      {/* Outer ring */}
+      <circle cx="32" cy="30" r="22" fill="#E3F0FF" stroke="#4A90D9" strokeWidth="1.5" />
+      {/* Inner ring */}
+      <circle cx="32" cy="30" r="17" fill="#F0F7FF" stroke="#4A90D9" strokeWidth="1" opacity="0.5" />
+      {/* Ring highlight */}
+      <path
+        d="M14 22C16 16 22 12 30 11"
+        stroke="#fff"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        opacity="0.5"
+      />
+      {/* Compass diamond/star */}
+      <path d="M32 12L36 28L32 48L28 28Z" fill="#4A90D9" stroke="#1A1A1A" strokeWidth="1" />
+      <path d="M14 30L28 26L50 30L28 34Z" fill="#5DCDF1" stroke="#1A1A1A" strokeWidth="1" />
+      {/* Highlight on diamond */}
+      <path d="M32 14L34 28L32 46" fill="#6BB8E8" opacity="0.4" />
+      <path d="M16 30L28 27L48 30" fill="#8DD8F8" opacity="0.3" />
+      {/* Center dot */}
+      <circle cx="32" cy="30" r="3" fill="#E8703A" stroke="#1A1A1A" strokeWidth="1" />
+      <circle cx="31" cy="29" r="1" fill="#fff" opacity="0.6" />
+      {/* Cardinal sparkles */}
+      <circle cx="32" cy="6" r="1.5" fill="#F5D060" />
+      <circle cx="56" cy="30" r="1.5" fill="#F5D060" />
+      <circle cx="8" cy="30" r="1" fill="#E8703A" opacity="0.6" />
+      <circle cx="32" cy="54" r="1" fill="#B4A7D6" opacity="0.6" />
     </svg>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/*  Hand-drawn SVG circle around "Adventure"                           */
+/*  Hand-drawn SVG swirl through "Adventure" (Ali Abdaal style)        */
 /* ------------------------------------------------------------------ */
 
-function AdventureCircle() {
+function AdventureSwirl() {
   const ref = useRef<SVGSVGElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [animate, setAnimate] = useState(false);
@@ -188,21 +257,22 @@ function AdventureCircle() {
   return (
     <svg
       ref={ref}
-      className="absolute -inset-x-3 -inset-y-2 w-[calc(100%+24px)] h-[calc(100%+16px)] pointer-events-none"
-      viewBox="0 0 200 80"
+      className="absolute -inset-x-6 -inset-y-3 w-[calc(100%+48px)] h-[calc(100%+24px)] pointer-events-none"
+      viewBox="0 0 240 80"
       preserveAspectRatio="none"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
+      {/* Elongated swirl that passes through the word — like Ali Abdaal's logo */}
       <path
-        d="M15 55C5 40 10 15 40 10C70 5 130 3 170 12C200 20 205 50 180 62C155 74 60 78 25 65C10 60 8 50 15 55Z"
+        d="M-10 50C10 70 60 75 120 65C180 55 230 35 240 25C245 18 230 10 190 15C150 20 80 35 50 40C20 45 5 38 10 30C15 22 50 12 100 10C150 8 200 15 220 25C235 32 225 48 190 55C155 62 80 68 40 60C10 53 -5 40 -10 50Z"
         stroke="#5DCDF1"
-        strokeWidth="3"
+        strokeWidth="2.5"
         strokeLinecap="round"
         fill="none"
         style={{
-          strokeDasharray: 600,
-          strokeDashoffset: animate ? 0 : 600,
+          strokeDasharray: 900,
+          strokeDashoffset: animate ? 0 : 900,
           transition: "stroke-dashoffset 0.8s ease-in-out",
         }}
       />
@@ -221,9 +291,10 @@ interface AdventureCard {
   linkText: string;
   linkHref: string;
   hoverColor: string;
+  compact?: boolean;
 }
 
-function Card({ icon, heading, body, linkText, linkHref, hoverColor }: AdventureCard) {
+function Card({ icon, heading, body, linkText, linkHref, hoverColor, compact }: AdventureCard) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -234,12 +305,15 @@ function Card({ icon, heading, body, linkText, linkHref, hoverColor }: Adventure
         backgroundColor: hovered ? hoverColor : "#f7f3ed",
         y: hovered ? -4 : 0,
         boxShadow: hovered
-          ? "0 12px 40px rgba(0,0,0,0.08)"
-          : "0 0px 0px rgba(0,0,0,0)",
+          ? "0 16px 48px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06)"
+          : "0 4px 20px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04)",
       }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="rounded-[20px] p-9 min-h-[320px] flex flex-col"
-      style={{ backgroundColor: "#f7f3ed" }}
+      className={`rounded-[20px] p-9 flex flex-col ${compact ? "min-h-[160px]" : "min-h-[320px]"}`}
+      style={{
+        backgroundColor: "#f7f3ed",
+        boxShadow: "0 4px 20px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04)",
+      }}
     >
       {/* Icon with wiggle on hover */}
       <motion.div
@@ -251,16 +325,16 @@ function Card({ icon, heading, body, linkText, linkHref, hoverColor }: Adventure
             : { rotate: 0 }
         }
         transition={{ duration: 0.4 }}
-        className="mb-6"
+        className={compact ? "mb-3" : "mb-6"}
       >
         {icon}
       </motion.div>
 
-      <h3 className="font-serif text-[28px] md:text-[32px] leading-[1.2] text-text-primary mb-4">
+      <h3 className={`font-serif leading-[1.2] text-text-primary ${compact ? "text-[22px] md:text-[24px] mb-2" : "text-[28px] md:text-[32px] mb-4"}`}>
         {heading}
       </h3>
 
-      <p className="font-sans text-[15px] leading-[1.7] text-text-secondary mb-6 flex-grow">
+      <p className={`font-sans text-[15px] leading-[1.7] text-text-secondary flex-grow ${compact ? "mb-3" : "mb-6"}`}>
         {body}
       </p>
 
@@ -305,6 +379,16 @@ const cards: AdventureCard[] = [
   },
 ];
 
+const moreCard: AdventureCard = {
+  icon: <CompassStarIcon />,
+  heading: "And More!",
+  body: "Even more stories, resources, builds, and graphics to explore across every adventure.",
+  linkText: "Explore all \u2192",
+  linkHref: "/explore",
+  hoverColor: "#B8D8F0",
+  compact: true,
+};
+
 export default function ChooseYourAdventure() {
   const titleRef = useRef<HTMLDivElement>(null);
   const titleInView = useInView(titleRef, { once: true, margin: "-100px" });
@@ -328,7 +412,7 @@ export default function ChooseYourAdventure() {
                 Choose Your{" "}
                 <span className="relative inline-block italic">
                   Adventure
-                  <AdventureCircle />
+                  <AdventureSwirl />
                 </span>
               </h2>
             </motion.div>
@@ -353,14 +437,25 @@ export default function ChooseYourAdventure() {
             </motion.div>
           </div>
 
-          {/* RIGHT COLUMN — offset 400px down */}
-          <div className="md:mt-[400px]">
+          {/* RIGHT COLUMN — offset 200px down */}
+          <div className="md:mt-[200px]">
+            {/* Card 3 */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={titleInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
               transition={{ duration: 0.6, delay: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <Card {...cards[2]} />
+            </motion.div>
+
+            {/* Card 4 — And More! (compact, half height) */}
+            <motion.div
+              className="mt-5"
+              initial={{ opacity: 0, y: 40 }}
+              animate={titleInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+              transition={{ duration: 0.6, delay: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              <Card {...moreCard} />
             </motion.div>
           </div>
         </div>
