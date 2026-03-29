@@ -74,7 +74,7 @@ export default function ProcessSteps() {
                   }}
                 >
                   {/* Subtle warm sheen */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-[#F5EFE6]/20 pointer-events-none rounded-3xl" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-[#F9F6F1]/20 pointer-events-none rounded-3xl" />
 
                   <div className="relative z-10">
                     {/* 3D Icon in dark rounded square */}
