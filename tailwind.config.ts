@@ -18,8 +18,8 @@ const config: Config = {
         },
         surface: {
           white: "#FFFFFF",
-          cream: "#F5EFE6",
-          warm: "#F5F0E8",
+          cream: "#F9F6F1",
+          warm: "#F9F6F1",
           light: "#F5F3EF",
           muted: "#E8E5DF",
         },

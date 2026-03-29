@@ -53,7 +53,7 @@ export default function HeroSection() {
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{
-        background: "linear-gradient(135deg, #FAFAF7 0%, #F5EFE6 60%, #F5EFE6 100%)",
+        background: "linear-gradient(135deg, #FDFCFA 0%, #F9F6F1 60%, #F9F6F1 100%)",
       }}
     >
       {/* Radial white glow from top left */}
