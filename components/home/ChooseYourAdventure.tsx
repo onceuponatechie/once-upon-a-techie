@@ -231,7 +231,7 @@ function Card({ icon, heading, body, linkText, linkHref, hoverColor }: Adventure
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       animate={{
-        backgroundColor: hovered ? hoverColor : "#F5F0E8",
+        backgroundColor: hovered ? hoverColor : "#f7f3ed",
         y: hovered ? -4 : 0,
         boxShadow: hovered
           ? "0 12px 40px rgba(0,0,0,0.08)"
@@ -239,7 +239,7 @@ function Card({ icon, heading, body, linkText, linkHref, hoverColor }: Adventure
       }}
       transition={{ duration: 0.3, ease: "easeOut" }}
       className="rounded-[20px] p-9 min-h-[320px] flex flex-col"
-      style={{ backgroundColor: "#F5F0E8" }}
+      style={{ backgroundColor: "#f7f3ed" }}
     >
       {/* Icon with wiggle on hover */}
       <motion.div
@@ -266,7 +266,7 @@ function Card({ icon, heading, body, linkText, linkHref, hoverColor }: Adventure
 
       <Link
         href={linkHref}
-        className="font-sans text-[15px] text-text-primary font-medium hover:underline inline-block"
+        className="font-sans text-[15px] text-text-primary font-medium underline inline-block"
       >
         {linkText}
       </Link>
@@ -283,7 +283,7 @@ const cards: AdventureCard[] = [
     icon: <BookQuillIcon />,
     heading: "Tell Better Stories",
     body: "Frameworks, resources, and builds for writers, storytellers, and anyone with something worth saying.",
-    linkText: "Start here \u2192",
+    linkText: "Explore \u2192",
     linkHref: "/storyteller",
     hoverColor: "#FDE68A",
   },
@@ -291,7 +291,7 @@ const cards: AdventureCard[] = [
     icon: <WrenchBoltIcon />,
     heading: "Build a Thing",
     body: "Building in public, frontend experiments, no-code tools, and resources for people who make things.",
-    linkText: "Start building \u2192",
+    linkText: "Explore \u2192",
     linkHref: "/builder",
     hoverColor: "#E9D5FF",
   },
@@ -326,7 +326,7 @@ export default function ChooseYourAdventure() {
             >
               <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-text-primary leading-[1.1]">
                 Choose Your{" "}
-                <span className="relative inline-block">
+                <span className="relative inline-block italic">
                   Adventure
                   <AdventureCircle />
                 </span>
@@ -353,8 +353,8 @@ export default function ChooseYourAdventure() {
             </motion.div>
           </div>
 
-          {/* RIGHT COLUMN — offset 200px down */}
-          <div className="md:mt-[200px]">
+          {/* RIGHT COLUMN — offset 400px down */}
+          <div className="md:mt-[400px]">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={titleInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
